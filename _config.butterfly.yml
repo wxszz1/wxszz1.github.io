@@ -1,0 +1,51 @@
+nav:
+  fixed: true
+menu:
+  首页: / || fas fa-home
+  技术文章: /categories/技术文章/ || fas fa-code
+  项目作品: /projects/ || fas fa-laptop-code
+  学习笔记: /categories/学习笔记/ || fas fa-book
+  归档: /archives/ || fas fa-archive
+  关于我: /about/ || fas fa-user
+social:
+  fab fa-github: https://github.com/wxszz1 || GitHub
+avatar:
+  img: /img/avatar.svg
+favicon: /img/avatar.svg
+index_top_img_height: 380px
+subtitle:
+  enable: true
+  effect: false
+  source: false
+  sub:
+    - 技术 · 实践 · 记录
+cover:
+  index_enable: false
+  aside_enable: false
+  archives_enable: false
+index_post_content:
+  method: 2
+  length: 180
+post_copyright:
+  enable: false
+aside:
+  card_author:
+    description: 记录技术探索，整理项目实践。
+    button:
+      enable: true
+      icon: fab fa-github
+      text: GitHub
+      link: https://github.com/wxszz1
+  card_announcement:
+    enable: true
+    content: 欢迎来到我的技术博客。这里将持续更新技术文章、项目作品和学习笔记。
+error_404:
+  enable: true
+search:
+  use: local_search
+  local_search:
+    preload: false
+    top_n_per_article: 1
+inject:
+  head:
+    - <link rel="stylesheet" href="/css/custom.css">
