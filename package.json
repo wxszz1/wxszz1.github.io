@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "hexo generate && node tools/ensure-index.cjs",
+    "build": "hexo generate && node tools/ensure-index.cjs && node tools/optimize-images.cjs",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server"
@@ -23,6 +23,7 @@
     "hexo-renderer-pug": "3.0.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-theme-butterfly": "5.7.0"
+    "hexo-theme-butterfly": "5.7.0",
+    "sharp": "0.35.5"
   }
 }

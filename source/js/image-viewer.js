@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     img.title = '点击查看大图，再次点击可按原始尺寸查看';
     const open = e => {
       e.preventDefault();
-      full.src = img.currentSrc || img.src;
+      full.src = img.dataset.original || img.currentSrc || img.src;
       full.classList.remove('actual-size');
       dialog.querySelector('a').href = full.src;
       dialog.showModal(); document.body.style.overflow = 'hidden';
