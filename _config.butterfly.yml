@@ -47,5 +47,7 @@ search:
     preload: false
     top_n_per_article: 1
 inject:
+  bottom:
+    - <script src="/js/image-viewer.js" defer></script>
   head:
     - <link rel="stylesheet" href="/css/custom.css">
