@@ -1,6 +1,10 @@
 # wxszz1 的技术博客
 
-网站：https://wxszz1.github.io/
+正式网站：https://blog.wxszz.top/
+
+备用网站：https://wxszz1.github.io/
+
+推送 main 后，GitHub Actions 构建并发布 GitHub Pages，同时更新 server-site 静态分支。服务器每分钟检查该分支，仅更新 /opt/wxszz1-blog/public，保留上次文件备份，不重启服务。构建失败时不会发布新版本。请勿直接编辑 server-site 分支。
 
 Hexo + Butterfly，使用 GitHub Actions 自动部署到 GitHub Pages。
 
