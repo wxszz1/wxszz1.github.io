@@ -1,5 +1,20 @@
 nav:
   fixed: true
+CDN:
+  internal_provider: local
+  third_party_provider: jsdelivr
+  option:
+    fontawesome: /vendor/fontawesome/css/all.min.css
+busuanzi:
+  site_uv: false
+  site_pv: false
+  page_pv: false
+share:
+  use:
+lazyload:
+  enable: true
+  native: true
+  field: post
 menu:
   首页: / || fas fa-home
   技术文章: /categories/技术文章/ || fas fa-code
@@ -18,7 +33,7 @@ subtitle:
   effect: false
   source: false
   sub:
-    - 技术 · 实践 · 记录
+    - 把学过的知识写下来，把走过的路留下来。
 cover:
   index_enable: false
   aside_enable: false
@@ -30,7 +45,7 @@ post_copyright:
   enable: false
 aside:
   card_author:
-    description: 记录技术探索，整理项目实践。
+    description: 从 C 语言、Java 到算法练习，记录每一次动手和理解。
     button:
       enable: true
       icon: fab fa-github
@@ -38,7 +53,7 @@ aside:
       link: https://github.com/wxszz1
   card_announcement:
     enable: true
-    content: 欢迎来到我的技术博客。这里将持续更新技术文章、项目作品和学习笔记。
+    content: 这里保存着从 2024 年开始手敲的学习笔记。欢迎翻阅旧文章，也欢迎见证之后的实践。
 error_404:
   enable: true
 search:
