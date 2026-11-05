@@ -1,7 +1,7 @@
 ---
 title: "普通人也能用的 Claude Code 教程"
 date: 2026-11-04 22:30:00
-updated: 2026-11-05 10:00:00
+updated: 2026-11-05 12:00:00
 categories:
   - 学习笔记
 tags:
@@ -14,16 +14,21 @@ description: "面向零基础读者的 Claude Code 图文教程：安装配置�
 
 适用：Windows x64 电脑。通过 CC Switch 接入 DeepSeek，从安装到完成日常任务。
 
+<div class="claude-tutorial-marker"></div>
+
 ## 阅读目录
 
-1. 简介：为什么要用 Claude Code？
-2. 安装与配置：让 Claude Code 用上 DeepSeek
-3. 第一次用 Claude Code 干活：整理资料
-4. 跟着做完整项目，熟悉常用命令
-5. 学习路线与日常应用
+1. [一、简介：为什么要用 Claude Code？](#tutorial-chapter-1)
+2. [二、安装与配置：让 Claude Code 用上 DeepSeek](#tutorial-chapter-2)
+3. [三、第一次用 Claude Code 干活：把杂乱资料整理成清单](#tutorial-chapter-3)
+4. [一、活动基本信息](#tutorial-chapter-4)
+5. [四、跟着做一个完整项目：筹备一场读书分享会](#tutorial-chapter-5)
+6. [五、接下来怎么练：把 AI 用到自己的生活和工作里](#tutorial-chapter-6)
 
 
 ---
+
+<a id="tutorial-chapter-1"></a>
 
 ## 一、简介：为什么要用 Claude Code？
 
@@ -58,18 +63,17 @@ description: "面向零基础读者的 Claude Code 图文教程：安装配置�
 
 在文件格式可读取、所需工具可用的情况下，它可以协助完成下面这条流程：
 
-```mermaid
-flowchart LR
-    A["📋 原始问卷"] --> B["🧹 检查与清理"]
-    B --> C["📊 统计与绘图"]
-    C --> D["📄 生成报告"]
-```
+![问卷数据处理流程：准备资料、检查清理、统计绘图、生成报告](/images/claude-code-beginners-guide/questionnaire-workflow.svg)
+
+*图1｜从原始资料到报告，每一步都需要核对结果。*
 
 如果你觉得图表不够清楚，还可以接着说：“把满意度按年级分别展示”“给每张图加上样本数量”“把结论改成适合汇报的三条要点”。
 
 **它的价值，是把原本分散在多个软件里的操作串起来，让你把更多精力放在判断问题和检查结果上。**这个案例也不需要你先学会编程，但你仍然需要核对统计结果，并在处理问卷前去除姓名、手机号等个人信息。
 
 ---
+
+<a id="tutorial-chapter-2"></a>
 
 ## 二、安装与配置：让 Claude Code 用上 DeepSeek
 
@@ -320,6 +324,8 @@ C:\Users\你的用户名\AppData\Local\Programs\CC Switch\
 
 ---
 
+<a id="tutorial-chapter-3"></a>
+
 ## 三、第一次用 Claude Code 干活：把杂乱资料整理成清单
 
 这一章，我们一起完成一个小任务：**把一段零散的活动资料，整理成一份可以直接查看和修改的准备清单。**
@@ -482,6 +488,8 @@ Claude Code 可能会显示正在读取文件、整理内容或创建文件。�
 ```text
 # 活动准备清单
 
+<a id="tutorial-chapter-4"></a>
+
 ## 一、活动基本信息
 
 - 活动：读书分享会
@@ -579,6 +587,8 @@ Claude练习
 **输入后按回车发送。**先给材料，再说要求；完成后检查，不满意就继续修改。这就是用 Claude Code 帮忙干活的基本流程。
 
 ---
+
+<a id="tutorial-chapter-5"></a>
 
 ## 四、跟着做一个完整项目：筹备一场读书分享会
 
@@ -948,6 +958,8 @@ Claude练习
 本章重点是走通：**讨论计划 → 分步生成 → 检查修改 → 保存进度 → 下次继续 → 核对交付。**
 
 ---
+
+<a id="tutorial-chapter-6"></a>
 
 ## 五、接下来怎么练：把 AI 用到自己的生活和工作里
 
