@@ -1,6 +1,7 @@
 ---
-title: "普通人也能用的 Claude Code：从安装到完成第一个项目"
+title: "普通人也能用的 Claude Code 教程"
 date: 2026-11-04 22:30:00
+updated: 2026-11-05 10:00:00
 categories:
   - 学习笔记
 tags:
@@ -83,6 +84,8 @@ flowchart LR
 | **Claude Code** | 读取文件、调用工具，执行你交代的任务 |
 | **DeepSeek** | 理解要求、思考问题，提供模型能力 |
 | **CC Switch** | 帮你配置 Claude Code 使用 DeepSeek |
+
+三个工具的分工：Claude Code 读取文件、调用工具并执行任务；DeepSeek 提供理解与推理能力；CC Switch 管理模型连接配置。
 
 本教程通过 **DeepSeek API** 调用模型。你可以把 API 理解为：让其他软件使用 DeepSeek 的接口。
 
