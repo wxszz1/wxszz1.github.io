@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>普通人也能用的 Claude Code 教程</title>
+      <link href="/posts/claude-code-beginners-guide/"/>
+      <url>/posts/claude-code-beginners-guide/</url>
+      
+        <content type="html"><![CDATA[<p>适用：Windows x64 电脑。通过 CC Switch 接入 DeepSeek，从安装到完成日常任务。</p><div class="claude-tutorial-marker"></div><h2 id="阅读目录"><a href="#阅读目录" class="headerlink" title="阅读目录"></a>阅读目录</h2><ol><li><a href="#tutorial-chapter-1">一、简介：为什么要用 Claude Code？</a></li><li><a href="#tutorial-chapter-2">二、安装与配置：让 Claude Code 用上 DeepSeek</a></li><li><a href="#tutorial-chapter-3">三、第一次用 Claude Code 干活：把杂乱资料整理成清单</a></li><li><a href="#tutorial-chapter-4">四、跟着做一个完整项目：筹备一场读书分享会</a></li><li><a href="#tutorial-chapter-5">五、接下来怎么练：把 AI 用到自己的生活和工作里</a></li></ol><hr><p><a id="tutorial-chapter-1"></a></p><h2 id="一、简介：为什么要用-Claude-Code？"><a href="#一、简介：为什么要用-Claude-Code？" class="headerlink" title="一、简介：为什么要用 Claude Code？"></a>一、简介：为什么要用 Claude Code？</h2><p>很多人第一次听到 Claude Code，会以为它是程序员专用的工具。其实，它也能帮助普通人整理资料、处理表格、分析数据，甚至制作自己的网页和小工具。</p><p><strong>它和普通 AI 聊天工具的一个重要区别是：除了给出建议，它还可以在你的授权范围内读取文件、修改内容、运行程序，直接参与完成任务。</strong>你用日常语言描述需求，再检查结果、提出修改，就能逐步把想法变成实际成果。</p><h3 id="1-非工科生可以用它做什么？"><a href="#1-非工科生可以用它做什么？" class="headerlink" title="1. 非工科生可以用它做什么？"></a>1. 非工科生可以用它做什么？</h3><ul><li>📚 <strong>学习与写作</strong>：整理多份资料、提取主要观点、生成阅读笔记，辅助搭建报告框架。</li><li>📊 <strong>表格与数据</strong>：清理问卷数据、分类统计、制作图表，减少重复操作。</li><li>📁 <strong>日常办公</strong>：批量重命名文件、归类材料、汇总多份文档。</li><li>🌐 <strong>表达与展示</strong>：制作个人主页、活动页面，或把资料做成可以浏览和搜索的网页。</li></ul><h3 id="2-工科生可以用它做什么？"><a href="#2-工科生可以用它做什么？" class="headerlink" title="2. 工科生可以用它做什么？"></a>2. 工科生可以用它做什么？</h3><ul><li>💻 <strong>辅助开发</strong>：理解陌生项目、编写功能、排查报错、补充测试。</li><li>🧪 <strong>辅助科研</strong>：编写数据处理脚本、绘制实验图表、整理实验结果。</li><li>⚙️ <strong>实现自动化</strong>：把重复操作写成程序，让同类任务以后也能快速完成。</li></ul><h3 id="3-一个具体例子：把问卷数据变成分析报告"><a href="#3-一个具体例子：把问卷数据变成分析报告" class="headerlink" title="3. 一个具体例子：把问卷数据变成分析报告"></a>3. 一个具体例子：把问卷数据变成分析报告</h3><p>假设你组织了一场校园活动，收到了 <strong>200 份反馈问卷</strong>。现在需要清理数据、统计满意度、整理意见，再交一份总结报告。你可以把导出的表格放进一个文件夹，向 Claude Code 提出要求：</p><blockquote><p>请分析这个文件夹里的活动反馈问卷。</p><p>先检查缺失值和重复记录，说明准备如何处理，等我确认后再继续。</p><p>然后统计整体满意度、比较不同年级的反馈，并整理大家最常提到的建议。</p><p>最后生成一份带图表的分析报告，标明统计口径，不要修改原始文件。</p></blockquote><p>在文件格式可读取、所需工具可用的情况下，它可以协助完成下面这条流程：</p><p><img src="/images/claude-code-beginners-guide/questionnaire-workflow.svg" alt="问卷数据处理流程：准备资料、检查清理、统计绘图、生成报告" loading='lazy'></p><p><em>图1｜从原始资料到报告，每一步都需要核对结果。</em></p><p>如果你觉得图表不够清楚，还可以接着说：“把满意度按年级分别展示”“给每张图加上样本数量”“把结论改成适合汇报的三条要点”。</p><p><strong>它的价值，是把原本分散在多个软件里的操作串起来，让你把更多精力放在判断问题和检查结果上。</strong>这个案例也不需要你先学会编程，但你仍然需要核对统计结果，并在处理问卷前去除姓名、手机号等个人信息。</p><hr><p><a id="tutorial-chapter-2"></a></p><h2 id="二、安装与配置：让-Claude-Code-用上-DeepSeek"><a href="#二、安装与配置：让-Claude-Code-用上-DeepSeek" class="headerlink" title="二、安装与配置：让 Claude Code 用上 DeepSeek"></a>二、安装与配置：让 Claude Code 用上 DeepSeek</h2><p>这一章，我们从下载安装材料开始，配置 DeepSeek，再让 Claude Code 完成第一个小任务。</p><p><strong>不需要提前学编程，跟着步骤操作即可。</strong>本教程适用于普通 Intel、AMD 的 <strong>Windows x64 电脑</strong>，不适用于 Windows ARM 电脑。</p><p><strong>开始前检查：</strong>本章按 Windows 10／11 操作。打开“设置 → 系统 → 关于”，查看“系统类型”，确认是 x64 处理器；如果写着 ARM，请先停止使用本材料包。准备能正常联网的电脑、用于练习的文件夹，以及 DeepSeek 开放平台账号和少量可用额度。前面的问卷分析是能力示例，后面从更容易检查的文字清单练起。</p><h3 id="1-先认识三个工具"><a href="#1-先认识三个工具" class="headerlink" title="1. 先认识三个工具"></a>1. 先认识三个工具</h3><table><thead><tr><th>工具</th><th>负责什么？</th></tr></thead><tbody><tr><td><strong>Claude Code</strong></td><td>读取文件、调用工具，执行你交代的任务</td></tr><tr><td><strong>DeepSeek</strong></td><td>理解要求、思考问题，提供模型能力</td></tr><tr><td><strong>CC Switch</strong></td><td>帮你配置 Claude Code 使用 DeepSeek</td></tr></tbody></table><p>三个工具的分工：Claude Code 读取文件、调用工具并执行任务；DeepSeek 提供理解与推理能力；CC Switch 管理模型连接配置。</p><p>本教程通过 <strong>DeepSeek API</strong> 调用模型。你可以把 API 理解为：让其他软件使用 DeepSeek 的接口。</p><h3 id="2-下载并解压安装材料"><a href="#2-下载并解压安装材料" class="headerlink" title="2. 下载并解压安装材料"></a>2. 下载并解压安装材料</h3><p>打开 <a href="https://pan.quark.cn/s/769d7b4ac058">夸克网盘下载入口</a>，下载 <strong>Windows-x64-完整安装材料-本地核验.zip</strong>。</p><p>下载完成后：</p><ol><li>在压缩包上点击鼠标右键。</li><li>选择 <strong>全部解压缩</strong>。</li><li>选择保存位置，点击 <strong>提取</strong>。</li><li>打开解压后的文件夹。</li></ol><p><strong>先解压，再运行里面的程序，不要直接在压缩包中双击运行。</strong></p><p>找不到下载文件时，在浏览器的“下载”列表点击“在文件夹中显示”；文件名通常以 .zip 结尾。若下载尚未完成、提示损坏或解压失败，先重新下载，不要继续运行缺失文件。网盘若要求登录或客户端，按页面提示处理；打不开分享链接时请联系作者更新链接。</p><p>解压后，主要使用这两个文件夹：</p><ul><li><strong>01-CC-Switch</strong>：里面是 CC Switch 的 <code>.msi</code> 安装包。</li><li><strong>02-Claude-Code本地核验</strong>：里面是 Claude Code 的 <code>claude.exe</code> 程序。</li></ul><blockquote><p>免责声明：本文仅供学习交流，软件及商标权利归各权利人所有，请遵守相关许可及服务条款。操作前请备份重要资料，妥善保管 API 密钥，并自行核对 AI 输出。在法律允许的范围内，作者不对因个人操作、第三方服务或 AI 输出错误造成的损失承担责任。第三方服务费用以官方为准。</p></blockquote><h3 id="3-安装-CC-Switch"><a href="#3-安装-CC-Switch" class="headerlink" title="3. 安装 CC Switch"></a>3. 安装 CC Switch</h3><p>打开 <strong>01-CC-Switch</strong>，双击 <code>CC-Switch-v4.0.25-Windows.msi</code>。</p><h4 id="①-欢迎页面"><a href="#①-欢迎页面" class="headerlink" title="① 欢迎页面"></a>① 欢迎页面</h4><p>点击 <strong>Next（下一步）</strong>。</p><table><thead><tr><th>按钮</th><th>意思</th></tr></thead><tbody><tr><td>Next</td><td>下一步</td></tr><tr><td>Back</td><td>返回上一步</td></tr><tr><td>Cancel</td><td>取消</td></tr><tr><td>Install</td><td>开始安装</td></tr><tr><td>Finish</td><td>完成</td></tr></tbody></table><h4 id="②-安装路径与快捷方式"><a href="#②-安装路径与快捷方式" class="headerlink" title="② 安装路径与快捷方式"></a>② 安装路径与快捷方式</h4><p>在 <strong>Destination Folder（安装位置）</strong> 页面，初次使用建议保留默认路径：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\你的用户名\AppData\Local\Programs\CC Switch\</span><br></pre></td></tr></table></figure><p>用户名会自动填写，不用照着输入。如果希望安装到 D 盘，点击 <strong>Change…（更改）</strong>，选择或填写 <code>D:\Apps\CC Switch\</code>，确认后返回。</p><p>建议勾选 <strong>Create a desktop shortcut（创建桌面快捷方式）</strong>，以后可以从桌面打开软件。检查路径后点击 <strong>Next</strong>。</p><h4 id="③-开始安装"><a href="#③-开始安装" class="headerlink" title="③ 开始安装"></a>③ 开始安装</h4><p>看到 <strong>Ready to install CC Switch</strong> 后，点击 <strong>Install（安装）</strong>，等待完成。需要修改路径时，点击 <strong>Back（上一步）</strong>。</p><h4 id="④-完成"><a href="#④-完成" class="headerlink" title="④ 完成"></a>④ 完成</h4><p>保留 <strong>Launch CC Switch（启动 CC Switch）</strong> 勾选，点击 <strong>Finish（完成）</strong>。</p><h3 id="4-申请-DeepSeek-API-Key"><a href="#4-申请-DeepSeek-API-Key" class="headerlink" title="4. 申请 DeepSeek API Key"></a>4. 申请 DeepSeek API Key</h3><p>打开 <a href="https://platform.deepseek.com/">DeepSeek 开放平台</a>，按页面提示注册或登录。</p><p><img src="/images/claude-code-beginners-guide/02-01-DeepSeek%E7%99%BB%E5%BD%95.jpg" alt="DeepSeek 开放平台登录页面" loading='lazy'></p><p><em>图 2-1｜DeepSeek 开放平台登录页面</em></p><p>进入 <strong>API Keys／API 密钥</strong> 页面，创建密钥，名称可填“Claude Code 练习”。复制并妥善保存，下一步会用到。</p><p><strong>操作顺序：</strong>登录后在导航中找“API Keys／API 密钥”，点“创建 API Key／创建密钥”或同义按钮，填名称并确认；创建成功后，用页面的复制按钮复制完整密钥，再粘贴到 CC Switch 的 API Key 输入框。列表里的掩码不是完整密钥；若已关闭创建窗口且平台不再显示全文，重新创建一把再使用。完成标志是密钥列表有这条记录，且你已把完整密钥填入 CC Switch；有密钥还要有可用余额才能调用。</p><p><strong>API Key 就像软件调用模型的通行证。</strong>不要公开分享完整密钥；泄露后应删除旧密钥并重新创建。</p><h4 id="额度和费用"><a href="#额度和费用" class="headerlink" title="额度和费用"></a>额度和费用</h4><p>在开放平台查看余额、充值入口和价格说明，确认有可用额度。API 与网页聊天分别计费。</p><p>以整个任务累计输入 <strong>1 万 Token</strong>、输出 <strong>2000 Token</strong>，且输入均未命中缓存为例：</p><table><thead><tr><th>模型</th><th align="right">示例任务的模型费用</th></tr></thead><tbody><tr><td>DeepSeek Flash</td><td align="right">约 0.02～0.04 元</td></tr><tr><td>DeepSeek V4 Pro</td><td align="right">约 0.07～0.14 元</td></tr></tbody></table><p>这是按核查时的空闲、高峰价格计算的用量示例，不是每个小任务的固定报价。文件量、思考过程和多次修改都会影响费用。先准备少量测试额度，完成后查看实际账单。价格以 <a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/">官方价格页</a> 为准。</p><p>价格核查日期：2026 年 11 月 5 日。Token 是模型计算文字用量的单位，不等于汉字数；“输入 1 万、输出 2000”指整个任务各轮累计用量，包含反复带入的历史内容，不是单次输入框的字数。本章纯文本练习不要求联网搜索；若另行使用搜索等收费服务，还会产生相应费用。</p><h3 id="5-在-CC-Switch-中连接-DeepSeek"><a href="#5-在-CC-Switch-中连接-DeepSeek" class="headerlink" title="5. 在 CC Switch 中连接 DeepSeek"></a>5. 在 CC Switch 中连接 DeepSeek</h3><ol><li>点击左侧 <strong>Claude Code</strong>。</li><li>点击 <strong>添加供应商</strong>。</li><li>找到并选择 <strong>DeepSeek</strong>。</li></ol><p><img src="/images/claude-code-beginners-guide/02-02-%E9%80%89%E6%8B%A9DeepSeek.png" alt="选择 DeepSeek 预设" loading='lazy'></p><p><em>图 2-2｜选择 DeepSeek 预设</em></p><p>在 <strong>API Key</strong> 输入框粘贴自己的密钥。</p><p><img src="/images/claude-code-beginners-guide/02-03-DeepSeek%E9%85%8D%E7%BD%AE.png" alt="填写 DeepSeek 配置" loading='lazy'></p><p><em>图 2-3｜填写 DeepSeek 配置</em></p><table><thead><tr><th>配置项</th><th>怎么填写</th></tr></thead><tbody><tr><td>名称</td><td>保留 DeepSeek</td></tr><tr><td>API Key</td><td>填自己的 DeepSeek 密钥</td></tr><tr><td>请求地址</td><td><code>https://api.deepseek.com/anthropic</code></td></tr><tr><td>模型和高级选项</td><td>初次使用保留 DeepSeek 预设设置</td></tr></tbody></table><p>点击 <strong>添加</strong>，回到列表后，将 DeepSeek <strong>切换为当前使用的配置</strong>。</p><p>完成标志：DeepSeek 已出现在 Claude Code 的供应商列表中，并有“当前使用／已启用”或同义标记；仅添加到列表不等于已经切换。截图中的字段布局以你安装的版本为准。当前官方模型名包括 deepseek-flash、deepseek-v4-pro；若预设仍是旧名称、启动时报模型错误，请先核对 <a href="https://api-docs.deepseek.com/quick_start/agent_integrations/claude_code/">DeepSeek 官方接入说明</a>。不要把网页聊天模型名随意填进 API 配置。修改后先退出 Claude Code，再从工作文件夹重新启动。</p><h3 id="6-安装-Claude-Code（本材料包为直接运行版）"><a href="#6-安装-Claude-Code（本材料包为直接运行版）" class="headerlink" title="6. 安装 Claude Code（本材料包为直接运行版）"></a>6. 安装 Claude Code（本材料包为直接运行版）</h3><p>这份材料中的 Claude Code 是 <strong>直接运行版</strong>，没有“下一步”和“选择安装路径”的安装向导。将程序放到固定位置，就可以启动。</p><h4 id="①-找到程序"><a href="#①-找到程序" class="headerlink" title="① 找到程序"></a>① 找到程序</h4><p>打开已经解压的安装材料，进入 <strong>02-Claude-Code本地核验</strong> 文件夹，找到 <strong>claude.exe</strong>。如果电脑隐藏了文件扩展名，可能只显示为 <strong>claude</strong>，文件类型为“应用程序”。</p><h4 id="②-选择存放位置"><a href="#②-选择存放位置" class="headerlink" title="② 选择存放位置"></a>② 选择存放位置</h4><p>第一次练习，建议在桌面新建 <strong>Claude练习</strong> 文件夹，把 <code>claude.exe</code> 复制进去。先右键点击程序选择 <strong>复制</strong>，再打开练习文件夹，在空白处右键选择 <strong>粘贴</strong>。</p><p>这里的文件夹就是本次任务的工作区域，后续示例生成的文件也会保存在这里。程序放在桌面文件夹或 D 盘均可，例如 <code>D:\Claude练习\</code>，但后面的操作要始终打开自己实际选择的文件夹。</p><p><strong>确认复制的是 claude.exe 程序本身，而不是快捷方式；不要在 ZIP 压缩包中直接运行。</strong></p><p><img src="/images/claude-code-beginners-guide/02-04-Claude%E7%A8%8B%E5%BA%8F%E6%94%BE%E5%85%A5%E7%BB%83%E4%B9%A0%E6%96%87%E4%BB%B6%E5%A4%B9.png" alt="claude.exe 已放入练习文件夹" loading='lazy'></p><p><em>图 2-4｜claude.exe 已放入练习文件夹</em></p><h4 id="③-不用重复在线安装"><a href="#③-不用重复在线安装" class="headerlink" title="③ 不用重复在线安装"></a>③ 不用重复在线安装</h4><p>这份包已经包含程序，不需要再输入在线安装命令，也不需要为了运行这个可执行文件额外安装 Node.js。</p><p>接下来从练习文件夹打开 PowerShell，检查版本并启动。这样比直接双击更容易看到运行提示。</p><h3 id="7-启动-Claude-Code"><a href="#7-启动-Claude-Code" class="headerlink" title="7. 启动 Claude Code"></a>7. 启动 Claude Code</h3><h4 id="①-打开-PowerShell"><a href="#①-打开-PowerShell" class="headerlink" title="① 打开 PowerShell"></a>① 打开 PowerShell</h4><p>打开练习文件夹，点击顶部 <strong>地址栏</strong>，输入 <code>powershell</code>，然后 <strong>按 Enter（回车键）</strong>。注意不是右侧搜索框。</p><p><img src="/images/claude-code-beginners-guide/02-05-%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5powershell.png" alt="地址栏输入 powershell" loading='lazy'></p><p><em>图 2-5｜地址栏输入 powershell</em></p><blockquote><p><strong>Enter 就是键盘上的回车键，通常标有“Enter”或“↵”。输入命令后，需要按回车，电脑才会执行。</strong></p></blockquote><p>教学检查点：以下操作要分清窗口。PowerShell 中输入 .\claude.exe 或 .\claude.exe -c；进入 Claude Code 后才输入 /help、/exit、/resume 等命令。英文半角符号照抄，不要复制命令提示符。</p><p>第四章的命令如果未出现在当前版本的 / 菜单中，不必卡在这里：命名或上下文整理可以暂时跳过；恢复会话失败时，在同一项目文件夹重新启动，再要求 AI 读取“项目进度.md”和现有成果，核对后继续。恢复聊天不会回滚文件。</p><p>本文没有要求启用 auto mode、自动接受全部修改或关闭确认。第一次实操保持默认权限，按提示逐项确认。所有项目日期、采购价格和预算均为练习假设，实际使用请替换并核对。</p><p><strong>复制和粘贴：</strong>选中教程中的命令正文，按 Ctrl＋C 复制；点击 PowerShell 或 Claude Code 的输入位置，尝试 Ctrl＋V 粘贴。终端不响应时可用 Ctrl＋Shift＋V 或右键粘贴，以终端菜单为准。只复制命令本身，不复制代码框、PS 提示符和说明文字。先检查内容完整，再按 Enter（回车键）；若已自动发送，不要重复发送。</p><p><strong>怎么知道能输入下一条？</strong>等待当前任务结束、底部重新出现输入位置后再发送。若任务明显跑偏，按 Esc 尝试停止当前执行；停止后先查看已经生成的文件，再交代下一步。不要把关闭帮助页、停止任务和撤销文件修改当成同一件事。</p><h4 id="②-检查程序是否能运行"><a href="#②-检查程序是否能运行" class="headerlink" title="② 检查程序是否能运行"></a>② 检查程序是否能运行</h4><p>在打开的 PowerShell 中输入：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\claude.exe <span class="literal">--version</span></span><br></pre></td></tr></table></figure><p><strong>按回车执行</strong>。显示版本号，说明程序能够运行。</p><p><img src="/images/claude-code-beginners-guide/02-06-Claude%E7%89%88%E6%9C%AC%E6%A3%80%E6%9F%A5.png" alt="版本检查真实截图" loading='lazy'></p><p><em>图 2-6｜版本检查真实截图</em></p><h4 id="③-正式启动"><a href="#③-正式启动" class="headerlink" title="③ 正式启动"></a>③ 正式启动</h4><p>接着输入：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\claude.exe</span><br></pre></td></tr></table></figure><p><strong>按回车启动</strong>。前面的 <code>.\</code> 表示运行当前文件夹里的程序，也要一起输入。</p><p>首次启动可能出现主题、文件夹信任或模型连接提示。主题按个人喜好选择；如果询问信任文件夹，只在确认路径是自己刚创建的练习文件夹后继续。选择菜单通常用上下方向键移动、回车确认，以页面提示为准。如果被带到 Claude 官方订阅登录页面，先停止，不要为本教程购买 Claude 订阅：返回 CC Switch，确认添加在 Claude Code 栏目、已切换启用 DeepSeek，检查请求地址与密钥，再退出 Claude Code 并重新启动。仍要求登录时，请保留完整报错，回到本章常见问题排查，不要反复重装。</p><p>如果之前已经打开过 Claude Code：在任务输入位置输入 <code>/exit</code>，<strong>按回车退出</strong>；回到 PowerShell 后，输入 <code>.\claude.exe</code>，<strong>再按回车重新启动</strong>，使新配置生效。</p><h4 id="④-如果出现-MCP-提示"><a href="#④-如果出现-MCP-提示" class="headerlink" title="④ 如果出现 MCP 提示"></a>④ 如果出现 MCP 提示</h4><p>有些电脑会提示检测到了 MCP 扩展工具。MCP 可以先理解为给 Claude Code 增加功能的扩展。<strong>第一次练习不需要这些工具，可以按 Esc 拒绝本次启用并继续。</strong>全新电脑不一定出现这一页，没有出现就继续。</p><p><img src="/images/claude-code-beginners-guide/02-07-Claude%E5%8F%AF%E9%80%89MCP%E6%8F%90%E7%A4%BA.png" alt="可选 MCP 工具提示" loading='lazy'></p><p><em>图 2-7｜可选 MCP 工具提示</em></p><h4 id="⑤-认识启动界面"><a href="#⑤-认识启动界面" class="headerlink" title="⑤ 认识启动界面"></a>⑤ 认识启动界面</h4><p>进入后，可以看到 Claude Code 版本、当前模型、工作文件夹，以及底部的任务输入位置。</p><p><img src="/images/claude-code-beginners-guide/02-08-Claude%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2-MiMo%E7%A4%BA%E4%BE%8B.png" alt="Claude Code 真实启动界面" loading='lazy'></p><p><em>图 2-8｜Claude Code 真实启动界面</em></p><blockquote><p><strong>截图使用的是 MiMo，展示的是界面位置，不是 DeepSeek 接通结果。</strong>黄色权限提示和 auto mode 来自这台电脑的已有设置，新手不需要照着开启。接入 DeepSeek 后，应结合 CC Switch 配置及 DeepSeek 平台调用记录确认实际使用的服务。</p></blockquote><h3 id="8-发送第一句话"><a href="#8-发送第一句话" class="headerlink" title="8. 发送第一句话"></a>8. 发送第一句话</h3><p>在底部输入“你好”，<strong>按回车发送</strong>。收到回复，说明当前连接的模型可以响应。</p><p><img src="/images/claude-code-beginners-guide/02-09-Claude%E9%A6%96%E6%AC%A1%E5%AF%B9%E8%AF%9D-MiMo%E7%A4%BA%E4%BE%8B.png" alt="Claude Code 首次对话真实截图" loading='lazy'></p><p><em>图 2-9｜Claude Code 首次对话真实截图</em></p><p>这张同样是 <strong>MiMo 对话示例</strong>，用于展示在哪里输入、在哪里查看回复，不能单独证明 DeepSeek 已接通。</p><h3 id="9-让它完成第一个小任务"><a href="#9-让它完成第一个小任务" class="headerlink" title="9. 让它完成第一个小任务"></a>9. 让它完成第一个小任务</h3><p>输入下面的要求，<strong>按回车发送</strong>：</p><blockquote><p>请在当前文件夹创建一个“你好.txt”，内容是“我的 Claude Code 已经可以开始工作了”。</p></blockquote><p>若询问是否允许创建文件，看清路径和操作内容后允许。任务完成后回到练习文件夹，按 F5 刷新，双击“你好.txt”核对内容。通过标准分三步：① --version 只证明程序能运行；②“你好”收到回复只证明当前模型可响应；③文件实际生成且内容正确，才证明本次文件操作成功。确认 DeepSeek 时，还要核对 CC Switch 当前启用的供应商，并在 DeepSeek 开放平台用量记录中查找这次测试对应的调用（记录可能延迟）。不要只凭模型自称或 MiMo 示例截图判断。还可以到 DeepSeek 开放平台查看调用和扣费记录。</p><h3 id="10-下次怎么打开和退出？"><a href="#10-下次怎么打开和退出？" class="headerlink" title="10. 下次怎么打开和退出？"></a>10. 下次怎么打开和退出？</h3><p>打开工作文件夹 → 地址栏输入 <code>powershell</code> 并回车 → 输入 <code>.\claude.exe</code> 并回车 → 输入任务并回车发送。</p><p>结束时，在 Claude Code 中输入 <code>/exit</code>，<strong>按回车退出</strong>。</p><h3 id="实测补充：它真的能读资料、生成文件并继续修改吗？"><a href="#实测补充：它真的能读资料、生成文件并继续修改吗？" class="headerlink" title="实测补充：它真的能读资料、生成文件并继续修改吗？"></a>实测补充：它真的能读资料、生成文件并继续修改吗？</h3><p>2026 年 11 月 5 日，使用材料包中的 <strong>Claude Code 2.1.318</strong>，连接 <strong>DeepSeek（deepseek-v4-pro）</strong>，完成了下面这次实际测试。</p><p><strong>第一步：让 AI 根据资料生成文件。</strong></p><p>准备一份 <code>活动资料.txt</code>，写明：读书分享会，预计 20 人，暂定周六 14 点，地点为图书馆二楼，预算不超过 300 元；需要签到表、饮用水和海报，结束时间尚未确定。</p><p>向 AI 交代任务：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">读取活动资料.txt，生成活动准备清单.md，包含基本信息、准备物品和待确认问题。不要修改原始资料，不要编造结束时间，保留“暂定”等不确定信息。</span><br></pre></td></tr></table></figure><p>如果你在 Claude Code 的对话输入框里照着练习，粘贴完这段话后，按 Enter（回车键）发送。遇到文件操作确认，先看清文件名和操作内容，再决定是否允许。</p><p><strong>第二步：继续修改刚才的成果。</strong></p><p>测试中恢复了同一个会话，再提出要求：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把活动准备清单.md 中的准备物品改成三列表格：物品、数量、状态。数量统一写“待确认”，状态统一写“待准备”，其他内容保留。</span><br></pre></td></tr></table></figure><p>实际生成的文件中，这一部分变成了：</p><table><thead><tr><th>物品</th><th>数量</th><th>状态</th></tr></thead><tbody><tr><td>签到表</td><td>待确认</td><td>待准备</td></tr><tr><td>饮用水</td><td>待确认</td><td>待准备</td></tr><tr><td>海报</td><td>待确认</td><td>待准备</td></tr></tbody></table><p><strong>检查结果：</strong>文件确实生成并完成修改；“暂定周六 14 点”和“结束时间未确定”得到保留；对比原始资料的文件校验值，确认它没有被修改。</p><p>你练习时也要打开实际文件检查，而不只看 AI 说“已完成”。到练习文件夹中找到 <code>活动准备清单.md</code>，用记事本打开；如果之前已经打开过，关闭后重新打开，确认看到最新内容。</p><p>费用查看：完成练习后，登录 DeepSeek 开放平台查看本次用量和扣费。客户端显示的估算可能与实际账单不同，以平台账单为准。</p><h3 id="11-常见问题"><a href="#11-常见问题" class="headerlink" title="11. 常见问题"></a>11. 常见问题</h3><p>排查顺序：先核对窗口与文件夹，再核对配置，最后查看报错；不要一上来重装。</p><p>找不到程序：在练习文件夹确认存在 claude.exe，注意不要重复 .exe 后缀；在 PowerShell 输入 .\claude.exe --version 并回车，前面的 .\ 也要复制。</p><p>密钥或额度问题：401 通常先检查密钥是否完整、有效；余额不足按 DeepSeek 平台账单核对。400、模型不存在或工具不支持时，重新核对 DeepSeek 预设、请求地址和模型映射。不要把完整密钥截图发给别人。</p><p>文件没有出现：按 F5 刷新；让 AI 只报告实际保存的完整路径，不要重建文件。对照路径检查，必要时在 PowerShell 输入 Get-Location 并回车查看当前文件夹。</p><p>复制命令时只复制代码内容，不复制 PS C:\...&gt;、代码框符号或截图里的文件路径。Ctrl＋S 在记事本中保存文件，在 Claude Code 中可能暂存输入，二者不同。</p><hr><p><a id="tutorial-chapter-3"></a></p><h2 id="三、第一次用-Claude-Code-干活：把杂乱资料整理成清单"><a href="#三、第一次用-Claude-Code-干活：把杂乱资料整理成清单" class="headerlink" title="三、第一次用 Claude Code 干活：把杂乱资料整理成清单"></a>三、第一次用 Claude Code 干活：把杂乱资料整理成清单</h2><p>这一章，我们一起完成一个小任务：<strong>把一段零散的活动资料，整理成一份可以直接查看和修改的准备清单。</strong></p><p>你会学会准备材料、发送要求、查看结果，以及让 AI 继续修改。不会写代码也没关系。</p><h3 id="1-准备好工作文件夹"><a href="#1-准备好工作文件夹" class="headerlink" title="1. 准备好工作文件夹"></a>1. 准备好工作文件夹</h3><p>打开上一章创建的 <strong>Claude练习</strong> 文件夹，里面应该已经有 <code>claude.exe</code>。</p><p>如果没有，打开之前解压的安装材料，进入 <strong>02-Claude-Code本地核验</strong> 文件夹，将 <code>claude.exe</code> 复制过来。</p><p>这个文件夹就是我们这次工作的地方。<strong>原始材料和生成的结果都放在这里，方便找到。</strong></p><p><img src="/images/claude-code-beginners-guide/03-01-Claude%E7%A8%8B%E5%BA%8F%E6%94%BE%E5%85%A5%E7%BB%83%E4%B9%A0%E6%96%87%E4%BB%B6%E5%A4%B9.png" alt="练习文件夹中的 claude.exe" loading='lazy'></p><p><em>图 3-1｜练习文件夹中的 claude.exe</em></p><h3 id="2-创建一份练习资料"><a href="#2-创建一份练习资料" class="headerlink" title="2. 创建一份练习资料"></a>2. 创建一份练习资料</h3><h4 id="第一步：新建文本文件"><a href="#第一步：新建文本文件" class="headerlink" title="第一步：新建文本文件"></a>第一步：新建文本文件</h4><p>在“Claude练习”文件夹空白处点击鼠标右键，选择 <strong>新建 → 文本文档</strong>。</p><p>将新文件命名为 <code>活动资料</code>，<strong>按回车确认</strong>。如果电脑显示文件扩展名，完整名称应该是 <code>活动资料.txt</code>。</p><blockquote><p>如果新建文件原本只显示“新建文本文档”，重命名时输入“活动资料”即可，不要额外加 <code>.txt</code>，避免变成“活动资料.txt.txt”。</p></blockquote><p><strong>不确定后缀是否重复？</strong>Windows 11 在文件夹顶部选择“查看 → 显示 → 文件扩展名”；Windows 10 在“查看”选项卡勾选“文件扩展名”。确认完整名称是“活动资料.txt”。如果右键菜单没有“文本文档”，从开始菜单搜索并打开记事本，粘贴材料，按 Ctrl＋Shift＋S 另存为，选择“Claude练习”文件夹，文件名填“活动资料.txt”，编码选 UTF-8，再点保存。</p><h4 id="第二步：填写材料"><a href="#第二步：填写材料" class="headerlink" title="第二步：填写材料"></a>第二步：填写材料</h4><p>双击文件，用记事本打开。复制下面这段示例资料，粘贴进去：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">我们准备举办一场读书分享会，预计20人参加。</span><br><span class="line">时间暂定周六下午两点，地点是学校图书馆二楼。</span><br><span class="line">每个人带一本想分享的书。</span><br><span class="line">需要准备签到表、饮用水和宣传海报。</span><br><span class="line">目前有3名同学帮忙，但还没有分工。</span><br><span class="line">预算不超过300元。</span><br><span class="line">活动结束时间还没有确定。</span><br></pre></td></tr></table></figure><h4 id="第三步：保存文件"><a href="#第三步：保存文件" class="headerlink" title="第三步：保存文件"></a>第三步：保存文件</h4><p>按住 <strong>Ctrl</strong>，再按一下 <strong>S</strong>，也就是 <strong>Ctrl＋S</strong>，保存内容，然后关闭记事本。</p><p>此时文件夹里应该有：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Claude练习</span><br><span class="line">├─ claude.exe</span><br><span class="line">└─ 活动资料.txt</span><br></pre></td></tr></table></figure><p><strong>完成标志：重新打开“活动资料.txt”，能看到刚才保存的七行内容。</strong></p><h3 id="3-打开-Claude-Code"><a href="#3-打开-Claude-Code" class="headerlink" title="3. 打开 Claude Code"></a>3. 打开 Claude Code</h3><h4 id="第一步：打开-PowerShell"><a href="#第一步：打开-PowerShell" class="headerlink" title="第一步：打开 PowerShell"></a>第一步：打开 PowerShell</h4><p>在“Claude练习”文件夹里，点击窗口顶部的 <strong>地址栏</strong>，输入：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell</span><br></pre></td></tr></table></figure><p><strong>按 Enter（回车键）。</strong>注意是顶部显示路径的地址栏，不是右侧搜索框。</p><p><img src="/images/claude-code-beginners-guide/03-02-%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5powershell.png" alt="在地址栏输入 powershell" loading='lazy'></p><p><em>图 3-2｜在地址栏输入 powershell</em></p><h4 id="第二步：启动程序"><a href="#第二步：启动程序" class="headerlink" title="第二步：启动程序"></a>第二步：启动程序</h4><p>在打开的 PowerShell 中输入：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\claude.exe</span><br></pre></td></tr></table></figure><p><strong>按回车启动。</strong>等待进入 Claude Code，顶部会显示程序信息，底部是输入任务的位置。</p><p><img src="/images/claude-code-beginners-guide/03-03-Claude%E5%90%AF%E5%8A%A8%E7%95%8C%E9%9D%A2-MiMo%E7%A4%BA%E4%BE%8B.png" alt="Claude Code 启动界面示例" loading='lazy'></p><p><em>图 3-3｜Claude Code 启动界面示例</em></p><blockquote><p>这张截图使用 MiMo，仅展示界面位置。本教程模型配置仍按上一章接入 DeepSeek。截图中的权限提示和 auto mode 不需要照着设置。</p></blockquote><p><strong>完成标志：底部出现可以输入任务的位置。</strong>如果上一章的 Claude Code 还开着，而且就在同一练习文件夹里，可以直接继续使用。</p><h3 id="4-先让它确认找到了材料"><a href="#4-先让它确认找到了材料" class="headerlink" title="4. 先让它确认找到了材料"></a>4. 先让它确认找到了材料</h3><p>先不急着生成整份文件。在底部输入：</p><blockquote><p>请查看当前文件夹，告诉我有没有“活动资料.txt”。如果有，请读出文件内容，先不要修改或创建任何文件。</p></blockquote><p><strong>按回车发送。</strong>等待回复，不要在尚未完成时连续重复发送。</p><h4 id="如果出现操作确认"><a href="#如果出现操作确认" class="headerlink" title="如果出现操作确认"></a>如果出现操作确认</h4><p>它可能询问是否允许读取文件。检查文件名和路径，确认是刚才创建的“活动资料.txt”，再按界面提示允许。不同版本的选项可能不同，以实际显示为准。</p><p>确认菜单通常用上下方向键选中选项，再按 Enter（回车键）。第一次练习优先选 Yes／Allow once（允许本次）这类单次选项；不必选“以后全部允许”。若屏幕已经显示正在读取而没有询问，继续等结果即可，不需要特意找确认按钮。</p><h4 id="检查回复"><a href="#检查回复" class="headerlink" title="检查回复"></a>检查回复</h4><p>看看读出的内容是否与保存的资料一致。</p><p><strong>完成标志：它找到了文件，并正确读出了活动资料。</strong></p><p>如果找不到，可以回复：</p><blockquote><p>请告诉我你当前所在的文件夹路径，以及这里有哪些文件。</p></blockquote><p><strong>按回车发送。</strong>将路径与自己的练习文件夹比较。如果路径不一致，输入 <code>/exit</code> 并<strong>按回车退出</strong>，再从正确文件夹的地址栏打开 PowerShell，输入 <code>.\claude.exe</code> 并<strong>按回车启动</strong>。</p><h3 id="5-正式交代整理任务"><a href="#5-正式交代整理任务" class="headerlink" title="5. 正式交代整理任务"></a>5. 正式交代整理任务</h3><p>确认材料读取正确后，继续输入下面这段话。第一次练习可以整段复制；粘贴后检查内容是否完整。如果已经自动发送，不用再按一次回车。</p><blockquote><p>请根据刚才的“活动资料.txt”，整理一份活动准备清单。请分成三部分：一、活动基本信息；二、需要准备的物品；三、待确认问题。保留原文中“暂定”的意思，没有写明的信息不要编造，也不要修改原始文件。请把结果保存为当前文件夹中的“活动准备清单.md”。</p></blockquote><p><strong>如果内容还在输入框中，按回车发送。</strong></p><table><thead><tr><th>要说清什么？</th><th>我们怎么说的？</th></tr></thead><tbody><tr><td>根据什么材料</td><td>活动资料.txt</td></tr><tr><td>要完成什么</td><td>整理活动准备清单</td></tr><tr><td>有什么要求</td><td>分三部分、保留“暂定”、不编造</td></tr><tr><td>保存在哪里</td><td>当前文件夹的活动准备清单.md</td></tr></tbody></table><p>不必一字不差地照抄。<strong>说清材料、任务、要求和结果位置，就能开始。</strong></p><h3 id="6-等待执行，看懂中间提示"><a href="#6-等待执行，看懂中间提示" class="headerlink" title="6. 等待执行，看懂中间提示"></a>6. 等待执行，看懂中间提示</h3><p>Claude Code 可能会显示正在读取文件、整理内容或创建文件。这是在展示操作过程，不是要求你写代码。</p><p>如果询问是否允许创建文件，确认目标是 <strong>活动准备清单.md</strong>，路径也在练习文件夹内，再允许执行。</p><p>如果准备删除原始资料、修改无关文件，或执行你看不懂且与任务无关的操作，先不要允许。用方向键选 No／Reject（拒绝）并按回车，或按该页面标注的 Esc 取消；回到任务输入框后，再输入下面这句话请它解释。不要在权限选择菜单里直接输入任务。</p><p>例如输入：</p><blockquote><p>我只需要读取活动资料并创建清单。请解释为什么需要这项操作，先不要执行。</p></blockquote><p><strong>按回车发送。</strong></p><p><strong>完成标志：它回复任务完成，并说明结果文件已经保存。</strong>下一步还要亲自打开检查，不能只看它说“完成”。</p><h3 id="7-找到并打开结果文件"><a href="#7-找到并打开结果文件" class="headerlink" title="7. 找到并打开结果文件"></a>7. 找到并打开结果文件</h3><p>回到练习文件夹。如果没有看到新文件，按 <strong>F5</strong> 刷新。正常情况下，会多出 <strong>活动准备清单.md</strong>。</p><h4 id="md-是什么？"><a href="#md-是什么？" class="headerlink" title=".md 是什么？"></a>.md 是什么？</h4><p>它是一种文本文件格式，常用于保存标题、列表和表格。</p><p>右键点击文件，选择 <strong>打开方式 → 记事本</strong>。如果列表里没有记事本，点击“选择其他应用”，再找到记事本。</p><p>打开后可能看到类似内容：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 活动准备清单</span><br><span class="line"></span><br><span class="line">## 一、活动基本信息</span><br><span class="line"></span><br><span class="line">- 活动：读书分享会</span><br><span class="line">- 预计人数：20人</span><br><span class="line">- 时间：暂定周六下午两点</span><br></pre></td></tr></table></figure><p>其中的 <code>#</code> 和 <code>-</code> 用来表示标题和列表，<strong>不是报错</strong>。你现在只需要能读懂内容。</p><h3 id="8-对照原材料，检查结果"><a href="#8-对照原材料，检查结果" class="headerlink" title="8. 对照原材料，检查结果"></a>8. 对照原材料，检查结果</h3><table><thead><tr><th>检查项</th><th>正确表现</th></tr></thead><tbody><tr><td>人数</td><td>预计20人</td></tr><tr><td>时间</td><td>保留“暂定周六下午两点”</td></tr><tr><td>地点</td><td>学校图书馆二楼</td></tr><tr><td>预算</td><td>不超过300元</td></tr><tr><td>结束时间</td><td>标为待确认，没有自行决定</td></tr><tr><td>原始文件</td><td>活动资料.txt 仍然保留</td></tr></tbody></table><p>AI 也可能提出“是否需要报名”“物品数量是多少”等问题。<strong>只要明确标为待确认问题，没有写成已确定的事实，就可以供你进一步考虑。</strong></p><p>如果发现错误，回到 Claude Code，输入：</p><blockquote><p>你把“暂定周六下午两点”写成了已经确定的时间，请改回“暂定”，并检查其他内容是否也把未确定的信息写成了事实。更新“活动准备清单.md”。</p></blockquote><p><strong>按回车发送。</strong>完成后关闭并重新打开结果文件，查看更新。</p><h3 id="9-让它根据反馈继续修改"><a href="#9-让它根据反馈继续修改" class="headerlink" title="9. 让它根据反馈继续修改"></a>9. 让它根据反馈继续修改</h3><p>回到 Claude Code，输入：</p><blockquote><p>请把“需要准备的物品”改成表格，包含“物品”“数量”“是否准备完成”三列。资料中没有数量的项目填写“待确认”；“是否准备完成”统一填写“待准备”。其他内容保留，更新“活动准备清单.md”。</p></blockquote><p><strong>按回车发送。</strong>修改后重新打开文件，检查是否出现类似内容：</p><table><thead><tr><th>物品</th><th>数量</th><th>是否准备完成</th></tr></thead><tbody><tr><td>签到表</td><td>待确认</td><td>待准备</td></tr><tr><td>饮用水</td><td>待确认</td><td>待准备</td></tr><tr><td>宣传海报</td><td>待确认</td><td>待准备</td></tr></tbody></table><p>这是预期结构示例，不是实际运行结果。虽然预计20人参加，也不能直接认定饮用水就是20瓶。<strong>没有确定的数量，先标注待确认。</strong></p><p>这一步练习的是：第一次给任务，之后继续提出具体修改，不用每次从头解释。</p><h3 id="10-不知道怎么说，就让它先问你"><a href="#10-不知道怎么说，就让它先问你" class="headerlink" title="10. 不知道怎么说，就让它先问你"></a>10. 不知道怎么说，就让它先问你</h3><p>输入：</p><blockquote><p>我想把这份活动资料整理得更实用，但还没想好具体要求。请先问我3个最关键的问题，等我回答后再修改文件。</p></blockquote><p><strong>按回车发送。</strong>它提问后，照常回答。例如：</p><blockquote><p>清单给3名筹备同学使用，希望简洁一点。目前还没有确定分工，先不要写负责人。</p></blockquote><p><strong>按回车发送。</strong>不需要一开始就写出完美要求，通过几轮对话逐渐补充，也是在正常使用 AI。</p><h3 id="11-保存成果，结束练习"><a href="#11-保存成果，结束练习" class="headerlink" title="11. 保存成果，结束练习"></a>11. 保存成果，结束练习</h3><p>检查文件夹里有这些内容：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Claude练习</span><br><span class="line">├─ claude.exe</span><br><span class="line">├─ 活动资料.txt</span><br><span class="line">└─ 活动准备清单.md</span><br></pre></td></tr></table></figure><table><thead><tr><th>文件</th><th>用途</th></tr></thead><tbody><tr><td>claude.exe</td><td>运行程序</td></tr><tr><td>活动资料.txt</td><td>原始材料</td></tr><tr><td>活动准备清单.md</td><td>AI 整理后的成果</td></tr></tbody></table><p>确认成果已经保存后，回到 Claude Code，输入：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/exit</span><br></pre></td></tr></table></figure><p><strong>按回车退出。</strong>退出程序不会删除这些文件，你仍可以查看、修改或复制清单。</p><h3 id="12-以后交代任务，可以照这个模板说"><a href="#12-以后交代任务，可以照这个模板说" class="headerlink" title="12. 以后交代任务，可以照这个模板说"></a>12. 以后交代任务，可以照这个模板说</h3><blockquote><p>请读取【文件名或材料位置】，帮我完成【具体任务】。<br>结果需要包含【内容或结构】，用于【用途或读者】。<br>请遵守【具体要求】，不确定的信息请提问或标注，不要编造。<br>最后保存为【文件名】，保留原始文件。</p></blockquote><p>例如，把活动资料换成会议记录：</p><blockquote><p>请读取“会议记录.txt”，整理出会议结论、待办事项和待确认问题。负责人、截止时间没有写明的，标注为待确认。保存为“会议待办清单.md”，不要修改原文件。</p></blockquote><p><strong>输入后按回车发送。</strong>先给材料，再说要求；完成后检查，不满意就继续修改。这就是用 Claude Code 帮忙干活的基本流程。</p><hr><p><a id="tutorial-chapter-4"></a></p><h2 id="四、跟着做一个完整项目：筹备一场读书分享会"><a href="#四、跟着做一个完整项目：筹备一场读书分享会" class="headerlink" title="四、跟着做一个完整项目：筹备一场读书分享会"></a>四、跟着做一个完整项目：筹备一场读书分享会</h2><p>上一章，我们整理了一份活动清单。这一章，我们把它继续做成一个完整项目：<strong>准备好活动方案、人员分工、预算表和宣传文案。</strong></p><p>你还会在做项目时学会查看帮助、引用文件、给对话命名、退出后继续，以及整理较长的对话。<strong>不用背命令，跟着做，用到哪个就学哪个。</strong></p><h3 id="1-这次要完成什么？"><a href="#1-这次要完成什么？" class="headerlink" title="1. 这次要完成什么？"></a>1. 这次要完成什么？</h3><p>假设你是读书分享会的负责人，需要把筹备材料交给其他同学使用。</p><table><thead><tr><th>文件</th><th>用途</th></tr></thead><tbody><tr><td>活动方案.md</td><td>说明活动怎么进行</td></tr><tr><td>分工与准备清单.md</td><td>说明谁负责、何时完成</td></tr><tr><td>活动预算.md</td><td>说明准备花多少钱</td></tr><tr><td>宣传文案.md</td><td>用于发布活动通知</td></tr><tr><td>项目进度.md</td><td>记录进度，方便下次继续</td></tr></tbody></table><p>这次练习只在电脑里生成文件，宣传文案由你检查并自行发布。</p><p><strong>这是一个新项目：</strong>第三章的时间仍为“暂定”，本章改用下面提供的“项目资料.txt”，练习已经确认时间、场地和分工后的筹备流程。请新建项目文件夹，使用本章资料，不要覆盖第三章的原始资料，也不要把两章的条件混在一起。</p><h3 id="2-先分清两种输入位置"><a href="#2-先分清两种输入位置" class="headerlink" title="2. 先分清两种输入位置"></a>2. 先分清两种输入位置</h3><table><thead><tr><th>在哪里输入？</th><th>输入什么？</th></tr></thead><tbody><tr><td>PowerShell，尚未进入 Claude Code</td><td><code>.\claude.exe</code>、<code>.\claude.exe -c</code></td></tr><tr><td>Claude Code 的任务输入位置</td><td>日常要求，以及 <code>/help</code>、<code>/rename</code> 等命令</td></tr></tbody></table><p>看到 PS C:\…&gt; 通常是在 PowerShell。进入 Claude Code 后，底部是平时发送任务的位置。以 / 开头的命令，要在 Claude Code 里输入。</p><p>不同版本和配置的选项可能不同，以实际菜单为准。<a href="https://code.claude.com/docs/en/commands">官方命令说明</a></p><h3 id="3-建立项目文件夹"><a href="#3-建立项目文件夹" class="headerlink" title="3. 建立项目文件夹"></a>3. 建立项目文件夹</h3><h4 id="第一步：创建文件夹"><a href="#第一步：创建文件夹" class="headerlink" title="第一步：创建文件夹"></a>第一步：创建文件夹</h4><p>在桌面空白处右键点击，选择 <strong>新建 → 文件夹</strong>，输入 <code>读书分享会项目</code>，<strong>按回车确认</strong>。</p><h4 id="第二步：复制程序"><a href="#第二步：复制程序" class="headerlink" title="第二步：复制程序"></a>第二步：复制程序</h4><p>打开上一章的“Claude练习”文件夹，复制 <strong>claude.exe</strong>，粘贴到新项目文件夹里。</p><h4 id="第三步：准备项目资料"><a href="#第三步：准备项目资料" class="headerlink" title="第三步：准备项目资料"></a>第三步：准备项目资料</h4><p>在新文件夹空白处右键点击，选择 <strong>新建 → 文本文档</strong>，命名为 <strong>项目资料.txt</strong>。如果电脑隐藏扩展名，只输入“项目资料”，不要重复添加 <code>.txt</code>。</p><p>打开文件，粘贴：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">活动名称：周末读书分享会</span><br><span class="line"></span><br><span class="line">活动时间：2026年11月14日，星期六，14:00—16:00。</span><br><span class="line">活动地点：学校图书馆二楼活动室，已确认可以使用。</span><br><span class="line">活动人数：20名参与者，另有3名工作人员。</span><br><span class="line">活动预算：不超过300元。</span><br><span class="line">活动内容：每位参与者带一本书，以自愿方式分享，不要求所有人上台。</span><br><span class="line"></span><br><span class="line">工作人员：</span><br><span class="line">小林负责主持和活动流程。</span><br><span class="line">小周负责签到、报名统计和现场引导。</span><br><span class="line">小陈负责物品采购和宣传文案。</span><br><span class="line"></span><br><span class="line">现有条件：</span><br><span class="line">活动室桌椅和投影设备免费使用。</span><br><span class="line">不收取报名费，不安排餐食。</span><br><span class="line"></span><br><span class="line">可参考的采购价格：</span><br><span class="line">饮用水每瓶2元。</span><br><span class="line">纸杯每包8元，一包50只。</span><br><span class="line">打印每张0.5元。</span><br><span class="line">其他物品如有需要，请先列出，不要编造价格。</span><br><span class="line"></span><br><span class="line">尚未确定：</span><br><span class="line">报名方式。</span><br><span class="line">对外咨询的联系人和联系方式。</span><br><span class="line">是否需要购买其他物品。</span><br><span class="line"></span><br><span class="line">要求：</span><br><span class="line">所有安排先形成草稿，由负责人检查。</span><br><span class="line">不替我们发送通知、提交报名信息或购买物品。</span><br></pre></td></tr></table></figure><p>这是<strong>练习用的假设资料和价格</strong>。按 <strong>Ctrl＋S</strong> 保存，关闭记事本。</p><p><strong>完成标志：文件夹里有 claude.exe 和项目资料.txt。</strong></p><h3 id="4-启动程序，认识帮助页面"><a href="#4-启动程序，认识帮助页面" class="headerlink" title="4. 启动程序，认识帮助页面"></a>4. 启动程序，认识帮助页面</h3><h4 id="第一步：启动-Claude-Code"><a href="#第一步：启动-Claude-Code" class="headerlink" title="第一步：启动 Claude Code"></a>第一步：启动 Claude Code</h4><p>打开项目文件夹，在顶部地址栏输入 <code>powershell</code>，<strong>按回车</strong>。</p><p>在 PowerShell 中输入：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\claude.exe</span><br></pre></td></tr></table></figure><p><strong>按回车启动。</strong></p><h4 id="第二步：打开帮助"><a href="#第二步：打开帮助" class="headerlink" title="第二步：打开帮助"></a>第二步：打开帮助</h4><p>进入 Claude Code 后输入：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/help</span><br></pre></td></tr></table></figure><p><strong>按回车执行。</strong></p><p><img src="/images/claude-code-beginners-guide/04-01-Claude%E5%B8%AE%E5%8A%A9%E4%B8%8E%E5%BF%AB%E6%8D%B7%E9%94%AE.png" alt="Claude Code 帮助页面真实截图" loading='lazy'></p><p><em>图 4-1｜Claude Code 帮助页面真实截图</em></p><blockquote><p>截图使用 MiMo，主要展示帮助页面和按键位置，不代表 DeepSeek 接通结果。顶部黄色提示来自截图电脑已有的权限设置，不需要照着配置。</p></blockquote><h4 id="第三步：看懂英文和按键"><a href="#第三步：看懂英文和按键" class="headerlink" title="第三步：看懂英文和按键"></a>第三步：看懂英文和按键</h4><table><thead><tr><th>英文</th><th>中文</th></tr></thead><tbody><tr><td>Help</td><td>帮助</td></tr><tr><td>General</td><td>通用说明</td></tr><tr><td>Commands</td><td>命令列表</td></tr><tr><td>Custom commands</td><td>自定义命令</td></tr><tr><td>Shortcuts</td><td>快捷键</td></tr><tr><td>Esc to cancel</td><td>按 Esc 关闭当前页面</td></tr></tbody></table><p>先浏览，不需要一次看懂全部内容。看完后，<strong>按 Esc 返回任务输入位置</strong>。</p><p>先练三个按键就够：在任务输入框输入 /help 并回车，打开帮助后按 Esc 返回；输入一小段文字，暂时不要发送，用退格键删除。换行先按帮助页当前显示的方法操作，确认文字仍留在输入框后再继续。整段粘贴后先检查是否完整，再按回车；如果已经发送，不要重复发送。</p><p>帮助页里的快捷键受版本、键盘布局和终端影响。Ctrl＋Shift＋下划线的撤销针对输入编辑，不是撤销项目文件；需要恢复文件时先停下并使用备份。Shift＋Tab 会切换操作模式，第一次练习保持默认模式，不需要自动接受全部修改。</p><table><thead><tr><th>按键或输入</th><th>作用</th><th>新手怎么用？</th></tr></thead><tbody><tr><td><code>/</code></td><td>查看命令</td><td>输入英文 <code>/</code>，查看菜单</td></tr><tr><td><code>@</code></td><td>引用文件路径</td><td>输入英文 <code>@</code>，按提示选择文件</td></tr><tr><td><code>/btw</code></td><td>临时问旁支问题</td><td>后面接临时问题</td></tr><tr><td><code>!</code></td><td>终端命令模式</td><td>执行系统命令，本章不用</td></tr><tr><td>连续按两次 Esc</td><td>清空当前输入</td><td>清除未发送的文字</td></tr><tr><td>Shift＋Tab</td><td>切换操作模式</td><td>新手保留默认设置，不必开启自动接受修改</td></tr><tr><td>Ctrl＋O</td><td>展开或收起详细输出</td><td>查看执行细节</td></tr><tr><td>Ctrl＋T</td><td>显示或隐藏任务列表</td><td>查看任务情况</td></tr><tr><td><code>\</code>＋回车</td><td>输入时换行</td><td>先输入反斜杠，再按回车</td></tr><tr><td>Ctrl＋Shift＋<code>_</code></td><td>撤销输入编辑</td><td>截图中的快捷键，不等于恢复全部文件修改</td></tr><tr><td>Alt＋V</td><td>粘贴图片</td><td>需剪贴板有图片，模型也要支持图片</td></tr><tr><td>Alt＋P</td><td>切换模型</td><td>接外部模型时先不要随意切换</td></tr><tr><td>Ctrl＋S</td><td>暂存当前输入</td><td>不是保存项目文件</td></tr><tr><td>Ctrl＋G</td><td>用外部编辑器编辑输入</td><td>需配置编辑器，本章不用</td></tr><tr><td><code>/keybindings</code></td><td>自定义快捷键</td><td>新手先不调整</td></tr></tbody></table><blockquote><p><strong>组合键怎么按？</strong>例如 Ctrl＋O：按住 Ctrl，再按一下字母 O，然后松开。Shift＋Tab 同理。</p><p>截图中的下划线 <code>_</code> 通常需要 Shift＋减号键输入，具体撤销映射以当前版本和终端为准，第一次练习可先不用。</p></blockquote><p><strong>同一个按键，在不同软件里可能作用不同。</strong>记事本中的 Ctrl＋S 是保存，Claude Code 帮助页中的 Ctrl＋S 是暂存输入。</p><p>先记住：<strong>回车发送、Esc 关闭当前页面、&#x2F;help 查看帮助。</strong></p><h3 id="5-给这次对话起名字"><a href="#5-给这次对话起名字" class="headerlink" title="5. 给这次对话起名字"></a>5. 给这次对话起名字</h3><p>输入：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/rename 读书分享会筹备</span><br></pre></td></tr></table></figure><p><strong>按回车执行。</strong>这能方便以后查找对话。对话名称与文件夹名称是两回事，改对话名不会改文件夹。</p><h3 id="6-先让-AI-理解项目"><a href="#6-先让-AI-理解项目" class="headerlink" title="6. 先让 AI 理解项目"></a>6. 先让 AI 理解项目</h3><p>输入下面的要求，<strong>按回车发送</strong>：</p><blockquote><p>请读取当前文件夹里的“项目资料.txt”。先用简短文字复述活动目标、已确定条件和待确认事项，再提出完成项目的步骤。最终需要活动方案、分工与准备清单、活动预算、宣传文案四份文件。现在只讨论计划，先不要创建或修改文件。</p></blockquote><h4 id="也可以用-选择文件"><a href="#也可以用-选择文件" class="headerlink" title="也可以用 @ 选择文件"></a>也可以用 @ 选择文件</h4><p>在输入位置输入英文 <code>@</code>，查看文件建议，找到 <strong>项目资料.txt</strong>，按菜单提示选择，再补充要求：</p><p>选择文件时可以继续输入“项目资料”筛选，按上下方向键移动，再按 Tab 或界面指定的确认键选中文件。这里的确认是选文件，不是发送整个任务。若没有建议列表，按 Esc 关闭菜单，直接使用上一段写明文件名的要求即可。</p><blockquote><p>请读取我引用的这份资料，先复述活动条件并提出计划，暂时不要修改文件。</p></blockquote><p><strong>按回车发送。</strong>两种方法选一种，不需要重复交代。</p><p>检查时间是否14:00—16:00、是否区分20名参与者和3名工作人员、预算是否不超过300元、未定事项是否仍标注待确认。</p><p>如果理解错了，输入：</p><blockquote><p>工作人员还有3人，采购数量需要考虑他们。请修正计划，先不要生成文件。</p></blockquote><p><strong>按回车发送。</strong>确认计划后再输入：</p><blockquote><p>计划可以。接下来按我逐步交代的要求执行，每完成一步告诉我生成了什么文件，先不要一次生成全部内容。</p></blockquote><p><strong>按回车发送。</strong></p><h3 id="7-制作第一份成果：活动方案"><a href="#7-制作第一份成果：活动方案" class="headerlink" title="7. 制作第一份成果：活动方案"></a>7. 制作第一份成果：活动方案</h3><p>输入：</p><blockquote><p>请先生成“活动方案.md”。包含活动基本信息、14:00—16:00的流程表、工作人员提前到场的准备安排，以及待确认事项。分享采用自愿方式，不要安排20个人全部上台。所有时段要衔接，不能超出活动时间。保留“项目资料.txt”不变。</p></blockquote><p><strong>按回车发送。</strong>如需允许读取或创建文件，检查路径和文件名后按提示允许。</p><p>回到文件夹，找到 <strong>活动方案.md</strong>；没有看到时按 <strong>F5</strong> 刷新。右键选择 <strong>打开方式 → 记事本</strong>。</p><table><thead><tr><th>检查项</th><th>要看什么？</th></tr></thead><tbody><tr><td>时间</td><td>14:00开始、16:00结束</td></tr><tr><td>流程</td><td>有开场、分享、交流和结束</td></tr><tr><td>人数</td><td>区分参与者和工作人员</td></tr><tr><td>分享方式</td><td>保留自愿原则</td></tr><tr><td>未定信息</td><td>标注待确认，没有擅自补全</td></tr></tbody></table><p>需要调整时输入：</p><blockquote><p>请增加自由交流时间，减少主持人介绍时间，总时长仍保持两小时。更新“活动方案.md”。</p></blockquote><p><strong>按回车发送。</strong>完成后重新打开文件检查。</p><h3 id="8-制作第二份成果：分工清单"><a href="#8-制作第二份成果：分工清单" class="headerlink" title="8. 制作第二份成果：分工清单"></a>8. 制作第二份成果：分工清单</h3><p>输入：</p><blockquote><p>请根据“项目资料.txt”和“活动方案.md”，生成“分工与准备清单.md”。用表格列出任务、负责人、建议完成时间、完成状态。负责人沿用已有分工，不新增人员。时间节点属于建议，请标清楚；未实际完成的任务统一标为“待完成”。</p></blockquote><p><strong>按回车发送。</strong>检查分工是否与资料一致、任务是否具体、有没有把建议写成承诺、有没有凭空标记已完成。</p><p>太笼统时输入：</p><blockquote><p>“完成现场准备”太笼统，请拆成可以逐项检查的小任务。保留负责人，更新清单。</p></blockquote><p><strong>按回车发送。完成标志：其他同学能看懂自己要做什么。</strong></p><h3 id="9-中途退出，练习下次继续"><a href="#9-中途退出，练习下次继续" class="headerlink" title="9. 中途退出，练习下次继续"></a>9. 中途退出，练习下次继续</h3><h4 id="第一步：保存进度"><a href="#第一步：保存进度" class="headerlink" title="第一步：保存进度"></a>第一步：保存进度</h4><p>输入：</p><blockquote><p>请生成“项目进度.md”，记录已经完成的文件、已经确认的决定、仍待确认的问题，以及下一步要做什么。不要把建议写成已确认决定。</p></blockquote><p><strong>按回车发送。</strong>确认文件生成后再退出。</p><h4 id="第二步：退出"><a href="#第二步：退出" class="headerlink" title="第二步：退出"></a>第二步：退出</h4><p>输入 <code>/exit</code>，<strong>按回车退出</strong>。回到 <code>PS C:\…&gt;</code> 的 PowerShell。</p><h4 id="第三步：继续最近一次对话"><a href="#第三步：继续最近一次对话" class="headerlink" title="第三步：继续最近一次对话"></a>第三步：继续最近一次对话</h4><p>在<strong>同一项目文件夹的 PowerShell 中</strong>输入：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\claude.exe <span class="literal">-c</span></span><br></pre></td></tr></table></figure><p><strong>按回车执行。</strong><code>-c</code> 继续当前目录最近一次对话。<a href="https://code.claude.com/docs/en/cli-reference">官方启动命令说明</a></p><p>进入后输入：</p><blockquote><p>我们继续。请先查看“项目进度.md”和现有文件，告诉我现在做到哪里，先不要修改文件。</p></blockquote><p><strong>按回车发送。</strong>核对后再继续。</p><h4 id="找更早的对话"><a href="#找更早的对话" class="headerlink" title="找更早的对话"></a>找更早的对话</h4><p>在 Claude Code 输入 <code>/resume</code>，<strong>按回车执行</strong>。找到 <strong>读书分享会筹备</strong>，按菜单提示选择并确认，通常用方向键选择、回车确认。</p><p><strong>恢复对话不等于恢复文件旧版本。</strong>文件后来修改过，仍要检查。</p><p>如果关掉了整个窗口：重新打开“读书分享会项目”文件夹，在地址栏输入 powershell 并回车，再输入 .\claude.exe -c 并回车。不能从其他文件夹随便打开，否则可能找不到本项目最近的对话。</p><p>如果没有找到历史对话：先按 Esc 关闭选择页面，再用普通启动命令进入；告诉 AI“先读取项目进度.md和当前文件，复述已完成、待完成事项，先不要修改”。核对正确后继续，不要为恢复聊天而删除成果文件。</p><h3 id="10-制作第三份成果：预算表"><a href="#10-制作第三份成果：预算表" class="headerlink" title="10. 制作第三份成果：预算表"></a>10. 制作第三份成果：预算表</h3><p>输入：</p><blockquote><p>请根据项目资料和现有方案，生成“活动预算.md”。饮用水暂按23人、每人1瓶估算；纸杯暂按1包估算；打印暂按10张估算。分别列出单价、数量、小计、合计和剩余预算，并展示计算过程。将这些数量标为预算假设，未提供价格的其他物品放入“待询价项目”，不要计入已知金额。</p></blockquote><p><strong>按回车发送。</strong>打开文件，核对：</p><table><thead><tr><th>项目</th><th>计算</th><th align="right">金额</th></tr></thead><tbody><tr><td>饮用水</td><td>23 × 2元</td><td align="right">46元</td></tr><tr><td>纸杯</td><td>1 × 8元</td><td align="right">8元</td></tr><tr><td>打印</td><td>10 × 0.5元</td><td align="right">5元</td></tr><tr><td>已知费用合计</td><td>46＋8＋5</td><td align="right"><strong>59元</strong></td></tr><tr><td>相对300元预算的余额</td><td>300－59</td><td align="right"><strong>241元</strong></td></tr></tbody></table><p><strong>241元不是最终结余</strong>：待询价项目尚未计入，也没有实际采购。</p><p>计算或表述有误时输入：</p><blockquote><p>请重新核对预算计算。已知费用应为59元，未计入待询价项目之前，相对预算还剩241元。请检查并修正，不要写成最终结余。</p></blockquote><p><strong>按回车发送。完成标志：计算正确、假设清楚、没有编造价格。</strong></p><h3 id="11-制作第四份成果：宣传文案"><a href="#11-制作第四份成果：宣传文案" class="headerlink" title="11. 制作第四份成果：宣传文案"></a>11. 制作第四份成果：宣传文案</h3><p>输入：</p><blockquote><p>请根据已经确认的活动资料，生成“宣传文案.md”，包含一份150字以内的群通知和三个可选标题。报名方式、联系人、联系方式还没确定，请用醒目的【待补充】标记。不要编造嘉宾、奖品、报名链接，也不要替我发布。</p></blockquote><p><strong>按回车发送。</strong>检查时间地点、带书提醒、自愿原则、待补充标记，以及有无不存在的承诺。</p><p>需要调整语气时输入：</p><blockquote><p>语气再自然一些，适合发在同学群里。不要用夸张宣传词，保留所有待补充标记。</p></blockquote><p><strong>按回车发送。完成标志：文案可供审阅，但需补全信息后才能发布。</strong></p><h3 id="12-对话变长时，查看和整理上下文"><a href="#12-对话变长时，查看和整理上下文" class="headerlink" title="12. 对话变长时，查看和整理上下文"></a>12. 对话变长时，查看和整理上下文</h3><p>上下文可先理解为：<strong>模型当前用来理解任务的聊天记录和材料。</strong></p><p>输入 <code>/context</code>，<strong>按回车执行</strong>，查看使用情况，先知道这里能查看，不用看懂每个数字。</p><p>对话很短就直接继续，<strong>不用为了练习而强行压缩</strong>。如果已多轮修改，先更新“项目进度.md”，再输入：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/compact 保留活动条件、已确认决定、四份成果文件名和待确认事项</span><br></pre></td></tr></table></figure><p><strong>按回车执行。</strong>完成后要求重新读取进度文件，核对下一步。</p><p><strong>压缩不是备份，也不保证保留每个细节。</strong>重要决定仍要写进文件。<a href="https://code.claude.com/docs/en/commands">命令说明</a></p><h3 id="13-最后检查，完成交付"><a href="#13-最后检查，完成交付" class="headerlink" title="13. 最后检查，完成交付"></a>13. 最后检查，完成交付</h3><p>输入：</p><blockquote><p>请交叉检查“活动方案.md”“分工与准备清单.md”“活动预算.md”“宣传文案.md”。检查时间、地点、人数、分工和预算是否一致，是否把待确认信息写成了事实。先列出问题，不要修改文件。</p></blockquote><p><strong>按回车发送。</strong>看完后决定哪些要改，例如：</p><blockquote><p>请修正你列出的第1项和第2项。其余内容保留，修改后告诉我分别更新了哪些文件。</p></blockquote><p><strong>按回车发送。</strong>最后自己打开四份文件核对。AI 自查可以帮忙，但不能代替负责人的确认。</p><p>再输入：</p><blockquote><p>请更新“项目进度.md”，列出最终成果文件、待负责人确认的事项，以及正式发布前还要补充的信息。</p></blockquote><p><strong>按回车发送。</strong>项目文件夹应有：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">读书分享会项目</span><br><span class="line">├─ claude.exe</span><br><span class="line">├─ 项目资料.txt</span><br><span class="line">├─ 活动方案.md</span><br><span class="line">├─ 分工与准备清单.md</span><br><span class="line">├─ 活动预算.md</span><br><span class="line">├─ 宣传文案.md</span><br><span class="line">└─ 项目进度.md</span><br></pre></td></tr></table></figure><p>确认后输入 <code>/exit</code>，<strong>按回车退出</strong>。</p><h3 id="14-本章命令速查"><a href="#14-本章命令速查" class="headerlink" title="14. 本章命令速查"></a>14. 本章命令速查</h3><table><thead><tr><th>命令</th><th>输入位置</th><th>什么时候用？</th></tr></thead><tbody><tr><td><code>.\claude.exe</code></td><td>PowerShell</td><td>启动</td></tr><tr><td><code>/help</code></td><td>Claude Code</td><td>查看帮助</td></tr><tr><td><code>/rename 读书分享会筹备</code></td><td>Claude Code</td><td>给对话命名</td></tr><tr><td><code>@</code></td><td>Claude Code</td><td>按菜单引用文件</td></tr><tr><td><code>/exit</code></td><td>Claude Code</td><td>退出</td></tr><tr><td><code>.\claude.exe -c</code></td><td>PowerShell</td><td>继续当前目录最近对话</td></tr><tr><td><code>/resume</code></td><td>Claude Code</td><td>恢复较早对话</td></tr><tr><td><code>/context</code></td><td>Claude Code</td><td>查看上下文</td></tr><tr><td><code>/compact 保留事项</code></td><td>Claude Code</td><td>对话较长时整理上下文</td></tr></tbody></table><p><strong>命令输入后按回车执行。</strong><code>@</code> 是文件选择入口，需要按菜单选文件、补充要求后再发送。</p><p>本章重点是走通：<strong>讨论计划 → 分步生成 → 检查修改 → 保存进度 → 下次继续 → 核对交付。</strong></p><hr><p><a id="tutorial-chapter-5"></a></p><h2 id="五、接下来怎么练：把-AI-用到自己的生活和工作里"><a href="#五、接下来怎么练：把-AI-用到自己的生活和工作里" class="headerlink" title="五、接下来怎么练：把 AI 用到自己的生活和工作里"></a>五、接下来怎么练：把 AI 用到自己的生活和工作里</h2><p>完成前面的练习后，你已经知道怎样启动 Claude Code、交代任务、检查结果，也尝试了一个完整项目。</p><p>接下来，不需要急着学更多命令。<strong>先找一件自己确实需要完成的事，让 AI 帮你做，再逐渐形成自己的方法。</strong></p><h3 id="1-不知道让-AI-做什么？先从这些事情找"><a href="#1-不知道让-AI-做什么？先从这些事情找" class="headerlink" title="1. 不知道让 AI 做什么？先从这些事情找"></a>1. 不知道让 AI 做什么？先从这些事情找</h3><p>回想最近一周，有没有一件事符合下面几个特点：</p><ul><li><strong>重复</strong>：经常做，步骤比较相似。</li><li><strong>费时</strong>：需要整理、复制、分类或反复修改。</li><li><strong>材料明确</strong>：有文档、笔记、记录等可以提供。</li><li><strong>容易检查</strong>：你能判断它有没有做对。</li></ul><p>第一次尽量选小任务，例如：</p><table><thead><tr><th>你的情况</th><th>可以尝试的任务</th></tr></thead><tbody><tr><td>课堂笔记很多，复习时找不到重点</td><td>按主题整理笔记，列出不理解的问题</td></tr><tr><td>会议记录零散</td><td>提取结论、待办事项和待确认问题</td></tr><tr><td>准备一次活动</td><td>整理流程、物品、分工和预算</td></tr><tr><td>文章写得太长</td><td>保留主要意思，压缩篇幅、调整结构</td></tr><tr><td>准备找工作</td><td>对照岗位要求，检查简历中缺少哪些信息</td></tr><tr><td>多份材料内容重复</td><td>汇总共同内容，单独列出差异和冲突</td></tr></tbody></table><p><strong>第一次不要选“帮我搞定所有工作”。</strong>选一个能在短时间内检查结果的小任务，更容易知道哪里需要改进。</p><h3 id="2-第一阶段：能独立完成一个小任务"><a href="#2-第一阶段：能独立完成一个小任务" class="headerlink" title="2. 第一阶段：能独立完成一个小任务"></a>2. 第一阶段：能独立完成一个小任务</h3><p>这一阶段的目标是：<strong>不照着教程，也能给材料、说要求、找到结果。</strong></p><h4 id="练习：整理一份自己的笔记"><a href="#练习：整理一份自己的笔记" class="headerlink" title="练习：整理一份自己的笔记"></a>练习：整理一份自己的笔记</h4><p>选择一份篇幅不长、没有隐私信息的笔记，复制到新的练习文件夹。先保留原文件，不要拿唯一一份重要材料直接练习。</p><p><strong>新文件夹也要准备程序：</strong>从“Claude练习”复制 claude.exe 到这里；用记事本新建“我的笔记.txt”，粘贴笔记正文，按 Ctrl＋S 保存。现有 Word 或 PDF 资料先复制可选中的正文到这个文本文件；不要只把 .docx 或 .pdf 后缀改成 .txt。图片、扫描件先跳过，等文字练习熟悉后再尝试。</p><p>打开这个新文件夹，在地址栏输入 powershell，按 Enter（回车键）；在打开的 PowerShell 输入 .\claude.exe，再按回车启动。后续每换一个项目文件夹，都按这套方法准备和启动。</p><p>从这个文件夹启动 Claude Code，输入：</p><blockquote><p>请读取“我的笔记.txt”，按主题整理内容，保留原意。将不完整、含义不明确的地方单独列为“待确认问题”，不要替我补成事实。结果保存为“整理后的笔记.md”，保留原文件。</p></blockquote><p><strong>按回车发送。</strong>完成后打开结果，检查：</p><ol><li>主要内容有没有遗漏？</li><li>有没有改变原意？</li><li>有没有增加原材料里没有的事实？</li><li>文件是否保存在指定位置？</li></ol><p><strong>达到标准：能独立走完整个过程，并说出结果哪里好、哪里需要改。</strong></p><h3 id="3-第二阶段：学会提出修改，而不是反复重做"><a href="#3-第二阶段：学会提出修改，而不是反复重做" class="headerlink" title="3. 第二阶段：学会提出修改，而不是反复重做"></a>3. 第二阶段：学会提出修改，而不是反复重做</h3><p>这一阶段的目标是：<strong>发现问题后，能指出具体位置，并说明希望怎样改。</strong></p><p>继续使用上一份笔记，选择一个真实问题提出修改。例如：</p><blockquote><p>第二部分太长，请按三个小标题重新整理。保留具体例子，删除重复表述，其他部分不要修改。</p></blockquote><p><strong>按回车发送。</strong>或者：</p><blockquote><p>你把我的疑问写成了确定结论。请把这些内容恢复为问题，并检查其他地方有没有类似情况。</p></blockquote><p><strong>按回车发送。</strong>不要只说“再好一点”，尽量交代：</p><table><thead><tr><th>要说清什么？</th><th>示例</th></tr></thead><tbody><tr><td>改哪里</td><td>第二部分</td></tr><tr><td>怎么改</td><td>分成三个小标题</td></tr><tr><td>保留什么</td><td>具体例子</td></tr><tr><td>不动什么</td><td>其他部分</td></tr></tbody></table><p>修改后重新打开文件，核对是否按要求完成。</p><p><strong>达到标准：能通过几轮明确反馈，把结果逐步改到可用，而不是每次重新开始。</strong></p><h3 id="4-第三阶段：独立完成一个小项目"><a href="#4-第三阶段：独立完成一个小项目" class="headerlink" title="4. 第三阶段：独立完成一个小项目"></a>4. 第三阶段：独立完成一个小项目</h3><p>这一阶段的目标是：<strong>把一件稍大的事拆成几步，完成后得到一组能使用的成果。</strong></p><table><thead><tr><th>项目</th><th>可以交付什么？</th></tr></thead><tbody><tr><td>准备一次小组汇报</td><td>资料摘要、汇报提纲、发言稿、待确认问题</td></tr><tr><td>筹备一次活动</td><td>活动方案、分工清单、预算、通知草稿</td></tr><tr><td>整理求职材料</td><td>经历梳理、岗位要求对照表、简历修改建议</td></tr><tr><td>汇总一批阅读资料</td><td>主题目录、观点摘要、来源清单、分歧记录</td></tr></tbody></table><h4 id="第一步：先确定交付结果"><a href="#第一步：先确定交付结果" class="headerlink" title="第一步：先确定交付结果"></a>第一步：先确定交付结果</h4><p>先写一句话：</p><blockquote><p>这个项目完成后，我希望得到________。</p></blockquote><p>例如：</p><blockquote><p>我希望得到一份汇报提纲、一份5分钟发言稿，以及一张待核对的事实清单。</p></blockquote><p>结果越具体，越容易判断有没有完成。</p><h4 id="第二步：先讨论计划"><a href="#第二步：先讨论计划" class="headerlink" title="第二步：先讨论计划"></a>第二步：先讨论计划</h4><p>把材料放进项目文件夹，启动 Claude Code，输入：</p><blockquote><p>我想完成一次小组汇报，材料都在当前文件夹。请先查看材料，列出完成项目的步骤，并告诉我还缺哪些信息。先不要修改文件。</p></blockquote><p><strong>按回车发送。</strong>看完计划，补充缺失信息，再逐步执行。</p><h4 id="第三步：每一步都检查"><a href="#第三步：每一步都检查" class="headerlink" title="第三步：每一步都检查"></a>第三步：每一步都检查</h4><p>完成提纲先检查结构，完成发言稿再检查时长和事实。</p><p><strong>前一步有问题，先修正，再进入下一步。</strong>不要等全部完成后才发现一开始理解错了。</p><h4 id="第四步：留下项目进度"><a href="#第四步：留下项目进度" class="headerlink" title="第四步：留下项目进度"></a>第四步：留下项目进度</h4><p>中途暂停时输入：</p><blockquote><p>请更新“项目进度.md”，写明已完成内容、已确认决定、待确认问题和下一步。注明相关文件名。</p></blockquote><p><strong>按回车发送。</strong>确认保存后，输入 <code>/exit</code>，<strong>按回车退出</strong>。</p><p>下次从同一个项目文件夹打开 PowerShell，输入：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\claude.exe <span class="literal">-c</span></span><br></pre></td></tr></table></figure><p><strong>按回车继续。</strong></p><p><strong>达到标准：能独立完成一个项目，并且暂停后知道怎样接着做。</strong></p><h3 id="5-第四阶段：找一项经常发生的工作，反复使用"><a href="#5-第四阶段：找一项经常发生的工作，反复使用" class="headerlink" title="5. 第四阶段：找一项经常发生的工作，反复使用"></a>5. 第四阶段：找一项经常发生的工作，反复使用</h3><p>做过几个任务后，挑选一件每周或每月都会发生的事。例如：</p><ul><li>每周整理会议记录。</li><li>每次活动前制作准备清单。</li><li>每读完一篇文章整理阅读笔记。</li><li>每次汇报前核对材料和发言稿。</li></ul><p>不必每次从头写要求，可以保存好用的方法。</p><h4 id="建立“我的-AI-工作模板”文件夹"><a href="#建立“我的-AI-工作模板”文件夹" class="headerlink" title="建立“我的 AI 工作模板”文件夹"></a>建立“我的 AI 工作模板”文件夹</h4><table><thead><tr><th>文件</th><th>保存什么？</th></tr></thead><tbody><tr><td>任务要求.txt</td><td>经常使用的要求</td></tr><tr><td>检查清单.txt</td><td>完成后需要核对什么</td></tr><tr><td>参考成品.md</td><td>一份认可的结果，供以后参考</td></tr></tbody></table><p>例如，会议记录的检查清单：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 结论是否有原始记录依据？</span><br><span class="line">2. 待办事项是否写清楚？</span><br><span class="line">3. 负责人和截止时间是否真实存在？</span><br><span class="line">4. 未确认的信息是否单独标注？</span><br><span class="line">5. 是否保留了原始记录？</span><br></pre></td></tr></table></figure><p>以后只替换本次材料，再根据实际情况调整要求。</p><p><strong>达到标准：有一套自己用得顺手的方法，而不是每次重新摸索。</strong></p><h3 id="6-不确定-AI-能不能做，就先问它怎么做"><a href="#6-不确定-AI-能不能做，就先问它怎么做" class="headerlink" title="6. 不确定 AI 能不能做，就先问它怎么做"></a>6. 不确定 AI 能不能做，就先问它怎么做</h3><p>遇到新任务，先输入：</p><blockquote><p>我需要完成【这件事】，现有材料是【这些文件】。你可以怎样帮我？请给出一个简单方案，说明需要我补充什么，以及哪些结果需要我亲自核对。先不要修改文件。</p></blockquote><p><strong>按回车发送。</strong>它说“可以做”不代表已经做成，接下来仍要用小样本测试。</p><p>例如有50份资料，可以先整理2份，检查方法合适后再处理其余材料。</p><h3 id="7-哪些事情需要自己接手？"><a href="#7-哪些事情需要自己接手？" class="headerlink" title="7. 哪些事情需要自己接手？"></a>7. 哪些事情需要自己接手？</h3><table><thead><tr><th>情况</th><th>你需要做什么？</th></tr></thead><tbody><tr><td>涉及事实、数字和引用</td><td>对照原始材料核对</td></tr><tr><td>AI 补充了原材料没有的信息</td><td>问清来源，不能确认就标注或删除</td></tr><tr><td>需要作出重要判断</td><td>自己结合实际情况决定</td></tr><tr><td>准备对外发送或发布</td><td>检查收件人、内容、承诺和隐私</td></tr><tr><td>准备覆盖或删除重要文件</td><td>确认范围并保留备份</td></tr></tbody></table><p><strong>判断 AI 有没有帮上忙，要看结果是否正确、是否可用，以及你花在检查和修改上的时间。</strong>不是看它生成了多少文字。</p><h3 id="8-一条可以照着走的练习路线"><a href="#8-一条可以照着走的练习路线" class="headerlink" title="8. 一条可以照着走的练习路线"></a>8. 一条可以照着走的练习路线</h3><p>不用严格按天完成，熟悉一个阶段后再往下走。</p><table><thead><tr><th>顺序</th><th>做什么？</th><th>完成标志</th></tr></thead><tbody><tr><td>第一次</td><td>整理一份短笔记</td><td>能找到结果，核对内容</td></tr><tr><td>第二次</td><td>对结果提出两次具体修改</td><td>修改符合要求，其他内容保留</td></tr><tr><td>第三次</td><td>换成自己的真实小任务</td><td>不照抄教程也能交代清楚</td></tr><tr><td>第四次</td><td>独立完成一个小项目</td><td>得到几份相互一致的成果</td></tr><tr><td>第五次</td><td>中途暂停，再恢复工作</td><td>能依据进度文件继续</td></tr><tr><td>之后</td><td>重复处理一项日常任务</td><td>积累自己的要求和检查模板</td></tr></tbody></table><p>某一步不顺利，回到上一步缩小任务即可。<strong>先把一件小事做稳，再增加材料量和任务复杂度。</strong></p><h3 id="9-保存这张使用清单"><a href="#9-保存这张使用清单" class="headerlink" title="9. 保存这张使用清单"></a>9. 保存这张使用清单</h3><p>每次开始前，问自己：</p><ul><li>我要完成什么？</li><li>材料放在哪里？</li><li>希望生成什么文件？</li><li>哪些内容不能改、哪些信息不能编造？</li></ul><p>每次结束后，再检查：</p><ul><li>结果是否符合要求？</li><li>事实、数字和来源是否正确？</li><li>原始材料是否保留？</li><li>成果和进度是否已经保存？</li></ul><p>你不需要先成为技术专家。<strong>从一件有明确材料、明确结果的小事开始，逐渐学会交代、检查和修改，就能把 AI 用到自己的工作里。</strong></p><hr><p>作者：<strong>wxs</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+            <tag> Claude Code </tag>
+            
+            <tag> DeepSeek </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>25.3.19（java 数据类型 及数据之间的转换）</title>
+      <link href="/posts/csdn-146377431/"/>
+      <url>/posts/csdn-146377431/</url>
+      
+        <content type="html"><![CDATA[<p>1.自动转换路线（!!!只能沿着箭头转换）</p><p>而且不在一条路线上的不能相互转换</p><p>随着箭头，数据的精度越来越高</p><p>char-&gt;int-&gt;long-&gt;float-&gt;double</p><p>byte-&gt;short-&gt;int-&gt;long-&gt;float-&gt;double</p><p>tips:小数的<br>类<br>型默认是double，如果要用float，在数字后面加f</p><p>byte short char 在计算是会先转换为int类型，在进行计算</p><p>不同类型计算时，结果会转换为精度最高的类型</p><p>2.编码规则</p><p>由最开始只有128位的ascll码，到后来统一的unicode(任何字符都是两位字节)，到现在最常用的UTF-8编码(中文3字节英文1字节)</p><p>3.强制转化</p><p>用（想转换的类型）（要转换的数据） 这样的方式,就能转换</p><p>例如int a &#x3D; (int)1.9;</p><p>这样虽然可以让程序正常运行，但是可能会造成数据溢出或者精度损失</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/146377431"> 25.3.19（java 数据类型 及数据之间的转换） </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文章 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> python </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>25.1.10学习笔记（算法（滑动窗口））</title>
+      <link href="/posts/csdn-145053155/"/>
+      <url>/posts/csdn-145053155/</url>
+      
+        <content type="html"><![CDATA[<p>题目：在leetcode上</p><p><img src="/images/csdn/267792c40191a641974d66bc.png" loading='lazy'></p><p>解释：什么是滑动窗口呢，在这道题里面，子串的长度为k,所以我们就可以将这个子串看为一个窗口，每次去统计窗口里面有多少满足要求，然后进行相关值的加减，滑动就体现在子串的第一个元素离开窗口，紧接着本来在窗口后的元素进入窗口，这样的步骤就像是窗口向后滑动了一样。</p><p>优点：这样相比较暴力求解，大大减小了运算量，复杂度为o(n)，相对于暴力的o(nk)少了很多。</p><p>下面是按照这个算法写的代码</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#define MAX(a,b) (a)&gt;(b)?(a):(b)</span><br><span class="line"></span><br><span class="line">int maxVowels(char* s, int k) &#123;</span><br><span class="line"></span><br><span class="line">int ans=0,vowel=0;</span><br><span class="line"></span><br><span class="line">for(int i=0;s[i];i++)&#123;</span><br><span class="line"></span><br><span class="line">    //1.进入窗口</span><br><span class="line"></span><br><span class="line">if(s[i]==&#x27;a&#x27;||s[i]==&#x27;e&#x27;||s[i]==&#x27;i&#x27;||s[i]==&#x27;o&#x27;||s[i]==&#x27;u&#x27;)&#123;</span><br><span class="line"></span><br><span class="line">    vowel++;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(i&lt;k-1)&#123;</span><br><span class="line"></span><br><span class="line">continue;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//2.更新答案</span><br><span class="line"></span><br><span class="line">ans=MAX(ans,vowel);</span><br><span class="line"></span><br><span class="line">//3.离开窗口</span><br><span class="line"></span><br><span class="line">char out=s[i-k+1];</span><br><span class="line"></span><br><span class="line">if(out==&#x27;a&#x27;||out==&#x27;e&#x27;||out==&#x27;i&#x27;||out==&#x27;o&#x27;||out==&#x27;u&#x27;)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    vowel--;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return ans;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/145053155"> 25.1.10学习笔记（算法（滑动窗口）） </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>12.26</title>
+      <link href="/posts/csdn-144741434/"/>
+      <url>/posts/csdn-144741434/</url>
+      
+        <content type="html"><![CDATA[<p>C语言的课上完了，感谢恩师鹏哥，让我打下了C语言的基础</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144741434"> 12.26 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文章 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>找到两只单身狗（12.25）</title>
+      <link href="/posts/csdn-144718012/"/>
+      <url>/posts/csdn-144718012/</url>
+      
+        <content type="html"><![CDATA[<p>问题：在一组数中找到没有重复的两个数</p><p>解决方案：</p><p><img src="/images/csdn/69755dbc63f3047d05f7f412.png" loading='lazy'></p><p><img src="/images/csdn/53150fb4f827da1e887cea5f.png" loading='lazy'></p><p><img src="/images/csdn/73aae45468fe2d218d688f63.png" loading='lazy'></p><p>解析：</p><p>思路：先将两个数分开，分成两组数据，然后通过异或的方法得到单身狗</p><p>方法：先要知道异或是什么，且其特点</p><p><img src="/images/csdn/d2635c6dc471e68e7e9a75b4.png" loading='lazy'></p><p><img src="/images/csdn/99698fa74a02afa11c43d830.png" loading='lazy'></p><p>&gt;&gt;：右移运算符</p><p><img src="/images/csdn/097948d812d86bd86de1dbe5.png" loading='lazy'></p><p>因为是以二进制存储数据，所以先找到那两个单身狗二进制时不同的位，通过这个位，来将数据分为两组，最后通过相同数异或为0这一特征，得到单身狗。</p><p>存储空间的小知识点：</p><p><img src="/images/csdn/c431a119fb7eeac1ff6a8678.png" loading='lazy'></p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144718012"> 找到两只单身狗（12.25） </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文章 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>12.24学习笔记（预处理及一些编译过程）</title>
+      <link href="/posts/csdn-144691774/"/>
+      <url>/posts/csdn-144691774/</url>
+      
+        <content type="html"><![CDATA[<p>（1）.在生成可执行程序的过程中，一般会生成以下文件：</p><p>1. <strong>预处理文件（.i 文件，以 C&#x2F;C++ 为例）</strong></p><ul><li>在 C 和 C++ 语言中，编译的第一步是预处理。如前面所述，当使用<code>gcc -E</code>（对于 C 语言）或<code>g++ -E</code>（对于 C++ 语言）命令时，会生成预处理文件（.i 文件）。这个文件展开了所有的<code>#include</code>指令，完成了宏替换等预处理操作。例如，<code>#include &lt;stdio.h&gt;</code>会将<code>stdio.h</code>文件的内容插入到源文件中相应的位置，宏定义（如<code>#define PI 3.14</code>）会将代码中所有的<code>PI</code>替换为<code>3.14</code>。<br>2. <strong>汇编文件（.s 文件）</strong></li><li>预处理后的下一步是编译，编译过程会将预处理后的代码转换为汇编语言代码，生成.s 文件。例如，对于一个简单的 C 函数<code>int add(int a, int b) { return a + b; }</code>，其对应的汇编文件可能包含了诸如<code>mov</code>（数据传送指令）、<code>add</code>（加法指令）等汇编指令，用于在机器的寄存器和内存之间操作数据来实现加法功能。不同的处理器架构（如 x86、ARM 等）会有不同的汇编指令集，生成的.s 文件内容也会因架构而异。<br>3. <strong>目标文件（.o 文件）</strong></li><li>汇编文件经过汇编器处理后会生成目标文件（.o 文件）。目标文件包含了机器代码，但是还不能直接执行。它是一种中间文件，在链接阶段会被用到。一个程序可能会有多个.o 文件，例如，如果一个项目有多个源文件（如<code>main.c</code>、<code>func1.c</code>、<code>func2.c</code>），经过编译后会分别生成<code>main.o</code>、<code>func1.o</code>、<code>func2.o</code>等目标文件。这些目标文件中包含了各个源文件编译后的机器码，以及一些关于变量、函数等的符号信息，用于在链接阶段进行符号解析。</li><li>以下是创造了Add、main函数然后生成汇编文件以及最后链接在一起的过程</li></ul><p><img src="/images/csdn/9de6e288e1d55dcd1001d0c2.png" loading='lazy'></p><p>为了让系统能识别文件，在linux环境下都按照elf格式来编译文件</p><p><img src="/images/csdn/a51d2a2e9223e52a743083e0.png" loading='lazy'></p><p>2.提前定义过的符号</p><p><img src="/images/csdn/8340291c9f7eda222a1ca91a.png" loading='lazy'></p><p>以下是一些使用例子：</p><p><img src="/images/csdn/b7f107d59e23e591184bbec8.png" loading='lazy'></p><p>用_FILE_和_LINE_找到了文件的位置以及行号.</p><p>3.fscanf</p><p>无论是fscanf还是fprintf都要记得主题是程序，所以scanf是向程序输入数据，fprintf是向文件输出数据</p><p><img src="/images/csdn/32db684607fb89956dd86425.png" loading='lazy'></p><p>4.下面是选择性编译，很厉害的东西</p><p>下面举几个例子</p><p><img src="/images/csdn/29070b54fea08f8ded37bfc4.png" loading='lazy'></p><p>#ifdef如果定义了DEBUG那么就运行下面的程序，#endif与其是一对，一个开头，一个结尾。</p><p><img src="/images/csdn/45553075f11f4bd8ff93462a.png" loading='lazy'></p><p>这个用法和if一样</p><p><img src="/images/csdn/ccb24760da55c2215474fe1d.png" loading='lazy'></p><p><img src="/images/csdn/adcb088faa7024ae380e1fed.png" loading='lazy'></p><p>这个也与if一样</p><p>5.在.h文件中防止反复引用的方法</p><p><img src="/images/csdn/6b8ca68039fb62b29da0fcb1.png" loading='lazy'></p><p>6.在引用头文件时需要注意的地方</p><p><img src="/images/csdn/862044cd63923ec2474833a1.png" loading='lazy'></p><p>7.用定义宏的方法模拟offsetof函数（用来计算元素偏移量的函数）</p><p><img src="/images/csdn/98be70746a048a04e0f8524f.png" loading='lazy'></p><p>很厉害的是：在定义OFFSETOF时直接将0作为了变量的首地址。</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144691774"> 12.24学习笔记（预处理及一些编译过程） </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>12.20学习笔记（文件的一些补充知识点以及预处理）</title>
+      <link href="/posts/csdn-144607417/"/>
+      <url>/posts/csdn-144607417/</url>
+      
+        <content type="html"><![CDATA[<p>1.函数feof：</p><p><code>feof</code>是一个 C 语言中的文件操作函数。它用于检测文件指针是否到达文件末尾。这个函数的原型是<code>int feof(FILE *stream)</code>，其中<code>stream</code>是一个指向已经打开的文件的指针。</p><p><img src="/images/csdn/145b6e99f443b9a801bb62dc.png" loading='lazy'></p><p>下面是应用实例：</p><p><img src="/images/csdn/968f7b50bb095a1f1d9ea8c1.png" loading='lazy'></p><p>这是对文件进行读取并输出其内容，如果是因为错误结束读取文件ferror就会返回1，而如果因为文件内容被读取完毕而结束，feof就会返回1.</p><p>2.文件缓冲区</p><p><img src="/images/csdn/3d4136f2e20641caf71fb192.png" loading='lazy'></p><p>简单来说就是内存与硬件之间的一个缓冲区，作用就是减少调用系统，让效率更高。</p><p><img src="/images/csdn/3975c547969557680d5cdaf7.png" loading='lazy'></p><p>以下是证明缓冲区存在的代码：</p><p><img src="/images/csdn/c5724cb60c8d0c9ed8a0faa9.png" loading='lazy'></p><p>在程序运行的前10秒内，test.txt没有内容，但过了10秒后，文件中就出现了abcdef这一内容，由此证明了文件缓冲区的存在。</p><p>3.预处理</p><p>下面这是我们写的代码转换到可执行程序的过程</p><p><img src="/images/csdn/feb304a1129b293a4837ffdb.png" loading='lazy'></p><p>编译主要分为以下三个步骤：</p><p><img src="/images/csdn/71b07c8aa13f7789c25ed81f.png" loading='lazy'></p><p>以下是各步骤具体作用</p><p><img src="/images/csdn/94b2fda71117fe9a78e50e9d.png" loading='lazy'></p><p>下面是符号汇总（符号指的就是函数名）的例子</p><p><img src="/images/csdn/894f8707a4fb8f026090547a.png" loading='lazy'></p><p><img src="/images/csdn/d5dc96a08aaba435ef3e0f20.png" loading='lazy'></p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144607417"> 12.20学习笔记（文件的一些补充知识点以及预处理） </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>12.19学习笔记（文件的粗浅理解）</title>
+      <link href="/posts/csdn-144583151/"/>
+      <url>/posts/csdn-144583151/</url>
+      
+        <content type="html"><![CDATA[<p>xxdd</p><p><img src="/images/csdn/413d493b13cbe47b137eb360.png" loading='lazy'>1.fopen：打开文件</p><p><img src="/images/csdn/5aa9295e6f2ebf7333bff128.png" loading='lazy'>第一个参数是打开的文件名称，第二个是打开模式。</p><p>2.</p><p>文件打开模式：</p><p>（1）.r：</p><p>当以<code>r</code>模式打开文件时，程序期望该文件已经存在。如果文件不存在，<code>fopen</code>函数将返回<code>NULL</code>。</p><p>这种模式用于从文件中读取数据。例如，读取一个文本文件中的字符、字符串或者格式化的数据。</p><p>示例代码如下：#include &lt;stdio.h&gt;</p><ul><li>int main()<ul><li>{</li><li>FILE *fp;</li><li>char buffer[100];</li><li>fp &#x3D; fopen(&quot;input.txt&quot;, &quot;r&quot;);</li><li>if(fp &#x3D;&#x3D; NULL)</li><li>{</li><li>perror(&quot;Error opening file&quot;);</li><li>return 1;</li><li>}</li><li>fgets(buffer, sizeof(buffer), fp);</li><li>printf(&quot;%s&quot;, buffer); fclose(fp);</li><li>return 0;</li><li>}</li><li>(2) w:</li><li>以<code>w</code>模式打开文件时，如果文件已经存在，文件的内容会被清空；如果文件不存在，则会创建一个新的文件。</li><li>主要用于向文件中写入数据。例如，将程序的输出结果保存到文件中。<br>#include &lt;stdio.h&gt;</li><li>int main()</li><li>{</li><li>FILE *fp; fp &#x3D; fopen(&quot;output.txt&quot;, &quot;w&quot;);</li><li>if(fp &#x3D;&#x3D; NULL) { perror(&quot;Error opening file&quot;);</li><li>return 1; } fprintf(fp, &quot;This is a test output.\n&quot;);</li><li>fclose(fp);</li><li>return 0;</li><li>}</li><li>(3)a:</li><li>当以<code>a</code>模式打开文件时，如果文件已经存在，新的数据会被追加到文件的末尾；如果文件不存在，则会创建一个新文件。</li><li><img src="/images/csdn/9cf50eabdf4a541d45b3e0e0.png" loading='lazy'></li><li><strong>还有这些模式（<code>r +</code>、<code>w +</code>、<code>a +）</code></strong></li><li><strong><code>2.接下来是读取文件内容的例子</code></strong></li><li><img src="/images/csdn/83182a77abe4757c3c13c595.png" loading='lazy'></li><li>这是用r模式打开文件进行读取，每读取一次文件指针会向下一个元素的位置移动</li><li><img src="/images/csdn/b796a1a1eb391955000a7739.png" loading='lazy'></li><li>这是把文件的内容输入到arr中</li><li>3.向文件中输入的例子</li><li><img src="/images/csdn/458cf1b01e8dd3453f3b953e.png" loading='lazy'></li><li>用w模式打开文件，然后创造了结构体，再用标准输入到文件中</li><li>4.流</li><li><img src="/images/csdn/0b6fb6ca02de2115f7d9a4cd.png" loading='lazy'></li><li><strong>流</strong>是对数据输入输出（I&#x2F;O）操作的一种高度抽象，形象地比喻为“流淌着字符的河”。它屏蔽了不同外部设备（如键盘、显示器、磁盘文件等）的具体实现细节，为程序员提供了一种统一的方式来处理各种设备的数据交换。通过流，我们只需关注数据的读写逻辑，而无需关心底层硬件接口的复杂性。</li><li>在C程序中，无论是向屏幕输出文字、从键盘接收用户输入，还是读写文件内容，所有这些操作都被封装为对流的读写。这种统一的接口设计极大地提升了代码的可移植性和开发效率。</li><li>5.几个函数的简单区分</li><li><img src="/images/csdn/bcfbff881ede8b5d4bbecee4.png" loading='lazy'>操作文件所用的主要还是fscanf和fprintf。</li><li>简单例子</li><li><img src="/images/csdn/fc9b279066fe59232a96c584.png" loading='lazy'></li><li><img src="/images/csdn/a352d7187a66e728dd066b4e.png" loading='lazy'></li><li>6.实例，通过文件来记录通讯录中的信息，使联系人信息可以长久保留<img src="/images/csdn/3ea802d2461858350b97f508.png" loading='lazy'></li><li>fread:</li><li><ul><li><code>fread</code>函数用于从文件流中读取数据。它的原型是<code>size_t fread(void *ptr, size_t size, size_t count, FILE *stream);</code>。</li><li>其中<code>ptr</code>是指向用于存储读取数据的内存块的指针，<code>size</code>是每个数据元素的大小（以字节为单位），<code>count</code>是要读取的元素个数，<code>stream</code>是指向要读取的文件流的指针（通过<code>fopen</code>打开文件后得到的<code>FILE</code>类型指针）。<ul><li>该函数的主要作用是从指定的文件流<code>stream</code>中读取<code>count</code>个大小为<code>size</code>字节的数据元素，并将它们存储到<code>ptr</code>所指向的内存区域中。读取成功后，<code>fread</code>函数返回实际读取的元素个数.</li></ul></li><li>因为不确定要存储多少个联系人的信息，所以一个个存储</li><li><img src="/images/csdn/ab25987c242f735267a00cf1.png" loading='lazy'></li><li>这个是读取文件信息，将联系人一个个输入到data数组中</li><li>7.fseek函数的使用</li><li><code>fseek</code>函数用于移动文件位置指针。其函数原型为<code>int fseek(FILE *stream, long int offset, int whence);</code>。</li><li>这个函数允许在文件内部进行定位，使得后续的文件读写操作可以从指定的位置开始。例如，可以将文件位置指针移动到文件的开头、中间或者结尾的某个位置。</li><li><img src="/images/csdn/45dc0f84abf02e204c7bc26d.png" loading='lazy'></li><li>其中，SEEK_SET文件的起始位置，END是文件的末尾，CUR是上回使用后指针的位置，ftell是描述当前指针位置对于文件起始位置的偏移量</li></ul></li></ul></li></ul><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144583151"> 12.19学习笔记（文件的粗浅理解） </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>12.16学习笔记</title>
+      <link href="/posts/csdn-144504721/"/>
+      <url>/posts/csdn-144504721/</url>
+      
+        <content type="html"><![CDATA[<p>1.联合体：联合体是 C 语言中的一种自定义数据类型，它的主要特点是其所有成员共享同一段内存空间。这与结构体（struct）不同，结构体的每个成员都有自己独立的内存空间。</p><p>其优点如下：</p><ul><li><p><strong>内存高效利用</strong>：在程序中，当一组数据在不同时刻只需要使用其中一个成员时，联合体就体现出了它的优势。例如，考虑一个简单的设备状态数据结构，它可能需要记录设备的温度（以浮点数形式）或者设备的错误代码（以整数形式）。</p></li><li><p><strong>与结构体配合构建复杂数据结构</strong>：联合体可以和结构体一起构建复杂的数据结构，以适应多种情况。例如，在图形处理程序中，图形对象的数据可能有多种形式。</p></li></ul><p>这是实例应用，用来判断编译器的大小端，</p><p><img src="/images/csdn/311014fbc2cda2a840814c32.png" loading='lazy'></p><p>char是一个字节，int是四个字节，然后返回char就是得到int存储第一个字节，根据第一个字节就可以判断大小端，从低地址开始访问，小端就是低位放在低地址，高位放在高地址。</p><p>2.这是一个经典错误</p><p><img src="/images/csdn/336d8f357bb654c28f08e454.png" loading='lazy'></p><p>解析：这个函数创造的是局部变量，对于str没有影响，所以无法实现需要功能，下面是修改代码</p><p><img src="/images/csdn/0ec1b4a41d4b3d9bda23782b.png" loading='lazy'></p><p><img src="/images/csdn/e7221a580520d9f495f640b8.png" loading='lazy'></p><p>3.对于printf的进一步理解：</p><p>打印字符串时，实际上给printf传的参数是首位地址，所以直接打印p也是成立的。</p><p><img src="/images/csdn/f23d357b12dd1fbe14e82252.png" loading='lazy'></p><p>4.内存：</p><p><img src="/images/csdn/bd614fdaaff751fe8e6db681.png" loading='lazy'></p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144504721"> 12.16学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>位段的简单理解</title>
+      <link href="/posts/csdn-144443365/"/>
+      <url>/posts/csdn-144443365/</url>
+      
+        <content type="html"><![CDATA[<p>1.概念</p><p>位段（bit - field）是一种数据结构。它允许在一个字节（或多个字节）中按位划分来存储不同的数据成员。</p><p>2.用法</p><p><img src="/images/csdn/34b181be1ea0333475c29f16.png" loading='lazy'></p><p>这个就是用来节省空间的，但是不具有跨平台性，慎用。</p><p>3.实例</p><p><img src="/images/csdn/878999238f37e1c91158e883.png" loading='lazy'></p><p>首先系统会先开辟一个字节的空间（一个字节&#x3D;8bit），a后面的单位是bit，因为a+b&lt;7，所以他们共用一个字节的空间，还剩一个bit，但是接下来的c大于一个bit，所以会新开辟一个字节来存储c，且上一个多出来的bit不会利用。</p><p>3.小tip：</p><p><img src="/images/csdn/2f8e55893fa1afb4e6858b26.png" loading='lazy'></p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144443365"> 位段的简单理解 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文章 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>通讯录的简单实现</title>
+      <link href="/posts/csdn-144369124/"/>
+      <url>/posts/csdn-144369124/</url>
+      
+        <content type="html"><![CDATA[<p>1.目录</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#define _CRT_SECURE_NO_WARNINGS</span><br><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;string.h&gt; </span><br><span class="line">#include&lt;assert.h&gt;</span><br><span class="line">#define max 100</span><br><span class="line">#define max_name 20</span><br><span class="line">#define max_sex 10</span><br><span class="line">#define max_tele 12</span><br><span class="line">#define max_addr 30</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">typedef struct peoinfor</span><br><span class="line">&#123;</span><br><span class="line">    char name[max_name];</span><br><span class="line">    int age;</span><br><span class="line">    char sex[max_sex];</span><br><span class="line">    char tele[max_tele];</span><br><span class="line">    char addr[max_addr];</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#125;peoinfor;</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">typedef struct contact</span><br><span class="line">//这两信息放在一起更好处理</span><br><span class="line">&#123;</span><br><span class="line">    peoinfor data[max];//存放人的信息</span><br><span class="line">    int count;//人数</span><br><span class="line">&#125;contact;</span><br><span class="line">//初始化</span><br><span class="line">void initcontact(contact* pc);</span><br><span class="line">//添加联系人</span><br><span class="line">void addcontact(contact* pc);</span><br><span class="line">//展示通讯录</span><br><span class="line">void showcontact(contact* pc);</span><br><span class="line">//删除联系人</span><br><span class="line">void delcontact(contact* pc);</span><br><span class="line">//查找联系人</span><br><span class="line">void findcontact(contact* pc);</span><br><span class="line">//修改联系人</span><br><span class="line">void modifycontact(contact* pc);</span><br><span class="line">//给联系人排序</span><br><span class="line">void sortcontact(contact* pc);</span><br><span class="line">2.主程序</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#define _CRT_SECURE_NO_WARNINGS</span><br><span class="line">#include&quot;contact.h&quot;</span><br><span class="line">void menu()</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;***************************************\n&quot;);</span><br><span class="line">    printf(&quot;****** 1.add         2.del     ********\n&quot;);</span><br><span class="line">    printf(&quot;****** 3.search      4.modify  ********\n&quot;);</span><br><span class="line">    printf(&quot;****** 5.show        6.sort    ********\n&quot;);</span><br><span class="line">    printf(&quot;****** 0.exit                  ********\n&quot;);</span><br><span class="line">    printf(&quot;***************************************\n&quot;);</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int input = 0;</span><br><span class="line">    contact con;</span><br><span class="line">    initcontact(&amp;con);</span><br><span class="line">    do </span><br><span class="line">    &#123;</span><br><span class="line">         menu();</span><br><span class="line">        printf(&quot;请选择\n&quot;);</span><br><span class="line">        scanf(&quot;%d&quot;, &amp;input);</span><br><span class="line">        switch (input)</span><br><span class="line">        &#123;</span><br><span class="line">        case 1:</span><br><span class="line">            addcontact(&amp;con);</span><br><span class="line">                break;</span><br><span class="line">        case 2:</span><br><span class="line">            delcontact(&amp;con);</span><br><span class="line">            break; </span><br><span class="line">        case 3:</span><br><span class="line">            findcontact(&amp;con);</span><br><span class="line">            break;</span><br><span class="line">        case 4:</span><br><span class="line">            modifycontact(&amp;con);</span><br><span class="line">            break;</span><br><span class="line">        case 5:</span><br><span class="line">            showcontact(&amp;con);</span><br><span class="line">            break;</span><br><span class="line">        case 6:</span><br><span class="line">            sortcontact(&amp;con);</span><br><span class="line">            break;</span><br><span class="line">        case 0:</span><br><span class="line">            printf(&quot;退出通讯录\n&quot;);</span><br><span class="line">            break;</span><br><span class="line">        default:</span><br><span class="line">            printf(&quot;选择错误\n&quot;);</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">        &#125;</span><br><span class="line">    &#125; while (input);</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>3.实现程序</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#define _CRT_SECURE_NO_WARNINGS</span><br><span class="line">#include &quot;contact.h&quot;</span><br><span class="line">//初始化通讯录</span><br><span class="line">void initcontact(contact* pc)</span><br><span class="line">&#123;</span><br><span class="line">    assert(pc);</span><br><span class="line">    pc-&gt;count = 0;</span><br><span class="line">    //这一步是将data里面所有的数据初始化为0，单位为字节</span><br><span class="line">    memset(pc-&gt;data, 0, sizeof(pc-&gt;data));</span><br><span class="line">&#125;</span><br><span class="line">//添加联系人</span><br><span class="line">void addcontact(contact* pc)</span><br><span class="line">&#123;</span><br><span class="line">    assert(pc);</span><br><span class="line">    //判断通讯录是否满了</span><br><span class="line">    if (pc-&gt;count == max)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;人数已满，无法添加\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    // 输入数据 </span><br><span class="line">    printf(&quot;请输入姓名\n&quot;);</span><br><span class="line">    scanf(&quot;%s&quot;, pc-&gt;data[pc-&gt;count].name);</span><br><span class="line">    printf(&quot;请输入年龄\n&quot;);</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;(pc-&gt;data[pc-&gt;count].age));</span><br><span class="line">    printf(&quot;请输入性别\n&quot;);</span><br><span class="line">    scanf(&quot;%s&quot;, pc-&gt;data[pc-&gt;count].sex);</span><br><span class="line">    printf(&quot;请输入电话\n&quot;);</span><br><span class="line">    scanf(&quot;%s&quot;, pc-&gt;data[pc-&gt;count].tele);</span><br><span class="line">    printf(&quot;请输入地址\n&quot;);</span><br><span class="line">    scanf(&quot;%s&quot;, pc-&gt;data[pc-&gt;count].addr);</span><br><span class="line">    pc-&gt;count++;</span><br><span class="line">    printf(&quot;添加成功\n&quot;);</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">&#125;</span><br><span class="line">//展示联系人</span><br><span class="line">void showcontact(contact* pc)</span><br><span class="line">&#123;</span><br><span class="line">    assert(pc); </span><br><span class="line">    int i = 0;</span><br><span class="line">    printf(&quot;%-20s\t%-5s\t%-5s\t%-12s\t%-30s\n&quot;, &quot;名字&quot;, &quot;年龄&quot;, &quot;性别&quot;, &quot;电话号码&quot;, &quot;地址&quot;);</span><br><span class="line">    for (i = 0; i &lt; pc-&gt;count; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%-20s\t%-5d\t%-5s\t%-12s\t%-30s\n&quot;   ,pc-&gt;data[i].name</span><br><span class="line">                                                ,pc-&gt;data[i].age</span><br><span class="line">                                                ,pc-&gt;data[i].sex</span><br><span class="line">                                                ,pc-&gt;data[i].tele</span><br><span class="line">                                                ,pc-&gt;data[i].addr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//删除联系人</span><br><span class="line">void delcontact(contact* pc)</span><br><span class="line">&#123;</span><br><span class="line">    //判断pc是否有效</span><br><span class="line">    assert(pc);</span><br><span class="line">    //pc中是否有数据</span><br><span class="line">    if (pc-&gt;count == 0)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;通讯录为空，不可删除\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    //开始删除</span><br><span class="line">    char name[max_name] = &#123; 0 &#125;;</span><br><span class="line">    printf(&quot;请输入被删除人的名字\n&quot;);</span><br><span class="line">    scanf(&quot;%s&quot;, name);</span><br><span class="line">    //1.查找</span><br><span class="line">    int pos=findbyname(pc, name);</span><br><span class="line">    if (pos==-1)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;不存在此人\n&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    //2.删除</span><br><span class="line">    int i = 0;</span><br><span class="line">    for (i = pos; i &lt; pc-&gt;count-1; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        pc-&gt;data[i] = pc-&gt;data[i + 1];</span><br><span class="line">    &#125;</span><br><span class="line">    pc-&gt;count--;</span><br><span class="line">    printf(&quot;删除成功\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line">//查找</span><br><span class="line">static int findbyname(contact* pc, char name[])</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    for (i = 0; i &lt; pc-&gt;count; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (strcmp(pc-&gt;data[i].name, name) == 0)</span><br><span class="line">        &#123;</span><br><span class="line">            return i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line">//查找联系人</span><br><span class="line">void findcontact(contact* pc)</span><br><span class="line">&#123;</span><br><span class="line">    //判断pc是否有效</span><br><span class="line">    assert(pc);</span><br><span class="line">    //pc中是否有数据</span><br><span class="line">    if (pc-&gt;count == 0)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;通讯录为空，不可查找\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    //1.查找</span><br><span class="line">    char name[max_name] = &#123; 0 &#125;;</span><br><span class="line">    printf(&quot;请输入被查找人的名字\n&quot;);</span><br><span class="line">    scanf(&quot;%s&quot;, name);</span><br><span class="line">    int pos = findbyname(pc, name);</span><br><span class="line">    </span><br><span class="line">    if (pos==-1)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;不存在此人\n&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    //输出信息</span><br><span class="line">    printf(&quot;%-20s\t%-5s\t%-5s\t%-12s\t%-30s\n&quot;, &quot;名字&quot;, &quot;年龄&quot;, &quot;性别&quot;, &quot;电话号码&quot;, &quot;地址&quot;);</span><br><span class="line">    printf(&quot;%-20s\t%-5d\t%-5s\t%-12s\t%-30s\n&quot;, pc-&gt;data[pos].name</span><br><span class="line">        , pc-&gt;data[pos].age</span><br><span class="line">        , pc-&gt;data[pos].sex</span><br><span class="line">        , pc-&gt;data[pos].tele</span><br><span class="line">        , pc-&gt;data[pos].addr);</span><br><span class="line">&#125;</span><br><span class="line">//修改联系人</span><br><span class="line">void modifycontact(contact* pc)</span><br><span class="line">&#123;</span><br><span class="line">    //判断pc是否有效</span><br><span class="line">    assert(pc);</span><br><span class="line">    //pc中是否有数据</span><br><span class="line">    if (pc-&gt;count == 0)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;通讯录为空，不可查找\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    //1.查找</span><br><span class="line">    char name[max_name] = &#123; 0 &#125;;</span><br><span class="line">    printf(&quot;请输入被查找人的名字\n&quot;);</span><br><span class="line">    scanf(&quot;%s&quot;, name);</span><br><span class="line">    int pos = findbyname(pc, name);</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">    if (pos == -1)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;不存在此人\n&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;已找到修改人信息，开始修改\n&quot;);</span><br><span class="line">    //开始修改</span><br><span class="line">    printf(&quot;请输入姓名\n&quot;);</span><br><span class="line">    scanf(&quot;%s&quot;, pc-&gt;data[pos].name);</span><br><span class="line">    printf(&quot;请输入年龄\n&quot;);</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;(pc-&gt;data[pos].age));</span><br><span class="line">    printf(&quot;请输入性别\n&quot;);</span><br><span class="line">    scanf(&quot;%s&quot;, pc-&gt;data[pos].sex);</span><br><span class="line">    printf(&quot;请输入电话\n&quot;);</span><br><span class="line">    scanf(&quot;%s&quot;, pc-&gt;data[pos].tele);</span><br><span class="line">    printf(&quot;请输入地址\n&quot;);</span><br><span class="line">    scanf(&quot;%s&quot;, pc-&gt;data[pos].addr);</span><br><span class="line">    pc-&gt;count++;</span><br><span class="line">    printf(&quot;修改成功\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line">//比较方法</span><br><span class="line">int cmp_peo_by_name(const void* e1, const void* e2)</span><br><span class="line">&#123;</span><br><span class="line">    return(strcmp(((peoinfor*)e1)-&gt;name, ((peoinfor*)e2)-&gt;name));</span><br><span class="line">&#125;</span><br><span class="line">//给联系人排序（按照名字）</span><br><span class="line">void sortcontact(contact* pc)</span><br><span class="line">&#123;</span><br><span class="line">    assert(pc);</span><br><span class="line">    qsort(pc-&gt;data, pc-&gt;count, sizeof(peoinfor), cmp_peo_by_name);</span><br><span class="line">    printf(&quot;排序成功\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line">4.实现图片</span><br></pre></td></tr></table></figure><p><img src="/images/csdn/235d667995ad21657ce6690a.png" loading='lazy'></p><p><img src="/images/csdn/4432e5f48a033f0274eebc06.png" loading='lazy'></p><p><img src="/images/csdn/2fa7b1d08d73541aabab0b6a.png" loading='lazy'></p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144369124"> 通讯录的简单实现 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文章 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>12.7学习笔记</title>
+      <link href="/posts/csdn-144305203/"/>
+      <url>/posts/csdn-144305203/</url>
+      
+        <content type="html"><![CDATA[<p>1.来介绍一下结构体的一个存储规则，这个规则看着很无理，莫名其妙的制定规则让存储很难，但是实际上是为了更好读取，也就是用空间换时间，</p><p><img src="/images/csdn/fea450beadf276e1f647b9a6.png" loading='lazy'></p><p>这就是解释的具体原因</p><p><img src="/images/csdn/89183c70040094dc5d8897fa.png" loading='lazy'></p><p>下面是具体例子</p><p>解析：先引入一个新概念，</p><p>偏移量，这是对偏移量的简单解释，简单说就是元素首地址与结构体首地址之间相差的字节数</p><p><img src="/images/csdn/fb765ab65937b57acabfe5eb.png" loading='lazy'></p><p>根据规则，先将从c1存入结构体偏移量为0的地址，，然后开始存储第二个int数据，vs对齐数默认为8，int大小为4字节，所以取4，所以int要对齐到地址为4的倍数的地址开始存储，从第四个开始存储，然后开始存储char，对齐数取1，任何数都是1的倍数，所以接在int后面存储，到这元素存储完毕，现在大小为9字节，而结构体大小要是最大对齐数的整数倍，最大对齐数为4，所以结构体大小为12.</p><p><img src="/images/csdn/31f4deabf6e7a989680059fa.png" loading='lazy'></p><p>这是测试结果</p><p><img src="/images/csdn/a8b25648d48b88efb7a096ad.png" loading='lazy'></p><p>其中，offsetof是用来测偏移量的，具体如下</p><p><img src="/images/csdn/d2d1331b52d886f2ca7ee3e7.png" loading='lazy'></p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144305203"> 12.7学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>12.1学习笔记</title>
+      <link href="/posts/csdn-144166867/"/>
+      <url>/posts/csdn-144166867/</url>
+      
+        <content type="html"><![CDATA[<p>1.这是一个判断字符的一个函数，是就返回正数，不是就返回0.</p><p><img src="/images/csdn/c66541607de79e8c92c741d5.png" loading='lazy'></p><p>2.这一个较为重要的函数，查找功能，email作为被查找数组，substr作为要找的字符串，若Email中存在substr，则返回返回substr在email中出现的起始地址，如下图会输出bitejiuyeke.com这一串字符。第二张图是模拟实现的代码及结果。</p><p><img src="/images/csdn/5ed335f87fa52c9d4e80eb67.png" loading='lazy'></p><p><img src="/images/csdn/85bfbdf2660e823c7b8202f8.png" loading='lazy'></p><p>3.这是一个memcpy模拟实现的写法，memcpy局势根据后面给的字节数来将arr1中的字符复制到arr1中，20指的是字节数。</p><p><img src="/images/csdn/829e437ed48e6065e086f495.png" loading='lazy'></p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144166867"> 12.1学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.30学习笔记</title>
+      <link href="/posts/csdn-144102544/"/>
+      <url>/posts/csdn-144102544/</url>
+      
+        <content type="html"><![CDATA[<p>今天学了几个关于字符的函数：</p><p>1.strcpy，这是一个比较常用的函数，，用来复制字符串，以下是他的源代码以及应用</p><p><img src="/images/csdn/2fdffbb56499bd07b4f18bd1.png" loading='lazy'></p><p>2.strcmp：用来比较两个字符串的大小，这是具体的实现过程</p><p><img src="/images/csdn/641f1eaa6a420d80cafff4d6.png" loading='lazy'></p><p>3.strcat:这是一个接着复制的字符串，以下是使用方法及结果</p><p><img src="/images/csdn/026ed3b3c19a969cbd385b67.png" loading='lazy'></p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144102544"> 11.30学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.25学习笔记</title>
+      <link href="/posts/csdn-144030139/"/>
+      <url>/posts/csdn-144030139/</url>
+      
+        <content type="html"><![CDATA[<p>1.举一个例子，来体现函数指针数组的便利，这是化简后的版本，</p><p><img src="/images/csdn/67792219b2036921b7dfa914.png" loading='lazy'></p><p>这是之前的版本</p><p><img src="/images/csdn/3bcf0cbb78a3948087cc62bf.png" loading='lazy'></p><p>仅仅是一部分，就和化简后的代码一样长</p><p>2.</p><p><img src="/images/csdn/2cca9eee8fc0b61506f85516.png" loading='lazy'></p><p>这是对快速排序函数qsort的解析，比较有意思的是最后一个参数，要自己制定一个比较规则函数作为参数传入。</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144030139"> 11.25学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.24学习笔记</title>
+      <link href="/posts/csdn-144014895/"/>
+      <url>/posts/csdn-144014895/</url>
+      
+        <content type="html"><![CDATA[<p>1.</p><p><img src="/images/csdn/a4c736c315785fa24315d4fe.png" loading='lazy'></p><p>这是一个很有意思的实例，其实考察了对于函数指针格式的理解，还涉及到了类型转换，</p><p>首先,*(void)(*)()这个就是函数指针的类型，然后将0由int转换为函数指针的类型，然后配合后面的括号，意味着调用地址为0x00000的函数。</p><p>2.</p><p><img src="/images/csdn/60168ddecacb1b111d46e851.png" loading='lazy'></p><p>这是第二个例子，题目是void(*signal(int,void(*)(int) ) ) (int),一下让人很懵，先看内层，首先</p><p>声明了函数signal，然后外层是一个函数指针，也就是说，signal函数的返回类型是函数指针，很好玩</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/144014895"> 11.24学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.23学习笔记</title>
+      <link href="/posts/csdn-143990321/"/>
+      <url>/posts/csdn-143990321/</url>
+      
+        <content type="html"><![CDATA[<p>1.</p><p><img src="/images/csdn/befe623346966d502811dc88.png" loading='lazy'></p><p>这是一个易混点，其中第二个和第三个非常容易搞混，要搞清楚这两个，就要明白指针的格式，</p><p>（int）*(arr)(   )；第一个括号指的是地址中所指向的空间中所装的数据类型，第二个括号则是变量名，第三个括号则是可有可无的，这个要看具体要创造的变量类型。</p><p>例如第二个实际上是（int)*(parr1[10])这样的，也就是创造了一个数组，有十个元素，元素都是指针。其实可以与创造数组的形式来比较，int arr[10],这就是创造数组，但是里面是指针，所以加上*，这样更好理解。</p><p>第三个则是先创造一个指针变量，然后int[10]是他的类型，所以他是指向数组的指针。</p><p>而第四个，则是前两者的结合体，首先创造了一个指针数组，可以放十个元素，然后int[5]告诉我们元素是数组指针，这个数组能放五个元素。</p><p>2. </p><p><img src="/images/csdn/e5a5cca7c029696ba3c157a9.png" loading='lazy'></p><p>这个是对于传参的一个解释，数组作为实参，有多种接收方式，但要注意指针数组可以通过二级指针来接受，不能用一级指针。</p><p>3.这个则是函数指针，挺好玩的，下面是应用实例</p><p><img src="/images/csdn/1cd483e19b9e81ae8ed5b700.png" loading='lazy'></p><p>这int是函数的返回值类型，第一个括号是变量名，第二个是形参类型。</p><p>这可以帮助理解指针数组，其实指针的创建，都要遵循其地址所指向的内容的创建形式，</p><p>比如int(*p)[10]这是一个数组指针，和数组的创建方式很像，而函数也是</p><p>int add(int x,int y)这是函数的创建。而函数指针则是int (*p)(int,int)，十分相似。</p><p>如有不对，见谅。</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/143990321"> 11.23学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.21学习笔记</title>
+      <link href="/posts/csdn-143932697/"/>
+      <url>/posts/csdn-143932697/</url>
+      
+        <content type="html"><![CDATA[<p>1.</p><p><img src="/images/csdn/ee636078467e062759b45fc1.png" loading='lazy'></p><p>这个就是关于数组名的特殊应用，其与后面的数组指针有很大关系</p><p>2.</p><p><img src="/images/csdn/5747eb537873fa01a647aef4.png" loading='lazy'></p><p>这个就是数组指针的一个简单应用，得到的是整个数组的地址</p><p>tip：</p><p><img src="/images/csdn/ca299087a98c7914ed00c479.png" loading='lazy'></p><p>所以貌似和数组指针没有区别，但是实质上的区别在这</p><p>3.</p><p><img src="/images/csdn/16f09ab29e6625da2d82f237.png" loading='lazy'></p><p>*(p+i)这个相当于得到第i行的首元素地址，*(*(p+i)+j)得到就是第i行第j个的元素</p><p>4.</p><p><img src="/images/csdn/01d204f53012f337a69c66e7.png" loading='lazy'></p><p>这两个实际上是等价的，相同意义</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/143932697"> 11.21学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.14学习笔记</title>
+      <link href="/posts/csdn-143758709/"/>
+      <url>/posts/csdn-143758709/</url>
+      
+        <content type="html"><![CDATA[<p>1.原码反码补码存在的原因，由于cpu只有加法器，为了能进行减法，于是设计了三码</p><p><img src="/images/csdn/01f5950b94fc78e2c1b0e175.png" loading='lazy'></p><p><img src="/images/csdn/02b7b78f7706720690127633.png" loading='lazy'></p><p>2.三码之间的互换规则</p><p><img src="/images/csdn/3a536e5f08422b986e5bda46.png" loading='lazy'></p><p>3.整型大家族，unsigned存在的意义就是来存储那些不存在负数的值</p><p><img src="/images/csdn/281f18d7d5dc2737616f3ae7.png" loading='lazy'></p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/143758709"> 11.14学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.11学习笔记</title>
+      <link href="/posts/csdn-143680737/"/>
+      <url>/posts/csdn-143680737/</url>
+      
+        <content type="html"><![CDATA[<p>一.对于字符串的浅显理解：存储字符串有2种方法：</p><p>1.用数组来存储，char arr[]&#x3D;&quot;字符串&quot;；这样的形式，优点易于更改，缺点格式麻烦，而且涉及了很多知识，例如数组就代表其首元素地址，相当于已经赋值了的指针变量。但是不能用char* arr来代替arr来进行存储，因为char* arr只是一个指向数组的指针，而并不具有存储字符功能，存储的只是数组地址，只是说数组名有相当于指针的功能。</p><p>注意：不能用char a&#x3D;“字符串”；这样的形式来存储字符串，因为char就决定了只能存储单字符</p><p>二.char(*chs)与char* chs的区别</p><p>前者是用来指向一维数组的指针，后者则是用来指向二维数组的指针，每加一次就到下一个数组。</p><p>三、int &amp;a,</p><p>这是引用，与传地址形式不同，但是都能改变原变量的值，但在c语言中无法使用，是c++等其他语言的方法</p><p><img src="/images/csdn/8e700f259df41000647d1de6.png" loading='lazy'></p><p>四、全局与局部变量</p><p>局部变量存储在栈区，全局变量存储在全局数据区。</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/143680737"> 11.11学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.9学习笔记</title>
+      <link href="/posts/csdn-143639323/"/>
+      <url>/posts/csdn-143639323/</url>
+      
+        <content type="html"><![CDATA[<p>1.不能对NULL进行解应用</p><p>2.常见的一些错误</p><p><img src="/images/csdn/6998fc91cdde06a22b6c9589.png" loading='lazy'></p><p>（1）这个较为简单，可通过编译器的报错发现，好更改</p><p>（2）这个基本在调用函数时出现，例如：</p><p><img src="/images/csdn/b6c6c8dae4ea69fbaf49ed3a.png" loading='lazy'></p><p>也比较好解决，加个库就可以了</p><p>（3）一般属于程序的逻辑问题，不能完成指定要求，很难发现，通过调试解决</p><p>3.这是一个搜索键，迅速找到代码中的指定名称</p><p><img src="/images/csdn/a8e2fd9c2711e6e2189d4a8d.png" loading='lazy'></p><p>4.下载git和tortoisegit，前者是一个版本更新的东西，常使用命令来使用，而后者则是辅助其使用，公司经常使用</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/143639323"> 11.9学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> c语言 </tag>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.8笔记2</title>
+      <link href="/posts/csdn-143631007/"/>
+      <url>/posts/csdn-143631007/</url>
+      
+        <content type="html"><![CDATA[<p>1.strcpy拷贝的时候会把\0也拷贝过去</p><p><img src="/images/csdn/61b17e5df5ff8d603f1ea174.png" loading='lazy'></p><p>2.assert是断言</p><p><img src="/images/csdn/94381c36b41a8540699aebc0.png" loading='lazy'></p><p>如果不满足框中的表达式会报错</p><p>3.关于const</p><p><img src="/images/csdn/4fc23e0f18f02de0101f3b8e.png" loading='lazy'></p><p>4.函数中char*的作用</p><p><img src="/images/csdn/60e368d564c2e3d6f914d18c.png" loading='lazy'></p><p><img src="/images/csdn/2335b487e84ce36940ff45d7.png" loading='lazy'></p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/143631007"> 11.8笔记2 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.8学习笔记</title>
+      <link href="/posts/csdn-143629801/"/>
+      <url>/posts/csdn-143629801/</url>
+      
+        <content type="html"><![CDATA[<p>1.strlen是一个用于测字符串长度的函数，无论是数组还是变量抑或直接是字符串，都可以测量，但不会包括\0，虽然每个字符串都离不开\0.</p><p>2.关于使用gets的一些见解：虽然是一个被遗弃的函数（因为存在安全溢出风险），但是它十分简洁，它的返回值是char*，但是它的返回值不能采用（经过半小时的尝试得到的结果），一般用法为<strong>gets（要输入的数组）</strong>，然后输出·，纠正一下gets最后所输入的换行，会被输出且不会在缓冲区留存。好像gets只能搭配数组使用。</p><p>3.getchar的使用，就是单个字符存入缓冲区，然后通过putchar调出，用法int c&#x3D;getchar();</p><p>putchar(c);(目前暂时发现c的类型，不影响输出），好像不能用printf输出，getchar也可以用来清除缓存去的\n之类的东西</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/143629801"> 11.8学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.6学习笔记</title>
+      <link href="/posts/csdn-143580570/"/>
+      <url>/posts/csdn-143580570/</url>
+      
+        <content type="html"><![CDATA[<p>1.自动窗口（自动加载上下的变量）</p><p>2.环境变量（但是会随着程序运行改变）有些变量会不在</p><p>3.监视：相对来说监视更加准确，甚至合法的表达式也算，可以显示结果</p><p>还可以查看内存<img src="/images/csdn/498e7858933f4e126dd4a6d4.png" loading='lazy'>画圈的部分是编译器识别的里面的东西，....就代表识别不了，？？？是文本</p><p>4.调用堆栈：外部代码：可以观察到函数的调用情况，压栈（录入数据）、出栈（清除数据）</p><p>5.可以通过反汇编看见语言被转换成什么汇编代码</p><p>6.寄存器与栈的部分概念</p><ul><li><strong>寄存器</strong>是CPU内部的高速存储单元，用于临时存储正在执行的指令、运算结果、地址等信息。由于寄存器位于CPU内部，因此访问速度非常快。</li><li>常见的寄存器包括程序计数器（PC）、指令寄存器（IR）、通用寄存器（例如：AX、BX、CX等）、堆栈指针寄存器（SP）等。</li><li><strong>栈</strong>是一种数据结构，通常用来存储函数调用过程中的临时数据（如局部变量、函数返回地址等）。栈是基于“后进先出”（LIFO，Last In First Out）原则的。</li><li>。寄存器用于高速缓存和运算，数量有限，存储容量也非常小（通常以字节或几十个字节计算）；而栈用于存储函数调用、局部变量等，存储空间较大，可以根据需要扩展，通常在内存（RAM）中占用更多空间。</li><li>7.<img src="/images/csdn/fea74b4f216d643f90e10e06.png" loading='lazy'></li><li>很厉害的一个错误，其中10、11的空格由编译器决定</li></ul><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/143580570"> 11.6学习笔记 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> c语言 </tag>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11.5学习记录</title>
+      <link href="/posts/csdn-143500201/"/>
+      <url>/posts/csdn-143500201/</url>
+      
+        <content type="html"><![CDATA[<p>1.算数转换</p><p>小的类型向大的提升，例如char、short变成int。</p><p>但是int会转换为unsigned（如果是负数，转换后会被认为是很大的整数）</p><p>2.算数转换与整型提升的区别</p><p>整型提升只适用比整型小的数，3而算数转换是比整型大的数例如longlong、double</p><p>3.debug是程序员版本（更适用于调试），release是发布版本（有各种优化，运行更快，大小更小。</p><p>4.调试时的断点可以设置条件</p><p>5.</p><p><img src="/images/csdn/f75a5a1757a427608c85f6f5.png" loading='lazy'></p><p>f10与f11的区别在调用函数时才会体现出来，f11会进入调用函数的内部。</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/143500201"> 11.5学习记录 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>按位与的浅显理解</title>
+      <link href="/posts/csdn-143496434/"/>
+      <url>/posts/csdn-143496434/</url>
+      
+        <content type="html"><![CDATA[<p>1.&gt;&gt;也就是二进制向下移一位，然后通过&amp;1来判断是不是1，1的二进制是000000000000000000000001，&amp;的规则是同位都是1就得到1.有一位不是或都不是那就得到0</p><p>2.传参时虽然传的是负数，但接受时可以用unsigned int 来把它当作极大的正数，从而也可以统计它的二进制中1的个数</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/143496434"> 按位与的浅显理解 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文章 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> c语言 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第一篇博客</title>
+      <link href="/posts/csdn-143485465/"/>
+      <url>/posts/csdn-143485465/</url>
+      
+        <content type="html"><![CDATA[<p>通过写博客来记录一些学习心得，作为笔记吧。</p><p>11.4</p><p>1.putchar与printf相比，拥有更加简洁、高效的功能，但只能输出单个字符，若要输出字符串，就要进行循环，而printf功能就非常强大，但是结构就会复杂一些，个人还是喜欢用printf。</p><p>2.又学了结构体，其实好像还蛮简单，就是一个拥有同一特征变量的集合体，然后就是基本的形式，以及两种传参方式，地址和直接传，地址更加优秀，节省空间（结构-&gt;变量）这个是地址方式，（结构.变量）这个是本体</p><hr><p>原文发表于 CSDN：<a href="https://blog.csdn.net/wxszz10/article/details/143485465"> 第一篇博客 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术文章 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> c语言 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

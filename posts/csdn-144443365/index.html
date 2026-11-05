@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>位段的简单理解 | wxszz1 的技术博客</title><meta name="author" content="wxszz1"><meta name="copyright" content="wxszz1"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.概念 位段（bit - field）是一种数据结构。它允许在一个字节（或多个字节）中按位划分来存储不同的数据成员。 2.用法  这个就是用来节省空间的，但是不具有跨平台性，慎用。 3.实例  首先系统会先开辟一个字节的空间（一个字节&#x3D;8bit），a后面的单位是bit，因为a+b&lt;7，所以他们共用一个字节的空间，还剩一个bit，但是接下来的c大于一个bit，所以会新开辟一个字节来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="位段的简单理解">
+<meta property="og:url" content="https://wxszz1.github.io/posts/csdn-144443365/index.html">
+<meta property="og:site_name" content="wxszz1 的技术博客">
+<meta property="og:description" content="1.概念 位段（bit - field）是一种数据结构。它允许在一个字节（或多个字节）中按位划分来存储不同的数据成员。 2.用法  这个就是用来节省空间的，但是不具有跨平台性，慎用。 3.实例  首先系统会先开辟一个字节的空间（一个字节&#x3D;8bit），a后面的单位是bit，因为a+b&lt;7，所以他们共用一个字节的空间，还剩一个bit，但是接下来的c大于一个bit，所以会新开辟一个字节来">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wxszz1.github.io/img/avatar.svg">
+<meta property="article:published_time" content="2024-12-12T18:22:03.000Z">
+<meta property="article:modified_time" content="2024-12-12T18:22:04.000Z">
+<meta property="article:author" content="wxszz1">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wxszz1.github.io/img/avatar.svg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "位段的简单理解",
+  "url": "https://wxszz1.github.io/posts/csdn-144443365/",
+  "image": "https://wxszz1.github.io/img/avatar.svg",
+  "datePublished": "2024-12-12T18:22:03.000Z",
+  "dateModified": "2024-12-12T18:22:04.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "wxszz1",
+      "url": "https://wxszz1.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/avatar.svg"><link rel="canonical" href="https://wxszz1.github.io/posts/csdn-144443365/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '位段的简单理解',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"><i class="fa-fw fas fa-code"></i><span> 技术文章</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-laptop-code"></i><span> 项目作品</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-book"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">wxszz1 的技术博客</span></a><a class="nav-page-title" href="/"><span class="site-name">位段的简单理解</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"><i class="fa-fw fas fa-code"></i><span> 技术文章</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-laptop-code"></i><span> 项目作品</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-book"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">位段的简单理解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-12T18:22:03.000Z" title="发表于 2024-12-13 02:22:03">2024-12-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-12T18:22:04.000Z" title="更新于 2024-12-13 02:22:04">2024-12-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>1.概念</p>
+<p>位段（bit - field）是一种数据结构。它允许在一个字节（或多个字节）中按位划分来存储不同的数据成员。</p>
+<p>2.用法</p>
+<p><img data-original="/images/csdn/34b181be1ea0333475c29f16.png" src="/images/previews/34b181be1ea0333475c29f16.png.webp" loading='lazy'></p>
+<p>这个就是用来节省空间的，但是不具有跨平台性，慎用。</p>
+<p>3.实例</p>
+<p><img data-original="/images/csdn/878999238f37e1c91158e883.png" src="/images/previews/878999238f37e1c91158e883.png.webp" loading='lazy'></p>
+<p>首先系统会先开辟一个字节的空间（一个字节&#x3D;8bit），a后面的单位是bit，因为a+b&lt;7，所以他们共用一个字节的空间，还剩一个bit，但是接下来的c大于一个bit，所以会新开辟一个字节来存储c，且上一个多出来的bit不会利用。</p>
+<p>3.小tip：</p>
+<p><img data-original="/images/csdn/2f8e55893fa1afb4e6858b26.png" src="/images/previews/2f8e55893fa1afb4e6858b26.png.webp" loading='lazy'></p>
+<hr>
+<p>原文发表于 CSDN：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wxszz10/article/details/144443365"> 位段的简单理解 </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/csdn-144504721/" title="12.16学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">12.16学习笔记</div></div><div class="info-2"><div class="info-item-1">1.联合体：联合体是 C 语言中的一种自定义数据类型，它的主要特点是其所有成员共享同一段内存空间。这与结构体（struct）不同，结构体的每个成员都有自己独立的内存空间。 其优点如下：  内存高效利用：在程序中，当一组数据在不同时刻只需要使用其中一个成员时，联合体就体现出了它的优势。例如，考虑一个简单的设备状态数据结构，它可能需要记录设备的温度（以浮点...</div></div></div></a><a class="pagination-related" href="/posts/csdn-144369124/" title="通讯录的简单实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">通讯录的简单实现</div></div><div class="info-2"><div class="info-item-1">1.目录 123456789#define _CRT_SECURE_NO_WARNINGS#include&lt;stdio.h&gt;#include&lt;string.h&gt; #include&lt;assert.h&gt;#define max 100#define max_name 20#define max_sex 10#define ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/csdn-143580570/" title="11.6学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-06</div><div class="info-item-2">11.6学习笔记</div></div><div class="info-2"><div class="info-item-1">1.自动窗口（自动加载上下的变量） 2.环境变量（但是会随着程序运行改变）有些变量会不在 3.监视：相对来说监视更加准确，甚至合法的表达式也算，可以显示结果 还可以查看内存画圈的部分是编译器识别的里面的东西，....就代表识别不了，？？？是文本 4.调用堆栈：外部代码：可以观察到函数的调用情况，压栈（录入数据）、出栈（清除数据） 5.可以通过反汇编看见...</div></div></div></a><a class="pagination-related" href="/posts/csdn-143629801/" title="11.8学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-08</div><div class="info-item-2">11.8学习笔记</div></div><div class="info-2"><div class="info-item-1">1.strlen是一个用于测字符串长度的函数，无论是数组还是变量抑或直接是字符串，都可以测量，但不会包括\0，虽然每个字符串都离不开\0. 2.关于使用gets的一些见解：虽然是一个被遗弃的函数（因为存在安全溢出风险），但是它十分简洁，它的返回值是char*，但是它的返回值不能采用（经过半小时的尝试得到的结果），一般用法为gets（要输入的数组），然后...</div></div></div></a><a class="pagination-related" href="/posts/csdn-144691774/" title="12.24学习笔记（预处理及一些编译过程）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-24</div><div class="info-item-2">12.24学习笔记（预处理及一些编译过程）</div></div><div class="info-2"><div class="info-item-1">（1）.在生成可执行程序的过程中，一般会生成以下文件： 1. 预处理文件（.i 文件，以 C&#x2F;C++ 为例）  在 C 和 C++ 语言中，编译的第一步是预处理。如前面所述，当使用gcc -E（对于 C 语言）或g++ -E（对于 C++ 语言）命令时，会生成预处理文件（.i 文件）。这个文件展开了所有的#include指令，完成了宏替换等预...</div></div></div></a><a class="pagination-related" href="/posts/csdn-144583151/" title="12.19学习笔记（文件的粗浅理解）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-19</div><div class="info-item-2">12.19学习笔记（文件的粗浅理解）</div></div><div class="info-2"><div class="info-item-1">xxdd 1.fopen：打开文件 第一个参数是打开的文件名称，第二个是打开模式。 2. 文件打开模式： （1）.r： 当以r模式打开文件时，程序期望该文件已经存在。如果文件不存在，fopen函数将返回NULL。 这种模式用于从文件中读取数据。例如，读取一个文本文件中的字符、字符串或者格式化的数据。 示例代码如下：#include &lt;stdio....</div></div></div></a><a class="pagination-related" href="/posts/csdn-144166867/" title="12.1学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-01</div><div class="info-item-2">12.1学习笔记</div></div><div class="info-2"><div class="info-item-1">1.这是一个判断字符的一个函数，是就返回正数，不是就返回0.  2.这一个较为重要的函数，查找功能，email作为被查找数组，substr作为要找的字符串，若Email中存在substr，则返回返回substr在email中出现的起始地址，如下图会输出bitejiuyeke.com这一串字符。第二张图是模拟实现的代码及结果。   3.这是一个memcp...</div></div></div></a><a class="pagination-related" href="/posts/csdn-144014895/" title="11.24学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-24</div><div class="info-item-2">11.24学习笔记</div></div><div class="info-2"><div class="info-item-1">1.  这是一个很有意思的实例，其实考察了对于函数指针格式的理解，还涉及到了类型转换， 首先,*(void)(*)()这个就是函数指针的类型，然后将0由int转换为函数指针的类型，然后配合后面的括号，意味着调用地址为0x00000的函数。 2.  这是第二个例子，题目是void(*signal(int,void(*)(int) ) ) (int),一下...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">wxszz1</div><div class="author-info-description">从 C 语言、Java 到算法练习，记录每一次动手和理解。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wxszz1"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/wxszz1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这里保存着从 2024 年开始手敲的学习笔记。欢迎翻阅旧文章，也欢迎见证之后的实践。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/claude-code-beginners-guide/" title="普通人也能用的 Claude Code 教程">普通人也能用的 Claude Code 教程</a><time datetime="2026-11-04T14:30:00.000Z" title="发表于 2026-11-04 22:30:00">2026-11-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/csdn-146377431/" title="25.3.19（java 数据类型 及数据之间的转换）">25.3.19（java 数据类型 及数据之间的转换）</a><time datetime="2025-03-19T03:28:29.000Z" title="发表于 2025-03-19 11:28:29">2025-03-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/csdn-145053155/" title="25.1.10学习笔记（算法（滑动窗口））">25.1.10学习笔记（算法（滑动窗口））</a><time datetime="2025-01-09T19:16:54.000Z" title="发表于 2025-01-10 03:16:54">2025-01-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/csdn-144741434/" title="12.26">12.26</a><time datetime="2024-12-25T21:12:44.000Z" title="发表于 2024-12-26 05:12:44">2024-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/csdn-144718012/" title="找到两只单身狗（12.25）">找到两只单身狗（12.25）</a><time datetime="2024-12-24T21:57:34.000Z" title="发表于 2024-12-25 05:57:34">2024-12-25</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By wxszz1</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div><script src="/js/image-viewer.js" defer></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>
