@@ -21,9 +21,8 @@ description: "面向零基础读者的 Claude Code 图文教程：安装配置�
 1. [一、简介：为什么要用 Claude Code？](#tutorial-chapter-1)
 2. [二、安装与配置：让 Claude Code 用上 DeepSeek](#tutorial-chapter-2)
 3. [三、第一次用 Claude Code 干活：把杂乱资料整理成清单](#tutorial-chapter-3)
-4. [一、活动基本信息](#tutorial-chapter-4)
-5. [四、跟着做一个完整项目：筹备一场读书分享会](#tutorial-chapter-5)
-6. [五、接下来怎么练：把 AI 用到自己的生活和工作里](#tutorial-chapter-6)
+4. [四、跟着做一个完整项目：筹备一场读书分享会](#tutorial-chapter-4)
+5. [五、接下来怎么练：把 AI 用到自己的生活和工作里](#tutorial-chapter-5)
 
 
 ---
@@ -488,8 +487,6 @@ Claude Code 可能会显示正在读取文件、整理内容或创建文件。�
 ```text
 # 活动准备清单
 
-<a id="tutorial-chapter-4"></a>
-
 ## 一、活动基本信息
 
 - 活动：读书分享会
@@ -588,7 +585,7 @@ Claude练习
 
 ---
 
-<a id="tutorial-chapter-5"></a>
+<a id="tutorial-chapter-4"></a>
 
 ## 四、跟着做一个完整项目：筹备一场读书分享会
 
@@ -959,7 +956,7 @@ Claude练习
 
 ---
 
-<a id="tutorial-chapter-6"></a>
+<a id="tutorial-chapter-5"></a>
 
 ## 五、接下来怎么练：把 AI 用到自己的生活和工作里
 
