@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>12.19学习笔记（文件的粗浅理解） | wxszz1 的技术博客</title><meta name="author" content="wxszz1"><meta name="copyright" content="wxszz1"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="xxdd 1.fopen：打开文件 第一个参数是打开的文件名称，第二个是打开模式。 2. 文件打开模式： （1）.r： 当以r模式打开文件时，程序期望该文件已经存在。如果文件不存在，fopen函数将返回NULL。 这种模式用于从文件中读取数据。例如，读取一个文本文件中的字符、字符串或者格式化的数据。 示例代码如下：#include &lt;stdio.h&gt;  int main() { FIL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12.19学习笔记（文件的粗浅理解）">
+<meta property="og:url" content="https://wxszz1.github.io/posts/csdn-144583151/index.html">
+<meta property="og:site_name" content="wxszz1 的技术博客">
+<meta property="og:description" content="xxdd 1.fopen：打开文件 第一个参数是打开的文件名称，第二个是打开模式。 2. 文件打开模式： （1）.r： 当以r模式打开文件时，程序期望该文件已经存在。如果文件不存在，fopen函数将返回NULL。 这种模式用于从文件中读取数据。例如，读取一个文本文件中的字符、字符串或者格式化的数据。 示例代码如下：#include &lt;stdio.h&gt;  int main() { FIL">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wxszz1.github.io/img/avatar.svg">
+<meta property="article:published_time" content="2024-12-18T21:19:15.000Z">
+<meta property="article:modified_time" content="2024-12-18T21:19:16.000Z">
+<meta property="article:author" content="wxszz1">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wxszz1.github.io/img/avatar.svg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "12.19学习笔记（文件的粗浅理解）",
+  "url": "https://wxszz1.github.io/posts/csdn-144583151/",
+  "image": "https://wxszz1.github.io/img/avatar.svg",
+  "datePublished": "2024-12-18T21:19:15.000Z",
+  "dateModified": "2024-12-18T21:19:16.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "wxszz1",
+      "url": "https://wxszz1.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/avatar.svg"><link rel="canonical" href="https://wxszz1.github.io/posts/csdn-144583151/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '12.19学习笔记（文件的粗浅理解）',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"><i class="fa-fw fas fa-code"></i><span> 技术文章</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-laptop-code"></i><span> 项目作品</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-book"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">wxszz1 的技术博客</span></a><a class="nav-page-title" href="/"><span class="site-name">12.19学习笔记（文件的粗浅理解）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"><i class="fa-fw fas fa-code"></i><span> 技术文章</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-laptop-code"></i><span> 项目作品</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-book"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">12.19学习笔记（文件的粗浅理解）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-18T21:19:15.000Z" title="发表于 2024-12-19 05:19:15">2024-12-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-18T21:19:16.000Z" title="更新于 2024-12-19 05:19:16">2024-12-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>xxdd</p>
+<p><img data-original="/images/csdn/413d493b13cbe47b137eb360.png" src="/images/previews/413d493b13cbe47b137eb360.png.webp" loading='lazy'>1.fopen：打开文件</p>
+<p><img data-original="/images/csdn/5aa9295e6f2ebf7333bff128.png" src="/images/previews/5aa9295e6f2ebf7333bff128.png.webp" loading='lazy'>第一个参数是打开的文件名称，第二个是打开模式。</p>
+<p>2.</p>
+<p>文件打开模式：</p>
+<p>（1）.r：</p>
+<p>当以<code>r</code>模式打开文件时，程序期望该文件已经存在。如果文件不存在，<code>fopen</code>函数将返回<code>NULL</code>。</p>
+<p>这种模式用于从文件中读取数据。例如，读取一个文本文件中的字符、字符串或者格式化的数据。</p>
+<p>示例代码如下：#include &lt;stdio.h&gt;</p>
+<ul>
+<li>int main()<ul>
+<li>{</li>
+<li>FILE *fp;</li>
+<li>char buffer[100];</li>
+<li>fp &#x3D; fopen(&quot;input.txt&quot;, &quot;r&quot;);</li>
+<li>if(fp &#x3D;&#x3D; NULL)</li>
+<li>{</li>
+<li>perror(&quot;Error opening file&quot;);</li>
+<li>return 1;</li>
+<li>}</li>
+<li>fgets(buffer, sizeof(buffer), fp);</li>
+<li>printf(&quot;%s&quot;, buffer); fclose(fp);</li>
+<li>return 0;</li>
+<li>}</li>
+<li>(2) w:</li>
+<li>以<code>w</code>模式打开文件时，如果文件已经存在，文件的内容会被清空；如果文件不存在，则会创建一个新的文件。</li>
+<li>主要用于向文件中写入数据。例如，将程序的输出结果保存到文件中。<br>#include &lt;stdio.h&gt;</li>
+<li>int main()</li>
+<li>{</li>
+<li>FILE *fp; fp &#x3D; fopen(&quot;output.txt&quot;, &quot;w&quot;);</li>
+<li>if(fp &#x3D;&#x3D; NULL) { perror(&quot;Error opening file&quot;);</li>
+<li>return 1; } fprintf(fp, &quot;This is a test output.\n&quot;);</li>
+<li>fclose(fp);</li>
+<li>return 0;</li>
+<li>}</li>
+<li>(3)a:</li>
+<li>当以<code>a</code>模式打开文件时，如果文件已经存在，新的数据会被追加到文件的末尾；如果文件不存在，则会创建一个新文件。</li>
+<li><img data-original="/images/csdn/9cf50eabdf4a541d45b3e0e0.png" src="/images/previews/9cf50eabdf4a541d45b3e0e0.png.webp" loading='lazy'></li>
+<li><strong>还有这些模式（<code>r +</code>、<code>w +</code>、<code>a +）</code></strong></li>
+<li><strong><code>2.接下来是读取文件内容的例子</code></strong></li>
+<li><img data-original="/images/csdn/83182a77abe4757c3c13c595.png" src="/images/previews/83182a77abe4757c3c13c595.png.webp" loading='lazy'></li>
+<li>这是用r模式打开文件进行读取，每读取一次文件指针会向下一个元素的位置移动</li>
+<li><img data-original="/images/csdn/b796a1a1eb391955000a7739.png" src="/images/previews/b796a1a1eb391955000a7739.png.webp" loading='lazy'></li>
+<li>这是把文件的内容输入到arr中</li>
+<li>3.向文件中输入的例子</li>
+<li><img data-original="/images/csdn/458cf1b01e8dd3453f3b953e.png" src="/images/previews/458cf1b01e8dd3453f3b953e.png.webp" loading='lazy'></li>
+<li>用w模式打开文件，然后创造了结构体，再用标准输入到文件中</li>
+<li>4.流</li>
+<li><img data-original="/images/csdn/0b6fb6ca02de2115f7d9a4cd.png" src="/images/previews/0b6fb6ca02de2115f7d9a4cd.png.webp" loading='lazy'></li>
+<li><strong>流</strong>是对数据输入输出（I&#x2F;O）操作的一种高度抽象，形象地比喻为“流淌着字符的河”。它屏蔽了不同外部设备（如键盘、显示器、磁盘文件等）的具体实现细节，为程序员提供了一种统一的方式来处理各种设备的数据交换。通过流，我们只需关注数据的读写逻辑，而无需关心底层硬件接口的复杂性。</li>
+<li>在C程序中，无论是向屏幕输出文字、从键盘接收用户输入，还是读写文件内容，所有这些操作都被封装为对流的读写。这种统一的接口设计极大地提升了代码的可移植性和开发效率。</li>
+<li>5.几个函数的简单区分</li>
+<li><img data-original="/images/csdn/bcfbff881ede8b5d4bbecee4.png" src="/images/previews/bcfbff881ede8b5d4bbecee4.png.webp" loading='lazy'>操作文件所用的主要还是fscanf和fprintf。</li>
+<li>简单例子</li>
+<li><img data-original="/images/csdn/fc9b279066fe59232a96c584.png" src="/images/previews/fc9b279066fe59232a96c584.png.webp" loading='lazy'></li>
+<li><img data-original="/images/csdn/a352d7187a66e728dd066b4e.png" src="/images/previews/a352d7187a66e728dd066b4e.png.webp" loading='lazy'></li>
+<li>6.实例，通过文件来记录通讯录中的信息，使联系人信息可以长久保留<img data-original="/images/csdn/3ea802d2461858350b97f508.png" src="/images/previews/3ea802d2461858350b97f508.png.webp" loading='lazy'></li>
+<li>fread:</li>
+<li><ul>
+<li><code>fread</code>函数用于从文件流中读取数据。它的原型是<code>size_t fread(void *ptr, size_t size, size_t count, FILE *stream);</code>。</li>
+<li>其中<code>ptr</code>是指向用于存储读取数据的内存块的指针，<code>size</code>是每个数据元素的大小（以字节为单位），<code>count</code>是要读取的元素个数，<code>stream</code>是指向要读取的文件流的指针（通过<code>fopen</code>打开文件后得到的<code>FILE</code>类型指针）。<ul>
+<li>该函数的主要作用是从指定的文件流<code>stream</code>中读取<code>count</code>个大小为<code>size</code>字节的数据元素，并将它们存储到<code>ptr</code>所指向的内存区域中。读取成功后，<code>fread</code>函数返回实际读取的元素个数.</li>
+</ul>
+</li>
+<li>因为不确定要存储多少个联系人的信息，所以一个个存储</li>
+<li><img data-original="/images/csdn/ab25987c242f735267a00cf1.png" src="/images/previews/ab25987c242f735267a00cf1.png.webp" loading='lazy'></li>
+<li>这个是读取文件信息，将联系人一个个输入到data数组中</li>
+<li>7.fseek函数的使用</li>
+<li><code>fseek</code>函数用于移动文件位置指针。其函数原型为<code>int fseek(FILE *stream, long int offset, int whence);</code>。</li>
+<li>这个函数允许在文件内部进行定位，使得后续的文件读写操作可以从指定的位置开始。例如，可以将文件位置指针移动到文件的开头、中间或者结尾的某个位置。</li>
+<li><img data-original="/images/csdn/45dc0f84abf02e204c7bc26d.png" src="/images/previews/45dc0f84abf02e204c7bc26d.png.webp" loading='lazy'></li>
+<li>其中，SEEK_SET文件的起始位置，END是文件的末尾，CUR是上回使用后指针的位置，ftell是描述当前指针位置对于文件起始位置的偏移量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>原文发表于 CSDN：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wxszz10/article/details/144583151"> 12.19学习笔记（文件的粗浅理解） </a>，作者：wxszz10。保留原文内容及图片。原文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 协议。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/csdn-144607417/" title="12.20学习笔记（文件的一些补充知识点以及预处理）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">12.20学习笔记（文件的一些补充知识点以及预处理）</div></div><div class="info-2"><div class="info-item-1">1.函数feof： feof是一个 C 语言中的文件操作函数。它用于检测文件指针是否到达文件末尾。这个函数的原型是int feof(FILE *stream)，其中stream是一个指向已经打开的文件的指针。  下面是应用实例：  这是对文件进行读取并输出其内容，如果是因为错误结束读取文件ferror就会返回1，而如果因为文件内容被读取完毕而结束，fe...</div></div></div></a><a class="pagination-related" href="/posts/csdn-144504721/" title="12.16学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">12.16学习笔记</div></div><div class="info-2"><div class="info-item-1">1.联合体：联合体是 C 语言中的一种自定义数据类型，它的主要特点是其所有成员共享同一段内存空间。这与结构体（struct）不同，结构体的每个成员都有自己独立的内存空间。 其优点如下：  内存高效利用：在程序中，当一组数据在不同时刻只需要使用其中一个成员时，联合体就体现出了它的优势。例如，考虑一个简单的设备状态数据结构，它可能需要记录设备的温度（以浮点...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/csdn-143680737/" title="11.11学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-11</div><div class="info-item-2">11.11学习笔记</div></div><div class="info-2"><div class="info-item-1">一.对于字符串的浅显理解：存储字符串有2种方法： 1.用数组来存储，char arr[]&#x3D;&quot;字符串&quot;；这样的形式，优点易于更改，缺点格式麻烦，而且涉及了很多知识，例如数组就代表其首元素地址，相当于已经赋值了的指针变量。但是不能用char* arr来代替arr来进行存储，因为char* arr只是一个指向数组的指针，而并不具...</div></div></div></a><a class="pagination-related" href="/posts/csdn-143758709/" title="11.14学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-14</div><div class="info-item-2">11.14学习笔记</div></div><div class="info-2"><div class="info-item-1">1.原码反码补码存在的原因，由于cpu只有加法器，为了能进行减法，于是设计了三码   2.三码之间的互换规则  3.整型大家族，unsigned存在的意义就是来存储那些不存在负数的值   原文发表于 CSDN： 11.14学习笔记 ，作者：wxszz10。保留原文内容及图片。原文采用 CC BY-SA 4.0 协议。 </div></div></div></a><a class="pagination-related" href="/posts/csdn-143639323/" title="11.9学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-09</div><div class="info-item-2">11.9学习笔记</div></div><div class="info-2"><div class="info-item-1">1.不能对NULL进行解应用 2.常见的一些错误  （1）这个较为简单，可通过编译器的报错发现，好更改 （2）这个基本在调用函数时出现，例如：  也比较好解决，加个库就可以了 （3）一般属于程序的逻辑问题，不能完成指定要求，很难发现，通过调试解决 3.这是一个搜索键，迅速找到代码中的指定名称  4.下载git和tortoisegit，前者是一个版本更新...</div></div></div></a><a class="pagination-related" href="/posts/csdn-143629801/" title="11.8学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-08</div><div class="info-item-2">11.8学习笔记</div></div><div class="info-2"><div class="info-item-1">1.strlen是一个用于测字符串长度的函数，无论是数组还是变量抑或直接是字符串，都可以测量，但不会包括\0，虽然每个字符串都离不开\0. 2.关于使用gets的一些见解：虽然是一个被遗弃的函数（因为存在安全溢出风险），但是它十分简洁，它的返回值是char*，但是它的返回值不能采用（经过半小时的尝试得到的结果），一般用法为gets（要输入的数组），然后...</div></div></div></a><a class="pagination-related" href="/posts/csdn-144166867/" title="12.1学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-01</div><div class="info-item-2">12.1学习笔记</div></div><div class="info-2"><div class="info-item-1">1.这是一个判断字符的一个函数，是就返回正数，不是就返回0.  2.这一个较为重要的函数，查找功能，email作为被查找数组，substr作为要找的字符串，若Email中存在substr，则返回返回substr在email中出现的起始地址，如下图会输出bitejiuyeke.com这一串字符。第二张图是模拟实现的代码及结果。   3.这是一个memcp...</div></div></div></a><a class="pagination-related" href="/posts/csdn-143932697/" title="11.21学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-21</div><div class="info-item-2">11.21学习笔记</div></div><div class="info-2"><div class="info-item-1">1.  这个就是关于数组名的特殊应用，其与后面的数组指针有很大关系 2.  这个就是数组指针的一个简单应用，得到的是整个数组的地址 tip：  所以貌似和数组指针没有区别，但是实质上的区别在这 3.  *(p+i)这个相当于得到第i行的首元素地址，*(*(p+i)+j)得到就是第i行第j个的元素 4.  这两个实际上是等价的，相同意义  原文发表于 C...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">wxszz1</div><div class="author-info-description">从 C 语言、Java 到算法练习，记录每一次动手和理解。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wxszz1"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/wxszz1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这里保存着从 2024 年开始手敲的学习笔记。欢迎翻阅旧文章，也欢迎见证之后的实践。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-13/" title="2026.11.13学习笔记（Python 队列恢复和 worker）">2026.11.13学习笔记（Python 队列恢复和 worker）</a><time datetime="2026-11-13T15:59:00.000Z" title="发表于 2026-11-13 23:59:00">2026-11-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-12/" title="2026.11.12学习笔记（Python 卡片回答、任务入队和 JSON）">2026.11.12学习笔记（Python 卡片回答、任务入队和 JSON）</a><time datetime="2026-11-12T15:59:00.000Z" title="发表于 2026-11-12 23:59:00">2026-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-11/" title="2026.11.11学习笔记（Agent问答续跑、命令参数和交换机实验）">2026.11.11学习笔记（Agent问答续跑、命令参数和交换机实验）</a><time datetime="2026-11-11T15:59:00.000Z" title="发表于 2026-11-11 23:59:00">2026-11-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-10/" title="2026.11.10学习笔记（更新接口测试、自定义异常和源码入口）">2026.11.10学习笔记（更新接口测试、自定义异常和源码入口）</a><time datetime="2026-11-10T15:59:00.000Z" title="发表于 2026-11-10 23:59:00">2026-11-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-09/" title="2026.11.9学习笔记（Python路径和Agent几个概念）">2026.11.9学习笔记（Python路径和Agent几个概念）</a><time datetime="2026-11-09T15:59:00.000Z" title="发表于 2026-11-09 23:59:00">2026-11-09</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By wxszz1</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div><script src="/js/image-viewer.js" defer></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>

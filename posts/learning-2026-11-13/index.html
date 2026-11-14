@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2026.11.13学习笔记（Python 队列恢复和 worker） | wxszz1 的技术博客</title><meta name="author" content="wxszz1"><meta name="copyright" content="wxszz1"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="今天继续做 Python 卡片练习。昨天还在写 JSON，今天开始试试，关掉程序再打开以后，原来的任务还能不能接着处理。 1. 单独启动一次，看看读到了什么刚开始我只把初始化队列那行注释掉，后面入队和保存的调用还留着。这几步都要用到队列。后来把演示改成只读文件，新进程输出了一条任务。 1[&#123;&#x27;card_id&#x27;: 1, &#x27;answer&#x27;: &amp;#x27">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026.11.13学习笔记（Python 队列恢复和 worker）">
+<meta property="og:url" content="https://wxszz1.github.io/posts/learning-2026-11-13/index.html">
+<meta property="og:site_name" content="wxszz1 的技术博客">
+<meta property="og:description" content="今天继续做 Python 卡片练习。昨天还在写 JSON，今天开始试试，关掉程序再打开以后，原来的任务还能不能接着处理。 1. 单独启动一次，看看读到了什么刚开始我只把初始化队列那行注释掉，后面入队和保存的调用还留着。这几步都要用到队列。后来把演示改成只读文件，新进程输出了一条任务。 1[&#123;&#x27;card_id&#x27;: 1, &#x27;answer&#x27;: &amp;#x27">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wxszz1.github.io/img/avatar.svg">
+<meta property="article:published_time" content="2026-11-13T15:59:00.000Z">
+<meta property="article:modified_time" content="2026-11-14T08:24:45.881Z">
+<meta property="article:author" content="wxszz1">
+<meta property="article:tag" content="Agent">
+<meta property="article:tag" content="JSON">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wxszz1.github.io/img/avatar.svg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "2026.11.13学习笔记（Python 队列恢复和 worker）",
+  "url": "https://wxszz1.github.io/posts/learning-2026-11-13/",
+  "image": "https://wxszz1.github.io/img/avatar.svg",
+  "datePublished": "2026-11-13T15:59:00.000Z",
+  "dateModified": "2026-11-14T08:24:45.881Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "wxszz1",
+      "url": "https://wxszz1.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/avatar.svg"><link rel="canonical" href="https://wxszz1.github.io/posts/learning-2026-11-13/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2026.11.13学习笔记（Python 队列恢复和 worker）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"><i class="fa-fw fas fa-code"></i><span> 技术文章</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-laptop-code"></i><span> 项目作品</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-book"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">wxszz1 的技术博客</span></a><a class="nav-page-title" href="/"><span class="site-name">2026.11.13学习笔记（Python 队列恢复和 worker）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"><i class="fa-fw fas fa-code"></i><span> 技术文章</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-laptop-code"></i><span> 项目作品</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-book"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">2026.11.13学习笔记（Python 队列恢复和 worker）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-11-13T15:59:00.000Z" title="发表于 2026-11-13 23:59:00">2026-11-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-11-14T08:24:45.881Z" title="更新于 2026-11-14 16:24:45">2026-11-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>今天继续做 Python 卡片练习。昨天还在写 JSON，今天开始试试，关掉程序再打开以后，原来的任务还能不能接着处理。</p>
+<h2 id="1-单独启动一次，看看读到了什么"><a href="#1-单独启动一次，看看读到了什么" class="headerlink" title="1. 单独启动一次，看看读到了什么"></a>1. 单独启动一次，看看读到了什么</h2><p>刚开始我只把初始化队列那行注释掉，后面入队和保存的调用还留着。这几步都要用到队列。后来把演示改成只读文件，新进程输出了一条任务。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;<span class="string">&#x27;card_id&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;answer&#x27;</span>: <span class="string">&#x27;蓝色&#x27;</span>&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>还要考虑第一次运行，文件可能根本没建。这里我按提示加了 <code>except FileNotFoundError</code>，找不到文件就返回空列表。实际试了已有文件和缺失文件，分别得到了一条任务和空列表。文件已经存在但 JSON 写坏了是另一种情况，解析错误应当报出来，免得把原数据当成空队列。</p>
+<h2 id="2-卡片和待办要一起存"><a href="#2-卡片和待办要一起存" class="headerlink" title="2. 卡片和待办要一起存"></a>2. 卡片和待办要一起存</h2><p>我一开始有点分不清等人答的卡片和等程序执行的任务。可以把卡片当成问答工单，回答后从 <code>open</code> 改成 <code>decided</code>，答案还留在卡片里。待办是回答成功后交给 worker 处理的东西，处理完就可以从队列里取掉。</p>
+<p>后来把卡片和队列一起保存，启动时用文件里的状态恢复。这样处理完成以后，还是能查到以前答过什么。这里是我单独写的 Python 练习，参考的是 agent-autoloop 的流程。</p>
+<h2 id="3-实际处理了一条任务"><a href="#3-实际处理了一条任务" class="headerlink" title="3. 实际处理了一条任务"></a>3. 实际处理了一条任务</h2><p>练习里可以列出还没回答的卡片，再选编号来答。保存文件里一度有两项待办，答案分别是“绿色”和“python”。我贴出的 PyCharm 输出里有 <code>2 python</code>，退出代码是 0。后来核对文件，两张卡片的答案都还在，待办队列已经空了。这个记录里没有第一条任务的处理输出，重启后再提交同一张卡片也还没实测。</p>
+<p>下次先给没有待回答卡片、没有任务可处理的情况加个提示。小改动继续往下做，等几个步骤串起来再集中跑一遍。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Agent/">Agent</a><a class="post-meta__tags" href="/tags/JSON/">JSON</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/posts/learning-2026-11-12/" title="2026.11.12学习笔记（Python 卡片回答、任务入队和 JSON）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">2026.11.12学习笔记（Python 卡片回答、任务入队和 JSON）</div></div><div class="info-2"><div class="info-item-1">昨天在 agent-autoloop 里体验了回答卡片后任务接着跑。今天我在 PyCharm 新建了练习文件，先用 Python 写卡片回答和入队。这是单独的学习练习，原来的 TypeScript 项目是参考。 1. 取出来的 card 还是原来的字典一开始我没明白，为什么先写一句 card = cards.get(card_id)。如果编号存在，ca...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/learning-2026-11-12/" title="2026.11.12学习笔记（Python 卡片回答、任务入队和 JSON）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-12</div><div class="info-item-2">2026.11.12学习笔记（Python 卡片回答、任务入队和 JSON）</div></div><div class="info-2"><div class="info-item-1">昨天在 agent-autoloop 里体验了回答卡片后任务接着跑。今天我在 PyCharm 新建了练习文件，先用 Python 写卡片回答和入队。这是单独的学习练习，原来的 TypeScript 项目是参考。 1. 取出来的 card 还是原来的字典一开始我没明白，为什么先写一句 card = cards.get(card_id)。如果编号存在，ca...</div></div></div></a><a class="pagination-related" href="/posts/learning-2026-11-09/" title="2026.11.9学习笔记（Python路径和Agent几个概念）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-09</div><div class="info-item-2">2026.11.9学习笔记（Python路径和Agent几个概念）</div></div><div class="info-2"><div class="info-item-1">记录项目移入src后的路径问题、更新文章的校验思路，以及Skill、Agent、Harness和Bot的区别。</div></div></div></a><a class="pagination-related" href="/posts/learning-2026-11-10/" title="2026.11.10学习笔记（更新接口测试、自定义异常和源码入口）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-10</div><div class="info-item-2">2026.11.10学习笔记（更新接口测试、自定义异常和源码入口）</div></div><div class="info-2"><div class="info-item-1">从文章更新的接口测试，到同名异常类的问题，再开始看agent-autoloop的命令入口。</div></div></div></a><a class="pagination-related" href="/posts/learning-2026-11-11/" title="2026.11.11学习笔记（Agent问答续跑、命令参数和交换机实验）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-11</div><div class="info-item-2">2026.11.11学习笔记（Agent问答续跑、命令参数和交换机实验）</div></div><div class="info-2"><div class="info-item-1">体验回答卡片后继续执行，记录命令参数的例子，以及交换机实验和报告核对。</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">wxszz1</div><div class="author-info-description">从 C 语言、Java 到算法练习，记录每一次动手和理解。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wxszz1"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/wxszz1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这里保存着从 2024 年开始手敲的学习笔记。欢迎翻阅旧文章，也欢迎见证之后的实践。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8D%95%E7%8B%AC%E5%90%AF%E5%8A%A8%E4%B8%80%E6%AC%A1%EF%BC%8C%E7%9C%8B%E7%9C%8B%E8%AF%BB%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">1. 单独启动一次，看看读到了什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%A1%E7%89%87%E5%92%8C%E5%BE%85%E5%8A%9E%E8%A6%81%E4%B8%80%E8%B5%B7%E5%AD%98"><span class="toc-number">2.</span> <span class="toc-text">2. 卡片和待办要一起存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%9E%E9%99%85%E5%A4%84%E7%90%86%E4%BA%86%E4%B8%80%E6%9D%A1%E4%BB%BB%E5%8A%A1"><span class="toc-number">3.</span> <span class="toc-text">3. 实际处理了一条任务</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-13/" title="2026.11.13学习笔记（Python 队列恢复和 worker）">2026.11.13学习笔记（Python 队列恢复和 worker）</a><time datetime="2026-11-13T15:59:00.000Z" title="发表于 2026-11-13 23:59:00">2026-11-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-12/" title="2026.11.12学习笔记（Python 卡片回答、任务入队和 JSON）">2026.11.12学习笔记（Python 卡片回答、任务入队和 JSON）</a><time datetime="2026-11-12T15:59:00.000Z" title="发表于 2026-11-12 23:59:00">2026-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-11/" title="2026.11.11学习笔记（Agent问答续跑、命令参数和交换机实验）">2026.11.11学习笔记（Agent问答续跑、命令参数和交换机实验）</a><time datetime="2026-11-11T15:59:00.000Z" title="发表于 2026-11-11 23:59:00">2026-11-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-10/" title="2026.11.10学习笔记（更新接口测试、自定义异常和源码入口）">2026.11.10学习笔记（更新接口测试、自定义异常和源码入口）</a><time datetime="2026-11-10T15:59:00.000Z" title="发表于 2026-11-10 23:59:00">2026-11-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-09/" title="2026.11.9学习笔记（Python路径和Agent几个概念）">2026.11.9学习笔记（Python路径和Agent几个概念）</a><time datetime="2026-11-09T15:59:00.000Z" title="发表于 2026-11-09 23:59:00">2026-11-09</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By wxszz1</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div><script src="/js/image-viewer.js" defer></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>
