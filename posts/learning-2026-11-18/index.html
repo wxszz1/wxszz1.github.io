@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2026.11.18学习笔记（总结落盘、SQLite 状态表和重复回答保护） | wxszz1 的技术博客</title><meta name="author" content="wxszz1"><meta name="copyright" content="wxszz1"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="今天把学习笔记助手的第一周收尾做完，然后开始用 SQLite 保存卡片状态。还是先做独立的小脚本，跑通保存、读回和回答更新，再考虑接回原来的菜单。 1. 模型给出了回复，还要判断能不能存昨天回答追问后，模型已经能结合原笔记、问题和补充答案继续回复。今天补上的是把回复整理成一条独立的知识结论，保存到 note.json。 提示词要求模型输出单行纯文本，不要寒暄、列表和 Markdown，但程序里也得">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026.11.18学习笔记（总结落盘、SQLite 状态表和重复回答保护）">
+<meta property="og:url" content="https://wxszz1.github.io/posts/learning-2026-11-18/index.html">
+<meta property="og:site_name" content="wxszz1 的技术博客">
+<meta property="og:description" content="今天把学习笔记助手的第一周收尾做完，然后开始用 SQLite 保存卡片状态。还是先做独立的小脚本，跑通保存、读回和回答更新，再考虑接回原来的菜单。 1. 模型给出了回复，还要判断能不能存昨天回答追问后，模型已经能结合原笔记、问题和补充答案继续回复。今天补上的是把回复整理成一条独立的知识结论，保存到 note.json。 提示词要求模型输出单行纯文本，不要寒暄、列表和 Markdown，但程序里也得">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wxszz1.github.io/img/avatar.svg">
+<meta property="article:published_time" content="2026-11-18T15:59:00.000Z">
+<meta property="article:modified_time" content="2026-11-28T02:40:16.012Z">
+<meta property="article:author" content="wxszz1">
+<meta property="article:tag" content="Agent">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="SQLite">
+<meta property="article:tag" content="状态恢复">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wxszz1.github.io/img/avatar.svg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "2026.11.18学习笔记（总结落盘、SQLite 状态表和重复回答保护）",
+  "url": "https://wxszz1.github.io/posts/learning-2026-11-18/",
+  "image": "https://wxszz1.github.io/img/avatar.svg",
+  "datePublished": "2026-11-18T15:59:00.000Z",
+  "dateModified": "2026-11-28T02:40:16.012Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "wxszz1",
+      "url": "https://wxszz1.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/avatar.svg"><link rel="canonical" href="https://wxszz1.github.io/posts/learning-2026-11-18/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2026.11.18学习笔记（总结落盘、SQLite 状态表和重复回答保护）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"><i class="fa-fw fas fa-code"></i><span> 技术文章</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-laptop-code"></i><span> 项目作品</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-book"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">wxszz1 的技术博客</span></a><a class="nav-page-title" href="/"><span class="site-name">2026.11.18学习笔记（总结落盘、SQLite 状态表和重复回答保护）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"><i class="fa-fw fas fa-code"></i><span> 技术文章</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-laptop-code"></i><span> 项目作品</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-book"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">2026.11.18学习笔记（总结落盘、SQLite 状态表和重复回答保护）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-11-18T15:59:00.000Z" title="发表于 2026-11-18 23:59:00">2026-11-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-11-28T02:40:16.012Z" title="更新于 2026-11-28 10:40:16">2026-11-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>今天把学习笔记助手的第一周收尾做完，然后开始用 SQLite 保存卡片状态。还是先做独立的小脚本，跑通保存、读回和回答更新，再考虑接回原来的菜单。</p>
+<h2 id="1-模型给出了回复，还要判断能不能存"><a href="#1-模型给出了回复，还要判断能不能存" class="headerlink" title="1. 模型给出了回复，还要判断能不能存"></a>1. 模型给出了回复，还要判断能不能存</h2><p>昨天回答追问后，模型已经能结合原笔记、问题和补充答案继续回复。今天补上的是把回复整理成一条独立的知识结论，保存到 <code>note.json</code>。</p>
+<p>提示词要求模型输出单行纯文本，不要寒暄、列表和 Markdown，但程序里也得检查。最初复测时，模型替身返回 <code>**第二次请求超时。**</code>，这段加粗文本仍被当成成功结果写入，待办也移除了。只在提示词里写要求，不能保证收到的文本就符合要求。</p>
+<p>我补了常见格式标记的拦截。修完后，缺少密钥会在创建客户端前返回；带加粗标记的结果不会写入，待办仍保留。另外还有一个普通卡片处理后不出队的问题，也一起修掉了，不然它会一直占着队首。</p>
+<p>保存知识结论时，先检查已有 JSON 的结构，再写到同目录临时文件，最后替换原文件。只有保存成功才移除待办。导师用临时目录和模型替身复测了正常追加、空白输出、损坏 JSON 和替换失败等情况；失败场景保留原文件与待办。这些复测没有发真实模型请求，也还不能说明笔记文件和状态文件已经具有数据库式的整体事务保证。</p>
+<p>这部分代码保存在 <code>4012a04</code>，实现和修复由我完成，复测与 Git 提交由导师协助。</p>
+<h2 id="2-第一张-SQLite-表先服务一个具体流程"><a href="#2-第一张-SQLite-表先服务一个具体流程" class="headerlink" title="2. 第一张 SQLite 表先服务一个具体流程"></a>2. 第一张 SQLite 表先服务一个具体流程</h2><p>我先用 Python 自带的 <code>sqlite3</code> 写了两个脚本：一个建表、写入并提交，另一个在新进程里读回。暂时没有加 ORM，也没有直接迁移原来的 JSON 数据。</p>
+<p><code>cards</code> 表只放五个字段：</p>
+<ol>
+<li><code>id</code>：根据编号找到要回答的卡片。</li>
+<li><code>state</code>：记录还在等待回答，还是已经回答。</li>
+<li><code>source</code>：原始笔记，接续模型时需要带上。</li>
+<li><code>question</code>：追问的具体内容。</li>
+<li><code>answer</code>：用户补充的回答。</li>
+</ol>
+<p>写入进程结束后，读取进程查到了同一条 <code>open</code> 记录。导师也在独立临时库里分别启动两个进程复测，读回的五个字段一致。脚本保存在 <code>6428db1</code>，样例数据库只留本机，不提交到仓库。</p>
+<p>这里的 <code>state</code> 只是记录状态。表里有这个字段，并不会自动阻止重复回答，更新时还得使用它。</p>
+<h2 id="3-重复回答保护放到更新条件里"><a href="#3-重复回答保护放到更新条件里" class="headerlink" title="3. 重复回答保护放到更新条件里"></a>3. 重复回答保护放到更新条件里</h2><p>今天接着写了 <code>answer_sqlite.py</code>，更新语句是：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> cards</span><br><span class="line"><span class="keyword">SET</span> answer <span class="operator">=</span> ?, state <span class="operator">=</span> ?</span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> ? <span class="keyword">AND</span> state <span class="operator">=</span> <span class="string">&#x27;open&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>参数里传入清理过的答案、<code>decided</code> 和卡片编号。用 <code>cursor.rowcount == 1</code> 判断这一条更新有没有实际生效。</p>
+<p>这样第一次回答会保存答案并改变状态，再回答同一个编号，就不符合 <code>open</code> 条件了。未知编号也匹配不到记录。纯空白回答则在执行 SQL 前拦住。</p>
+<p>本机运行后看到的几种结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">首次回答：保存成功</span><br><span class="line">重复回答：卡片不存在或已回答，未修改</span><br><span class="line">未知编号：卡片不存在或已回答，未修改</span><br><span class="line">空白回答：答案为空</span><br></pre></td></tr></table></figure>
+
+<p>最终记录还是第一次保存的“第二次请求超时”，没有被后面的覆盖回答改掉。导师在临时库重新启动回答脚本复测，两次最终记录也一致。本轮提交是 <code>d0b42e2</code>。</p>
+<p>目前验证的是这些输入和重启后的行为，还没验证异常回滚，也没有做并发写入测试。下一项先补失败回滚，再把 SQLite 接回现有模型流程。</p>
+<h2 id="4-先把当前增量做完"><a href="#4-先把当前增量做完" class="headerlink" title="4. 先把当前增量做完"></a>4. 先把当前增量做完</h2><p>今天也调整了推进方式：多轮追问、低价值笔记拦截、全量格式清洗先放到后续清单。每次只做一个能运行、能验收的小增量，通过以后保存提交，再接下一项。</p>
+<p>另一个聊天里，我委托 AI 完成的 agent-autoloop Python 移植也收到了 Windows &#x2F; Linux 范围的验收报告。其中有停机备份恢复、服务升级等验证，但 macOS、交互回调和运行中进程的无停机移交不在已验证范围。这是 AI 代为实现和验证的工程，和我今天亲手写的 SQLite 练习分开记录，也不算向原 TypeScript 仓库贡献了代码。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Agent/">Agent</a><a class="post-meta__tags" href="/tags/SQLite/">SQLite</a><a class="post-meta__tags" href="/tags/%E7%8A%B6%E6%80%81%E6%81%A2%E5%A4%8D/">状态恢复</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/learning-2026-11-19/" title="2026.11.19学习笔记（SQLite 回滚、追问接续和 JSON 订单去重）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">2026.11.19学习笔记（SQLite 回滚、追问接续和 JSON 订单去重）</div></div><div class="info-2"><div class="info-item-1">今天在学习笔记助手里试了两个场景：回答写到一半失败，退出后再从数据库找回已回答的卡片。下午还重跑了一个把 JSON 订单拆开入库的课程实验。 1. UPDATE 执行了，提交前出错怎么办我在 UPDATE 后、commit() 前主动抛了一个异常，模拟还没提交就出错。异常分支调用 rollback()，打印失败提示后直接返回。要是还往下检查 rowco...</div></div></div></a><a class="pagination-related" href="/posts/learning-2026-11-17/" title="2026.11.17学习笔记（模型追问、重启接续和失败重试）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">2026.11.17学习笔记（模型追问、重启接续和失败重试）</div></div><div class="info-2"><div class="info-item-1">昨天接了真实模型和读取关键笔记的工具，今天继续写学习笔记助手，把模型追问接到原来的卡片和待办流程里。这部分是我自己实现、运行，导师按行为要求复现和检查。代码仍在独立的 Python 练习项目里，不是向 agent-autoloop 原仓库提交的贡献。 1. 读到了笔记，不代表整个查询已经成功查询关键笔记需要先让模型提出工具请求，Python 读文件，再...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/learning-2026-11-17/" title="2026.11.17学习笔记（模型追问、重启接续和失败重试）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-17</div><div class="info-item-2">2026.11.17学习笔记（模型追问、重启接续和失败重试）</div></div><div class="info-2"><div class="info-item-1">昨天接了真实模型和读取关键笔记的工具，今天继续写学习笔记助手，把模型追问接到原来的卡片和待办流程里。这部分是我自己实现、运行，导师按行为要求复现和检查。代码仍在独立的 Python 练习项目里，不是向 agent-autoloop 原仓库提交的贡献。 1. 读到了笔记，不代表整个查询已经成功查询关键笔记需要先让模型提出工具请求，Python 读文件，再...</div></div></div></a><a class="pagination-related" href="/posts/learning-2026-11-19/" title="2026.11.19学习笔记（SQLite 回滚、追问接续和 JSON 订单去重）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-19</div><div class="info-item-2">2026.11.19学习笔记（SQLite 回滚、追问接续和 JSON 订单去重）</div></div><div class="info-2"><div class="info-item-1">今天在学习笔记助手里试了两个场景：回答写到一半失败，退出后再从数据库找回已回答的卡片。下午还重跑了一个把 JSON 订单拆开入库的课程实验。 1. UPDATE 执行了，提交前出错怎么办我在 UPDATE 后、commit() 前主动抛了一个异常，模拟还没提交就出错。异常分支调用 rollback()，打印失败提示后直接返回。要是还往下检查 rowco...</div></div></div></a><a class="pagination-related" href="/posts/learning-2026-11-26/" title="2026.11.26学习笔记（SQLite 工单、失败重试和真实模型演示）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-26</div><div class="info-item-2">2026.11.26学习笔记（SQLite 工单、失败重试和真实模型演示）</div></div><div class="info-2"><div class="info-item-1">今天把之前在样例脚本里练过的 SQLite 卡片接进了学习笔记助手。最后用真实模型跑了一遍，从提交笔记到查回结论，全程录了屏。 1. 两个编号都是 1，可能是两张不同的卡片刚把追问卡片改成存 SQLite 时，导师发现菜单 3 新建的普通工单还是写进 JSON，菜单 1 和 4 却只查 SQLite。结果是程序提示工单建好了，回到菜单里既看不到也答不了...</div></div></div></a><a class="pagination-related" href="/posts/learning-2026-11-16/" title="2026.11.16学习笔记（状态恢复、真实模型和工具调用）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-16</div><div class="info-item-2">2026.11.16学习笔记（状态恢复、真实模型和工具调用）</div></div><div class="info-2"><div class="info-item-1">今天先把 Python 工单练习收尾，然后第一次在这份练习里接真实模型和只读工具。工单流程参考了 agent-autoloop，代码写在单独的 Python 项目里。 1. 没有卡片可答的时候，队列里可能还有活今天我按需求自己改了命令行的行为。没有卡片可答，就提示并回到菜单。队列空了也是一样。这两个入口得各自判断，因为卡片全答完的时候，之前入队的活还可...</div></div></div></a><a class="pagination-related" href="/posts/learning-2026-11-27/" title="2026.11.27学习笔记（单臂路由、RIP 和 SQLite 任务防重）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-27</div><div class="info-item-2">2026.11.27学习笔记（单臂路由、RIP 和 SQLite 任务防重）</div></div><div class="info-2"><div class="info-item-1">今天做了 Packet Tracer 的路由器配置实验。另一个聊天里，我用学习笔记助手做了一轮面试自检，主要是在想同一条任务被两个 worker 处理时，数据库应该接受谁的结果。 1. 配置交换机，先看命令行的提示符我在 Switch&gt; 里直接输入 switchport mode trunk，结果报了 Invalid input。这条命令要在接口...</div></div></div></a><a class="pagination-related" href="/posts/learning-2026-11-12/" title="2026.11.12学习笔记（Python 卡片回答、任务入队和 JSON）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-11-12</div><div class="info-item-2">2026.11.12学习笔记（Python 卡片回答、任务入队和 JSON）</div></div><div class="info-2"><div class="info-item-1">昨天在 agent-autoloop 里体验了回答卡片后任务接着跑。今天我在 PyCharm 新建了练习文件，先用 Python 写卡片回答和入队。这是单独的学习练习，原来的 TypeScript 项目是参考。 1. 取出来的 card 还是原来的字典一开始我没明白，为什么先写一句 card = cards.get(card_id)。如果编号存在，ca...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">wxszz1</div><div class="author-info-description">从 C 语言、Java 到算法练习，记录每一次动手和理解。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wxszz1"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/wxszz1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这里保存着从 2024 年开始手敲的学习笔记。欢迎翻阅旧文章，也欢迎见证之后的实践。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A8%A1%E5%9E%8B%E7%BB%99%E5%87%BA%E4%BA%86%E5%9B%9E%E5%A4%8D%EF%BC%8C%E8%BF%98%E8%A6%81%E5%88%A4%E6%96%AD%E8%83%BD%E4%B8%8D%E8%83%BD%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">1. 模型给出了回复，还要判断能不能存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%AC%AC%E4%B8%80%E5%BC%A0-SQLite-%E8%A1%A8%E5%85%88%E6%9C%8D%E5%8A%A1%E4%B8%80%E4%B8%AA%E5%85%B7%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">2. 第一张 SQLite 表先服务一个具体流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%87%8D%E5%A4%8D%E5%9B%9E%E7%AD%94%E4%BF%9D%E6%8A%A4%E6%94%BE%E5%88%B0%E6%9B%B4%E6%96%B0%E6%9D%A1%E4%BB%B6%E9%87%8C"><span class="toc-number">3.</span> <span class="toc-text">3. 重复回答保护放到更新条件里</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%85%88%E6%8A%8A%E5%BD%93%E5%89%8D%E5%A2%9E%E9%87%8F%E5%81%9A%E5%AE%8C"><span class="toc-number">4.</span> <span class="toc-text">4. 先把当前增量做完</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-27/" title="2026.11.27学习笔记（单臂路由、RIP 和 SQLite 任务防重）">2026.11.27学习笔记（单臂路由、RIP 和 SQLite 任务防重）</a><time datetime="2026-11-27T15:59:00.000Z" title="发表于 2026-11-27 23:59:00">2026-11-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-26/" title="2026.11.26学习笔记（SQLite 工单、失败重试和真实模型演示）">2026.11.26学习笔记（SQLite 工单、失败重试和真实模型演示）</a><time datetime="2026-11-26T15:59:00.000Z" title="发表于 2026-11-26 23:59:00">2026-11-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-24/" title="2026.11.24学习笔记（npm 安装、require 和测试命令）">2026.11.24学习笔记（npm 安装、require 和测试命令）</a><time datetime="2026-11-24T15:59:00.000Z" title="发表于 2026-11-24 23:59:00">2026-11-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-19/" title="2026.11.19学习笔记（SQLite 回滚、追问接续和 JSON 订单去重）">2026.11.19学习笔记（SQLite 回滚、追问接续和 JSON 订单去重）</a><time datetime="2026-11-19T15:59:00.000Z" title="发表于 2026-11-19 23:59:00">2026-11-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-18/" title="2026.11.18学习笔记（总结落盘、SQLite 状态表和重复回答保护）">2026.11.18学习笔记（总结落盘、SQLite 状态表和重复回答保护）</a><time datetime="2026-11-18T15:59:00.000Z" title="发表于 2026-11-18 23:59:00">2026-11-18</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By wxszz1</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div><script src="/js/image-viewer.js" defer></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>

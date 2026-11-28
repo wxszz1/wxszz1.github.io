@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2026.11.24学习笔记（npm 安装、require 和测试命令） | wxszz1 的技术博客</title><meta name="author" content="wxszz1"><meta name="copyright" content="wxszz1"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="今天在另一个项目里装了双模块实验包，跑了一次测试。安装和调用是我在终端操作的，实验代码和后面的配置修复有 AI 协助。 1. 装了包以后，代码怎么用它我用 npm install 安装了实验包的 1.0.0 版本，再用 npm ls --depth&#x3D;0 确认测试项目已经有这个直接依赖。依赖包就是项目运行时需要用到的外部代码，跟 Python 项目先用 pip 安装库差不多。 我一开始把 requi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026.11.24学习笔记（npm 安装、require 和测试命令）">
+<meta property="og:url" content="https://wxszz1.github.io/posts/learning-2026-11-24/index.html">
+<meta property="og:site_name" content="wxszz1 的技术博客">
+<meta property="og:description" content="今天在另一个项目里装了双模块实验包，跑了一次测试。安装和调用是我在终端操作的，实验代码和后面的配置修复有 AI 协助。 1. 装了包以后，代码怎么用它我用 npm install 安装了实验包的 1.0.0 版本，再用 npm ls --depth&#x3D;0 确认测试项目已经有这个直接依赖。依赖包就是项目运行时需要用到的外部代码，跟 Python 项目先用 pip 安装库差不多。 我一开始把 requi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wxszz1.github.io/img/avatar.svg">
+<meta property="article:published_time" content="2026-11-24T15:59:00.000Z">
+<meta property="article:modified_time" content="2026-11-28T02:40:16.012Z">
+<meta property="article:author" content="wxszz1">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="npm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wxszz1.github.io/img/avatar.svg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "2026.11.24学习笔记（npm 安装、require 和测试命令）",
+  "url": "https://wxszz1.github.io/posts/learning-2026-11-24/",
+  "image": "https://wxszz1.github.io/img/avatar.svg",
+  "datePublished": "2026-11-24T15:59:00.000Z",
+  "dateModified": "2026-11-28T02:40:16.012Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "wxszz1",
+      "url": "https://wxszz1.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/avatar.svg"><link rel="canonical" href="https://wxszz1.github.io/posts/learning-2026-11-24/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2026.11.24学习笔记（npm 安装、require 和测试命令）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"><i class="fa-fw fas fa-code"></i><span> 技术文章</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-laptop-code"></i><span> 项目作品</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-book"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">wxszz1 的技术博客</span></a><a class="nav-page-title" href="/"><span class="site-name">2026.11.24学习笔记（npm 安装、require 和测试命令）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"><i class="fa-fw fas fa-code"></i><span> 技术文章</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-laptop-code"></i><span> 项目作品</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-book"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">2026.11.24学习笔记（npm 安装、require 和测试命令）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-11-24T15:59:00.000Z" title="发表于 2026-11-24 23:59:00">2026-11-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-11-28T02:40:16.012Z" title="更新于 2026-11-28 10:40:16">2026-11-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>今天在另一个项目里装了双模块实验包，跑了一次测试。安装和调用是我在终端操作的，实验代码和后面的配置修复有 AI 协助。</p>
+<h2 id="1-装了包以后，代码怎么用它"><a href="#1-装了包以后，代码怎么用它" class="headerlink" title="1. 装了包以后，代码怎么用它"></a>1. 装了包以后，代码怎么用它</h2><p>我用 <code>npm install</code> 安装了实验包的 1.0.0 版本，再用 <code>npm ls --depth=0</code> 确认测试项目已经有这个直接依赖。依赖包就是项目运行时需要用到的外部代码，跟 Python 项目先用 <code>pip</code> 安装库差不多。</p>
+<p>我一开始把 <code>require()</code> 理解成要这个包里的函数。更准确一点，它拿到的是包导出的内容。这次拿到的是两个对象 <code>greeting</code> 和 <code>farewell</code>，每个对象有 <code>message</code> 属性和 <code>print()</code> 方法。测试先检查属性，再调用方法，终端打印出两行日志：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hello from the greeting module!</span><br><span class="line">Goodbye from the farewell module!</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-安装成功了，为什么-npm-test-还会报错"><a href="#2-安装成功了，为什么-npm-test-还会报错" class="headerlink" title="2. 安装成功了，为什么 npm test 还会报错"></a>2. 安装成功了，为什么 npm test 还会报错</h2><p>有一轮安装和查看依赖都成功了，运行 <code>npm test</code> 却提示 <code>Missing script: &quot;test&quot;</code>。检查后发现测试目录里的 <code>package.json</code> 只剩依赖配置，<code>index.js</code> 也缺了。AI 帮我恢复入口和配置后，复跑又得到了上面两行输出。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;test&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node index.js&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>看到这几行才知道，<code>npm test</code> 会去找项目里配置的测试命令。这个实验里它找到的是 <code>node index.js</code>，真正执行 JavaScript 的是 Node.js。下次看到同样的报错，我可以先检查当前目录和 <code>package.json</code> 里的 <code>scripts</code>。</p>
+<h2 id="3-npm-和-Git-都在管理什么"><a href="#3-npm-和-Git-都在管理什么" class="headerlink" title="3. npm 和 Git 都在管理什么"></a>3. npm 和 Git 都在管理什么</h2><p>在 Python 项目里也会同时用 <code>pip</code> 和 Git。拿今天的实验来说，npm 用来发布和安装包，Git 用来记录源码改了什么。一个包可以由 Git 记录修改历史，再通过 npm 发布版本，给其他项目安装使用。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a><a class="post-meta__tags" href="/tags/Node-js/">Node.js</a><a class="post-meta__tags" href="/tags/npm/">npm</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/learning-2026-11-26/" title="2026.11.26学习笔记（SQLite 工单、失败重试和真实模型演示）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">2026.11.26学习笔记（SQLite 工单、失败重试和真实模型演示）</div></div><div class="info-2"><div class="info-item-1">今天把之前在样例脚本里练过的 SQLite 卡片接进了学习笔记助手。最后用真实模型跑了一遍，从提交笔记到查回结论，全程录了屏。 1. 两个编号都是 1，可能是两张不同的卡片刚把追问卡片改成存 SQLite 时，导师发现菜单 3 新建的普通工单还是写进 JSON，菜单 1 和 4 却只查 SQLite。结果是程序提示工单建好了，回到菜单里既看不到也答不了...</div></div></div></a><a class="pagination-related" href="/posts/learning-2026-11-19/" title="2026.11.19学习笔记（SQLite 回滚、追问接续和 JSON 订单去重）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">2026.11.19学习笔记（SQLite 回滚、追问接续和 JSON 订单去重）</div></div><div class="info-2"><div class="info-item-1">今天在学习笔记助手里试了两个场景：回答写到一半失败，退出后再从数据库找回已回答的卡片。下午还重跑了一个把 JSON 订单拆开入库的课程实验。 1. UPDATE 执行了，提交前出错怎么办我在 UPDATE 后、commit() 前主动抛了一个异常，模拟还没提交就出错。异常分支调用 rollback()，打印失败提示后直接返回。要是还往下检查 rowco...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">wxszz1</div><div class="author-info-description">从 C 语言、Java 到算法练习，记录每一次动手和理解。</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wxszz1"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/wxszz1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这里保存着从 2024 年开始手敲的学习笔记。欢迎翻阅旧文章，也欢迎见证之后的实践。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%A3%85%E4%BA%86%E5%8C%85%E4%BB%A5%E5%90%8E%EF%BC%8C%E4%BB%A3%E7%A0%81%E6%80%8E%E4%B9%88%E7%94%A8%E5%AE%83"><span class="toc-number">1.</span> <span class="toc-text">1. 装了包以后，代码怎么用它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88-npm-test-%E8%BF%98%E4%BC%9A%E6%8A%A5%E9%94%99"><span class="toc-number">2.</span> <span class="toc-text">2. 安装成功了，为什么 npm test 还会报错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-npm-%E5%92%8C-Git-%E9%83%BD%E5%9C%A8%E7%AE%A1%E7%90%86%E4%BB%80%E4%B9%88"><span class="toc-number">3.</span> <span class="toc-text">3. npm 和 Git 都在管理什么</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-27/" title="2026.11.27学习笔记（单臂路由、RIP 和 SQLite 任务防重）">2026.11.27学习笔记（单臂路由、RIP 和 SQLite 任务防重）</a><time datetime="2026-11-27T15:59:00.000Z" title="发表于 2026-11-27 23:59:00">2026-11-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-26/" title="2026.11.26学习笔记（SQLite 工单、失败重试和真实模型演示）">2026.11.26学习笔记（SQLite 工单、失败重试和真实模型演示）</a><time datetime="2026-11-26T15:59:00.000Z" title="发表于 2026-11-26 23:59:00">2026-11-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-24/" title="2026.11.24学习笔记（npm 安装、require 和测试命令）">2026.11.24学习笔记（npm 安装、require 和测试命令）</a><time datetime="2026-11-24T15:59:00.000Z" title="发表于 2026-11-24 23:59:00">2026-11-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-19/" title="2026.11.19学习笔记（SQLite 回滚、追问接续和 JSON 订单去重）">2026.11.19学习笔记（SQLite 回滚、追问接续和 JSON 订单去重）</a><time datetime="2026-11-19T15:59:00.000Z" title="发表于 2026-11-19 23:59:00">2026-11-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/learning-2026-11-18/" title="2026.11.18学习笔记（总结落盘、SQLite 状态表和重复回答保护）">2026.11.18学习笔记（总结落盘、SQLite 状态表和重复回答保护）</a><time datetime="2026-11-18T15:59:00.000Z" title="发表于 2026-11-18 23:59:00">2026-11-18</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By wxszz1</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div><script src="/js/image-viewer.js" defer></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>
